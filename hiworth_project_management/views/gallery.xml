@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_gallery_project_kanban1" model="ir.ui.view">
+            <field name="name">Gallery</field>
+            <field name="model">gallery.project</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_color_details">
+                		
+                    <templates>
+                        <t t-name="kanban-box">
+                        	<div t-attf-class="oe_kanban_card oe_kanban_file_location">
+                            
+                                <div class="oe_kanban_vignette">
+									<img t-att-src="kanban_image('ir.attachment',
+									'datas', record.id.value)" class="oe_avatar oe_kanban_avatar_primegallery"/>
+									<div class="oe_kanban_details"><br/>
+									<br/>
+									
+									</div>
+								</div>
+							</div>
+                               
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+		<record id="view_gallery_project_form1" model="ir.ui.view">
+			<field name="name">Gallery</field>
+			<field name="model">ir.attachment</field>
+			<field name="arch" type="xml">
+				<form string="Gallery">
+					<sheet>
+						<group>
+						
+								<field name="name"/>
+									<field name="datas" widget="image" class="oe_avatar" />
+							
+					</group>
+					</sheet>
+					 	
+				</form>
+			</field>
+		</record>	
+
+		<record id="view_gallery_project_tree" model="ir.ui.view">
+			<field name="name">Gallery</field>
+			<field name="model">ir.attachment</field>
+			<field name="arch" type="xml">
+				<tree string="Gallery">
+						
+					<field name="name"/>
+						<field name="datas"/>
+				
+					 	
+				</tree>
+			</field>
+		</record>			
+
+
+		<record model="ir.actions.act_window" id="action_gallery_project1">
+			<field name="name">Gallery</field>
+			<field name="res_model">ir.attachment</field>
+			<field name="view_type">form</field>
+			<field name="context">{'default_gallery' : True}</field>
+			<field name="domain">[('gallery','=',True)]</field>
+			<field name="view_mode">kanban,tree,form</field>
+		</record>
+
+
+		<record id="action_gallery_project1_kanban1" model="ir.actions.act_window.view">
+			<field name="view_mode">kanban</field>
+			<field name="view_id" ref="view_gallery_project_kanban1" />
+			<field name="act_window_id" ref="action_gallery_project1" />
+		</record>
+
+		<record id="action_gallery_project1_form1" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_gallery_project_form1" />
+			<field name="act_window_id" ref="action_gallery_project1" />
+		</record>
+
+		<record id="action_gallery_project1_tree1" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_gallery_project_tree" />
+			<field name="act_window_id" ref="action_gallery_project1" />
+		</record>
+
+
+		<menuitem id="main_menu_gallery_project" name="Gallery" sequence="35" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_user,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/>
+		<menuitem id="menu_gallery_project" name="Gallery" sequence="35" parent="main_menu_gallery_project"/>
+
+		<menuitem id="sub_menu_gallery_project" name="Gallery" sequence="35" parent="menu_gallery_project" action="action_gallery_project1"/>
+</data>
+</openerp>

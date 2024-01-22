@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record id="hiworth_hr_advance_tree" model="ir.ui.view">
+            <field name="name">Advance</field>
+            <field name="model">advance.pay</field>
+            <field name="arch" type="xml">
+                <tree> 
+                    
+                            <field name="date"/>
+                        
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="hiworth_hr_advance_wage_form" model="ir.ui.view">
+            <field name="name">Advance</field>
+            <field name="model">advance.pay</field>
+            <field name="arch" type="xml">
+                <form string="Advance Pay"> 
+                    
+                    <sheet>
+                    
+                    <!-- <center><separator string="Daily Wages"/></center> -->
+                    <group col="4">
+                        <field name="date" required="1"/>
+                    </group>
+                        <group>
+                            <field name="advance_line" nolabel="1">
+                                <tree editable="bottom"> 
+                                    <field name="employee" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="amount" string="Amount"/>
+                                </tree>
+                                <form> 
+                                    <group>
+                                    <field name="employee"/>
+                                    <field name="amount"/>
+                                </group>
+                                </form>
+                        </field>
+                        </group>
+                    </sheet>
+                        
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hiworth_hr_advance_pay" model="ir.actions.act_window">
+            <field name="name">Advance</field>
+            <field name="res_model">advance.pay</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hiworth_hr_advance_tree" />
+        </record>
+
+         <menuitem name="Advance Salary" id="menu_attendance_advvv_root" parent="hr_payroll.menu_hr_root_payroll"/>
+
+         <menuitem name="Advance Salary" id="menu_attendance_daily_wage_subb" parent="menu_attendance_advvv_root" action="action_hiworth_hr_advance_pay"/>
+
+    	<record id="hiworth_hr_daily_wage_tree" model="ir.ui.view">
+            <field name="name">Worker Wages</field>
+            <field name="model">daily.wages</field>
+            <field name="arch" type="xml">
+                <tree> 
+                	
+                			<field name="date_from"/>
+                            <field name="date_to"/>
+                        
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="hiworth_hr_daily_wage_form" model="ir.ui.view">
+            <field name="name">Worker Wages</field>
+            <field name="model">daily.wages</field>
+            <field name="arch" type="xml">
+                <form string="Daily Wages"> 
+                	
+                	<sheet>
+                	
+                	<!-- <center><separator string="Daily Wages"/></center> -->
+                	<group col="4">
+                		<field name="date_from" required="1"/>
+                        <field name="date_to"/>
+                	</group>
+                        <group>
+                            <field name="daily_wage" nolabel="1">
+                            	<tree editable="bottom"> 
+                            		<field name="employee" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="employee_type"/>
+                                    <field name="days"/>
+                                    <field name="advance"/>
+                            		<!-- <field name="location"/> -->
+                            		<field name="wage"/>
+                                    <field name="amount"/>
+                            	</tree>
+                            	<form> 
+                            		<group>
+                            		<field name="employee"/>
+                                    <field name="employee_type"/>
+                                    <field name="days"/>
+                            		<!-- <field name="location"/> -->
+                            		<field name="wage"/>
+                            	</group>
+                            	</form>
+                        </field>
+                        </group>
+                    </sheet>
+                        
+                </form>
+            </field>
+        </record>
+
+    	<record id="action_hiworth_hr_daily_wages" model="ir.actions.act_window">
+            <field name="name">Worker Wages</field>
+            <field name="res_model">daily.wages</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hiworth_hr_daily_wage_tree" />
+        </record>
+
+         <!-- <menuitem name="Worker Wages" id="menu_attendance_daily_wage_root" parent="hr_payroll.menu_hr_root_payroll" action="action_hiworth_hr_daily_wages"/> -->
+
+</data>
+</openerp>

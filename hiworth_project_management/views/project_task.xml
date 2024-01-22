@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_project_task_tree12" model="ir.ui.view">
+            <field name="name">project.task.tree</field>
+            <field name="model">project.task.create</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="state" invisible="1"/>
+                    <field name="name" string="Task Name"/>
+                    <field name="project_id" string="Project"/>
+                    <field name="user_id" string="Employee"/>
+                    <field name="civil_contractor" string="Customer"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_task_wizard_line_form" model="ir.ui.view">
+            <field name="name">task.wizard.line.form</field>
+            <field name="model">task.wizard.line</field>
+            <field name="arch" type="xml">
+                <form string="Events">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project_id" readonly="1"/>
+                                <field name="manager_id" readonly="1"/>
+                                <field name="company_id" readonly="1"/>
+                                <field name="customer_id" readonly="1"/>
+                                <field name="task_type"/>
+                            </group>
+                            <group>
+                                <field name="date_begin"/>
+                                <field name="report_time"/>
+                                <field name="date_end"/>
+                                <field name="assigned"/>
+                            </group>
+                        </group>
+                        <field name="remarks" placeholder="Remarks"/>
+                    </sheet>
+                    <footer>
+                    <div>
+                        <button string="Save and new" type="object" class="oe_highlight" name="button_save_new"/>
+                        <button string="Save and close" type="object" class="oe_highlight" name="button_save"/>
+                    </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_project_task_form34" model="ir.ui.view">
+            <field name="name">project.task.form</field>
+            <field name="model">project.task.create</field>
+            <field name="arch" type="xml">
+
+            <form string="Project">
+                    <header>
+                        <field name="state" widget="statusbar" nolabel="1"/>
+                    </header>
+                    <sheet string="Task">
+                    
+                    <h1>
+                        <field name="name" placeholder="Task summary." class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="user_id"/>
+                            <field name="reviewer_id" readonly="1"/>
+                            
+                        </group>
+                        <group>
+                            
+                            <field name="civil_contractor"/>
+                            <field name="date_today" readonly="1"/>
+                            <field name="date_end"/>
+                            
+                        </group>
+                    </group>
+                    <group>
+                        <field name="remarks"/>
+                    </group>
+                    <group>
+                        <field name="status"/>
+                    </group>
+                   
+                    </sheet>
+                  
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_project_inherit_task_create">
+            <field name="name">Project - Task</field>
+            <field name="res_model">project.task.create</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem action="action_project_inherit_task_create" id="id_project_task_inherit" name="Tasks"
+            parent="project.menu_project_management" sequence="3"
+            groups="project.group_project_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee"/>
+
+
+
+            </data>
+        </openerp>

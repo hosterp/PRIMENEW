@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+    	<record model="ir.ui.view" id="edit_hr_employee_users_view">
+            <field name="name">Res Users</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form" />
+            <field name="arch" type="xml">
+                
+                <xpath expr="//sheet//field[@name='partner_id']" position="after">
+                	<field name="employee_id"/>
+                </xpath>
+
+                <xpath expr="//notebook//page//group[@string='Allowed Companies']" position="attributes">
+                    <attribute name="string">Allowed Branches</attribute>
+                </xpath>
+
+                <xpath expr="//div//label[@for='company_id']" position="attributes">
+                    <attribute name="string">Company</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

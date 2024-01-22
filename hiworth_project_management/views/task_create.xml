@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+
+		<record id="view_create_task_form" model="ir.ui.view">
+			<field name="name">Task</field>
+			<field name="model">task.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+						
+				<group>
+					<field name="assigned" options="{'no_create':True}" domain="[('partner_id.customer','!=',True)]"/>
+				
+			     </group>
+				<footer>
+					<button name="task_confirm" string="Go" type="object" class="oe_highlight" />Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+				</footer>
+			
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="create_task_wizard">
+			<field name="name">Create Task</field>
+			<field name="res_model">task.wizard</field>
+			<field name="view_id" ref="view_create_task_form"/>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+
+
+
+		  <menuitem action="create_task_wizard" id="id_create_task" name="Create Tasks"
+            parent="event.menu_event_event" sequence="1"
+            groups="project.group_project_manager,base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/>
+
+
+
+
+         <record id="view_day_abstract_wizard_form" model="ir.ui.view">
+			<field name="name">Day Abstract</field>
+			<field name="model">day.abstract.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+						
+				<group>
+					<field name="date" required="1"/>
+				
+			     </group>
+				<footer>
+					<button name="action_continue" string="Go" type="object" class="oe_highlight" />Or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+				</footer>
+			
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_day_abstract_wizard_form">
+			<field name="name">Day Abstract</field>
+			<field name="res_model">day.abstract.wizard</field>
+			<field name="view_id" ref="view_day_abstract_wizard_form"/>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+
+
+
+		 <!--  <menuitem action="action_day_abstract_wizard_form" id="menu_day_abstract_wizard_form" name="Create Tasks"
+            parent="event.menu_event_event" sequence="1"
+            groups="project.group_project_manager,base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/> -->
+
+
+       <menuitem action="action_day_abstract_wizard_form" id="menu_day_abstract_wizard_form" name="Day Abstract"
+            parent="event.menu_event_event" sequence="7"
+            groups="project.group_project_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm"/>
+
+
+       	<menuitem name="Day Abstract" id="menu_activity_wd_project_main_employee_employee_12455"
+	 		parent="menu_project_management_employee_project54789" sequence="2" action="action_day_abstract_wizard_form" />
+
+	</data>
+</openerp>

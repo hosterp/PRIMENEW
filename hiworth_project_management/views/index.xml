@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_project_index_trees1" model="ir.ui.view">
+			<field name="name">project.index.tree</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<tree create="false" edit="false">
+					<field name="partner_id" string="Name"/>
+					<field name="client_id" />
+					<field name="pba_no" string="Project Name"/>
+					<field name="work_nature"/>
+					<field name="direction"/>
+					<field name="area"/>
+					<field name="no_story"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="tree_project_project" model="ir.ui.view">
+			<field name="name">project.project.tree</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<tree create="false" edit="false">
+
+					<field name="name" string="Project Name"/>
+					<!-- <field name="company_id" string="Branch"/> -->
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_project_index_forms2" model="ir.ui.view">
+			<field name="name">project.index.form</field>
+			<field name="model">project.project</field>
+			<field name="priority" eval="17"/>
+			<field name="arch" type="xml">
+				<form create="false" edit="false">
+					<div class="col-xs-offset-7">
+						<div class="oe_button_box oe_edit" name="button_box">
+							<button name="open_wizard_project_details" class="oe_stat_button" string="View Details" icon="fa-folder" type="object"/>
+						</div>
+					</div>
+					<!-- <header>
+						<button name="open_wizard_project_details" type="object" string="View Details" class="oe_highlight"/>
+					</header> -->
+					<div class="oe_title" style="width: 390px;">
+						<h1><field name="partner_id" class="oe_inline" nolabel="1"/></h1>
+					</div>
+					<group>
+						<group>
+							<!-- <field name="partner_id"/> -->
+							<field name="client_id"/>
+							<field name="pba_no" string="Project Name"/>
+						</group>
+						<group>
+							<field name="work_nature"/>
+							<field name="direction"/>
+							<field name="area"/>
+							<field name="no_story"/>
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_project_index_datass2">
+			<field name="name">Index</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="view_project_index_trees1"/>
+			<field name="domain">[]</field>
+		</record>
+
+		<record id="action_project_index_tree_views1" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_project_index_trees1" />
+			<field name="act_window_id" ref="action_project_index_datass2" />
+		</record>
+
+		<record id="action_project_index_form_views1" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_project_index_forms2" />
+			<field name="act_window_id" ref="action_project_index_datass2" />
+		</record>
+		<!--
+                <menuitem action="action_project_index_datass2" id="id_project_index1" name="Index" parent="project.menu_project_management" sequence="1" groups="base.group_erp_manager"/> -->
+
+
+
+		<record id="form_project_wizard_prime" model="ir.ui.view">
+			<field name="name">schems.project.project.form</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<form string="Project Details">
+					<group>
+						<field name="project_details" />
+					</group>
+					<notebook>
+						<page attrs="{'invisible': [('project_details','!=', 'client')]}">
+							<group col="4">
+								<group>
+									<separator string="Client Details"/><newline/>
+									<newline/><field name="partner_id" readonly="1"/>
+									<newline/><field name="nick_name" readonly="1"/>
+									<field name="dob" readonly="1"/>
+
+									<field name="email" widget="email" readonly="1"/>
+
+									<label for="street1" string="Communication Address"/>
+									<div>
+										<field name="street1" placeholder="Street" readonly="1"/>
+										<field name="street3" string="Post Office"  placeholder="Post Office" readonly="1"/>
+										<field name="city1" placeholder="city" readonly="1"/>
+										<field name="state_id1" placeholder="State" readonly="1"/>
+										<field name="country_id1" placeholder="Country" readonly="1"/>
+										<field name="zip1" placeholder="zip" readonly="1"/>
+									</div>
+									<label for="phone" string="Tel No" readonly="1"/>
+									<div>
+										<field name="phone" widget="phone" placeholder="Work" readonly="1"/>
+										<field name="mobile" widget="phone" placeholder="Residential" readonly="1"/>
+									</div>
+									<field name="occupation" readonly="1"/>
+
+								</group>
+
+								<group>
+									<separator string="Family Details"/><newline/>
+									<group>
+										<field name="wife_hus" readonly="1"/>
+									</group>
+									<group>
+										<field name="dob_wh" nolabel="1" placeholder="BIRTHDAY" readonly="1"/>
+									</group><newline/>
+									<!-- <field name="wdng_day" placeholder="Wedding Date" readonly="1"/> -->
+								</group>
+							</group>
+						</page>
+
+
+						<page attrs="{'invisible': [('project_details','!=', 'accounts')]}">
+							<notebook>
+								<page string="Account Statement">
+									<group string="Account Statement" groups="project.group_project_manager,hiworth_construction.group_project_management_user">
+										<field name="acc_statement" readonly="True" nolabel="1">
+											<tree editable="bottom">
+												<field name="date" string="Date" />
+												<field name="name" string="Description" />
+												<field name="opp_acc_cash_bank" string="Account"/>
+												<field name="debit" sum="Total" />
+												<field name="credit" sum="Total" />
+											</tree>
+										</field>
+										<group colspan="4">
+											<group class="oe_subtotal_footer oe_right">
+												<field name="acc_balance" class="oe_subtotal_footer_separator"
+													   widget="monetary" />
+											</group>
+										</group>
+									</group>
+								</page>
+								<page string="Payment Schedule">
+									<group string="Payment Schedule">
+										<field name="schedule_id" nolabel="1" readonly="1">
+											<tree editable="bottom">
+												<field name="sequence" widget="handle" />
+												<field name="seq" required="True" />
+												<field name="name" required="True" />
+												<field name="amount" sum="Total" />
+												<field name="due_on" />
+												<field name="stage_total" readonly="True" />
+
+											</tree>
+										</field>
+									</group>
+									<group>
+										<field name="schedule_note" nolabel="1" placeholder="Note....." readonly="1" />
+									</group>
+								</page>
+							</notebook>
+						</page>
+
+						<page attrs="{'invisible': [('project_details','!=', 'project')]}">
+							<div class="oe_title">
+								<label for="name" string="Project Name" />
+								<h1>
+									<field name="name" string="Project Name" readonly="1" />
+								</h1>
+								<label for="location_id" string="Project Location" />
+								<h1>
+									<field name="location_id" string="Project Location" required="True" readonly="1" />
+								</h1>
+								<!-- google cordinates -->
+								<separator string="Google Map Location"/>
+								<group col="6">
+									<field name="latitude"/>
+									<field name="longitude"/>
+									<button type="object" name="show_google_map" string="show-in-google-maps" class="oe_highlight"/>
+								</group>
+
+								<div name="options_active" invisible="1">
+									<field name="use_tasks" class="oe_inline"/>
+									<label for="use_tasks" string="Use Tasks"/>
+								</div>
+							</div>
+							<group>
+								<group col="4">
+									<!-- <field name="user_id" string="Project Manager" attrs="{'readonly':[('state','in',['close', 'cancelled'])]}" context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_manager']}" readonly="1"/>
+									<newline/> -->
+									<field name="partner_id" on_change="onchange_partner_id(partner_id)" string="Customer" readonly="1"/>
+								</group>
+								<!--  <p attrs="{'invisible': [('analytic_account_id','=',False)]}">
+                                     To invoice or setup invoicing and renewal options, go to the related contract:
+                                     <field name="analytic_account_id" readonly="1" required="0" class="oe_inline" nolabel="1"/>.
+                                 </p> -->
+								<group name="group_alias" attrs="{'invisible': [('alias_domain', '=', False)]}">
+									<label for="alias_name" string="Email Alias"/>
+									<div name="alias_def">
+										<field name="alias_id" class="oe_read_only oe_inline" string="Email Alias" required="0"/>
+										<div class="oe_edit_only oe_inline" name="edit_alias" style="display: inline;">
+											<field name="alias_name" class="oe_inline"/>@<field name="alias_domain" class="oe_inline" readonly="1"/>
+										</div>
+									</div>
+									<label for="alias_model" string="Incoming Emails create"/>
+									<field name="alias_model" class="oe_inline" nolabel="1"/>
+									<field name="alias_contact" class="oe_inline" string="Accept Emails From"/>
+								</group>
+							</group>
+							<group>
+								<group col="5">
+									<field name="building_sqf" class="oe_inline" readonly="1" />
+									<!-- <p class="oe_inline"> X </p> -->
+									<field name="rate" readonly="1" />
+									<newline />
+									<field name="cent" readonly="1" />
+									<newline />
+									<field name="remark1" style="width: 380%%" readonly="1" />
+									<newline />
+									<field name="start_date" readonly="1" invisible="1"/>
+									<newline />
+									<field name="date_end" readonly="1" invisible="1"/>
+
+								</group>
+								<group col="2">
+									<!-- <field name="cent" /> <field name="building_sqf" /> <field name="rate" 
+										/> -->
+									<field name="total_value" readonly="1" />
+									<field name="estimated_cost" readonly="1" />
+									<field name="estimated_cost_extra"
+										   attrs="{'invisible':[('estimated_cost_extra','=', 0)]}" readonly="1" />
+									<field name="total_estimated_cost"
+										   attrs="{'invisible':[('estimated_cost_extra','=', 0)]}" class="oe_inline" readonly="1" />
+									<button name="compute_estimated_cost" type="object" icon="gtk-refresh" />
+								</group>
+							</group>
+							<field name="state" invisible="1"/>
+						</page>
+						<page attrs="{'invisible': [('project_details','!=', 'messaging')]}">
+							<notebook>
+								<page string="Inbox">
+									<group string="Inbox">
+										<field name="inbox_one2many" nolabel="1" readonly="1">
+											<tree>
+												<field name="from_id" />
+												<field name="to_id" />
+												<field name="date" />
+												<field name="message" />
+												<!-- <field name="reply" /> -->
+											</tree>
+											<form>
+												<group>
+													<field name="from_id" />
+													<field name="to_id" />
+													<field name="date" />
+													<field name="message" />
+													<!-- <field name="reply" /> -->
+												</group>
+											</form>
+										</field>
+									</group>
+								</page>
+								<page string="Sent Messages">
+									<group string="Sent Messages">
+										<field name="sent_one2many" nolabel="1" readonly="1">
+											<tree>
+												<field name="from_id" />
+												<field name="to_id" />
+												<field name="date" />
+												<field name="message" />
+											</tree>
+											<form>
+												<group>
+													<field name="to_id" />
+													<field name="from_id" />
+													<field name="date" />
+													<field name="message" />
+												</group>
+											</form>
+										</field>
+									</group>
+								</page>
+							</notebook>
+						</page>
+					</notebook>
+
+				</form>
+			</field>
+		</record>
+
+		<record id="action_project_wizard_prime" model="ir.actions.act_window">
+			<field name="name">Project Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="domain">[('detail_selection','=', True)]</field>
+			<field name="context">{'default_detail_selection': True}</field>
+			<field name="view_id" ref="form_project_wizard_prime"/>
+		</record>
+		<record model="ir.ui.view" id="search_main_project_details_filter">
+			<field name="name">Main Project Details</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<search string="Main Project Details Filter">
+					<field name="name" string="Main Project Details"
+						   filter_domain="['|','|','|',('name','ilike',self),('user_id','ilike',self),('partner_id','ilike',self),('start_date','ilike',self)]"/>
+					<field name="company_id"/>
+					<field name="start_date"/>
+					<group expand="0" string="Group By">
+						<filter string="company" icon="terp-accessories-archiver" domain="[]"
+								context="{'group_by':'company_id'}"/>
+
+						<filter string="year" icon="terp-accessories-archiver" domain="[]"
+								context="{'group_by':'start_date:year'}"/>
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+		<record id="action_main_project_prime" model="ir.actions.act_window">
+			<field name="name">Main Project Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="search_main_project_details_filter"/>
+			<field name="domain">[('inv_button','=',False),('inactive_project','=',False),('state','!=','close'),]</field>
+<!--			<field name="context">{'search_default_group_by_branch': True,'search_default_group_by_month':True}</field>-->
+			<field name="view_id" ref="project.view_project"/>
+		</record>
+
+
+		<record id="action_project_project_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="project.view_project" />
+			<field name="sequence">1</field>
+			<field name="act_window_id" ref="action_main_project_prime" />
+		</record>
+
+		<record id="action_job_assignment_form_view1200" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="project.edit_project" />
+			<field name="sequence">2</field>
+			<field name="act_window_id" ref="action_main_project_prime" />
+		</record>
+
+
+
+		<menuitem action="action_main_project_prime" id="menu_main_projects"
+				  name="Active Projects" parent="project.menu_project_management" sequence="1" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm,hiworth_project_management.group_architect"/>
+
+		<!-- <record id="hiworth_project_management.menu_main_projects" model="ir.ui.menu">
+		    <field name="groups_id" eval="[(3,ref('group_also_customer'))]"/>
+		</record>
+ -->
+
+		<record id="action_main_project_prime_inactive" model="ir.actions.act_window">
+			<field name="name">Inactive Project Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('inv_button','=',False),('inactive_project','=',True)]</field>
+			<field name="view_id" ref="project.view_project"/>
+			<field name="context">{'search_default_group_by_branch': True,'search_default_group_by_month': True}</field>
+		</record>
+		<menuitem action="action_main_project_prime_inactive" id="menu_main_inactive_projects"
+				  name="Inactive Projects" parent="project.menu_project_management" sequence="2" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm,hiworth_project_management.group_architect"/>
+
+		<record id="action_closed_project_prime_closed" model="ir.actions.act_window">
+			<field name="name">Closed Project Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('inv_button','=',False),('state','=','close')]</field>
+			<field name="view_id" ref="project.view_project"/>
+			<field name="context">{'search_default_group_by_branch': True,'search_default_group_by_month': True}</field>
+		</record>
+		<menuitem action="action_closed_project_prime_closed" id="menu_main_closed_projects"
+				  name="Closed Projects" parent="project.menu_project_management" sequence="2" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm,hiworth_project_management.group_architect"/>
+
+
+		<!-- menu which only shows customer project details neww-->
+		<record id="action_main_project_prime_cust" model="ir.actions.act_window">
+			<field name="name">Project Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.project</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('inactive_project','=',False)]</field>
+			<field name="view_ids"
+				   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_project_project')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('project.edit_project')})]"/>
+		</record>
+
+		<menuitem action="action_main_project_prime_cust" id="menu_main_customer_projects_neww"
+				  name="Projects" parent="project.menu_project_management" sequence="1" groups="hiworth_project_management.group_also_customer"/>
+
+		
+		<!-- User previllage for dgm,admin1,admin2,gm -->
+
+		<record id="action_res_users_new_111" model="ir.actions.act_window">
+			<field name="name">Users</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.users</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="base.view_users_tree"/>
+			<field name="search_view_id" ref="base.view_users_search"/>
+			<field name="domain">[('customer','=',True)]</field>
+			<field name="help">Create and manage users that will connect to the system. Users can be deactivated should there be a period of time during which they will/should not connect to the system. You can assign them groups in order to give them specific access to the applications they need to use in the system.</field>
+		</record>
+
+		<menuitem name="Users"
+				  id="menu_user_root_main"
+				  action="action_res_users_new_111"
+				  groups="hiworth_project_management.group_admin1,hiworth_project_management.group_admin2,hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager"
+				  sequence="90"/>
+
+
+	</data>
+</openerp>

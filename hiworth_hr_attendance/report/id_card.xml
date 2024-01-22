@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+
+
+		<report id="report_id_card_employee" string="ID Card"
+			model="hr.employee" report_type="qweb-pdf"
+			name="hiworth_hr_attendance.report_id_card_template_template" />
+
+			<record id="paperformat_id_card" model="report.paperformat">
+			<field name="name">European A4 ID CARD</field>
+			<field name="default" eval="True" />
+			<field name="format">custom</field>
+			<field name="page_height">85</field>
+			<field name="page_width">50</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">0</field>
+			<field name="margin_bottom">0</field>
+			<field name="margin_left">0</field>
+			<field name="margin_right">0</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">0</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<record id="hiworth_hr_attendance.report_id_card_employee" model="ir.actions.report.xml">
+			<field name="paperformat_id" ref="hiworth_hr_attendance.paperformat_id_card" />
+		</record>
+
+
+		<template id="report_id_card_template_template">
+			 <style>
+                img {
+                    position: absolute;
+					left: 0px;
+					top: 0px;
+					z-index: -1;
+                }
+
+
+                <!-- h2 {
+                    position: absolute;
+					left: 0px;
+					top: 0px;
+					z-index: -1;
+                } -->
+               
+            </style>
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+						<div class="page">
+							<img src="/hiworth_hr_attendance/static/src/img/id_card_new.jpg" width="300px;" height="505px"/>
+							<p style="position: absolute;margin-top:200px;margin-left:155;text-align:center;">
+								<strong><span style="font-size:14px" t-esc="o.name"></span></strong><br/>
+								<span style="font-size:10px;" t-esc="o.job_id.name"/>
+							</p>
+							
+							<img t-if="docs.image_medium" t-att-src="'data:image/png;base64,%s' % docs.image_medium" height="165px;" width="120px;" style="margin-top:25px;margin-left:150px;"/>
+							<!-- <h2>
+								<span t-field="o.name" style="margin-left:240px;line-height:21em;"/>
+							</h2> -->
+							
+							<!-- <h2>
+								<span t-field="o.name" style="margin-left:260px;line-height:15em;"/>
+							</h2>
+							<h4><span t-esc="o.job_id.name" style="margin-left:260px;line-height:2em;"/></h4>
+							 -->
+
+							
+							<!-- <div
+					style="display: block;
+                        height: 1px;
+                        border: 0;
+                        border-bottom: 2px solid #389438;
+                        margin: 1em 0;
+                        padding: 0;
+                        margin-top: -17px;
+                        z-index: 9;
+                        position: relative;">
+				</div> -->
+				<!-- <div class="col-xs-3">
+						<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 100px;max-width: 100px;"/>
+					</div> -->
+				
+				<!-- <div
+					style="position:absolute;top:30px;left:300px;">
+					<img t-if="docs.image_medium" t-att-src="'data:image/png;base64,%s' % docs.image_medium" height="160px;" width="220px;"/>
+				</div> -->
+							
+							 
+						</div>
+						<!-- <div class="footer" style="margin-top:100px;">
+				
+				<div
+					style="position:absolute;left:30px;max-height: 450px;">
+					<img src="/hiworth_hr_attendance/static/src/img/id_card_prime.jpeg" width="225px;" height="115px"/> 
+					
+				</div>
+
+				<div
+					style="position:absolute;left:260px;max-height: 450px;">
+					<strong>
+						<p>
+							<span style="font-size:18px;font-family:merriweather;">Builders &amp; Architects,</span><br/>
+							<span  style="font-size:10px;">MC Road,Padinjarenada,Chengannur,689121</span><br/>
+							<span  style="font-size:10px;">Ph:+919656010354,0479-2450354</span><br/>
+							<span style="font-size:18px;font-family:merriweather;">Structural Desk</span><br/>
+							<span  style="font-size:10px;">Pulinthitta Bldg.,L31/75B,Ambelipadam Road,</span><br/>
+							<span style="font-size:10px;">Vytila, Cochin 682019</span><br/>
+							<span style="font-size:10px;">Ph :0484-4000085/86</span><br/>
+							<span style="font-size:10px;">Website:www.primearchitect.in</span>
+						</p>
+					</strong>
+				</div>
+				<div style="position:absolute;left:95px;margin-top:110px;">
+					<p>
+						<span style="font-size:10px;">Email:primebuiders84@gmail.com</span>
+
+					</p>
+				</div>
+				<div style="position:absolute;left:122px;margin-top:120px;">
+					<p>
+						<span style="font-size:10px;">primebuiders85@gmail.com</span>
+
+					</p>
+				</div>
+			</div> -->
+						
+					
+				</t>
+			</t>
+		</template>
+	</data>
+</openerp>

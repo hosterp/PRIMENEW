@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+
+		<record id="view_activities_wd_tree" model="ir.ui.view">
+			<field name="name">activity.tree</field>
+			<field name="model">event.event</field>
+			<field name="arch" type="xml">
+				<tree colors="red:state == 'initial';blue:state=='completed';green:state == 'evaluated'">
+					<field name="company_id" />
+					<field name="project_name" string="PBA" />
+					<field name="name" string="Activity"/>
+					<field name="user_id" string="Work Assigned"/>
+					<field name="current_user" string="Assigned By" />
+					<field name="state" />
+					
+				</tree>
+			</field>
+		</record>
+
+
+		
+
+		<record id="view_activity_wd_form" model="ir.ui.view">
+			<field name="name">activity.form</field>
+			<field name="model">event.event</field>
+			<field name="priority" eval="20" />
+			<field name="arch" type="xml">
+				<form string="Activities">
+					<header>
+						<button name="complete_task" type="object" class="oe_highlight" string="Completed" states="initial" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/>
+						<!-- <button name="completed_task" type="object" class="oe_highlight" string="Completed" states="draft" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/> -->
+						<field name="state" widget="statusbar" statusbar_visible="initial,completed"/>
+					</header>
+					<sheet>
+					<h1><field name="wd_id" class="oe_inline" attrs="{'readonly':[('state','=','completed')],'required':1}" options="{'no_create': True}" readonly="0"/></h1>
+
+					<group >
+							<group >
+								<field name="name" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Activity"/>
+								<field name="current_user" string="Assigned By" readonly="1" />
+								<field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Assigned To" domain="[('employee_id','!=',False)]" required="0" invisible="1"/>
+
+								<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Assigned Users" domain="[('employee_id','!=',False)]" widget="many2many_tags"/>
+
+
+								
+								<field name="activity" invisible="1" />
+								<field name="company_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" invisible="1" />
+								<field name="remarks" attrs="{'readonly':[('state','=','completed')]}"/>
+							</group>
+							
+							<group>
+								
+								<field name="date_begin" attrs="{'readonly':[('state','=','completed')]}"/>
+								<field name="report_time" attrs="{'readonly':[('state','=','completed')]}"/>
+								<field name="date_end" attrs="{'readonly':[('state','=','completed')]}"/>
+								
+								
+								<!-- <field name="status" attrs="{'readonly':[('state','=','complete')]}" invisible="1"/>
+								<field name="remarks" attrs="{'readonly':[('state','=','complete')]}"/>
+								<field name="status1" invisible="1"/>
+								<field name="update_sel" invisible="1"/>
+								<field name="update" invisible="1"/>
+								<field name="admin" invisible="1"/>
+								<field name="updated_user" invisible="1"/> -->
+							</group>
+					</group>
+					<group string="Report" attrs="{'invisible': [('report_id','!=',False)]}">
+                        <field name="report" />
+                        <field name="report_id" invisible="1"/>
+					</group>
+					<group>
+                        <button name="send_work_report" string="Send Report" class="oe_highlight" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office,hiworth_project_management.group_architect" type="object" attrs="{'invisible': [('report_id','!=',False)]}"/>
+                    </group>
+
+				</sheet>
+					
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_project_activities_wd">
+			<field name="name">All Activities</field>
+			<field name="res_model">event.event</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="context">{'default_activity':1,'search_default_group_by_branch_activity_site':1,'search_default_group_by_wd_activity_site':1}</field>
+			<field name="domain">[('activity','=',True)]</field>
+		
+		</record>
+
+		
+		<record id="action_activity_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_activities_wd_tree" />
+			<field name="act_window_id" ref="action_project_activities_wd" />
+		</record>
+
+		<record id="action_activity_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_activity_wd_form" />
+			<field name="act_window_id" ref="action_project_activities_wd" />
+		</record>
+
+
+		<menuitem name="Task" id="menu_task_office_management"
+		parent="menu_office_management" sequence="4" />
+
+		<!--<menuitem name="Activities" id="menu_activity_wd_project_main"-->
+		<!--parent="menu_task_office_management" sequence="1" />-->
+
+		<!--<menuitem name="All Activities" id="menu_site_activity_wd_project_all" parent="menu_activity_wd_project_main" action="action_project_activities_wd" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.activity_create_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office" sequence="5" />-->
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_personal_activities_wd">
+			<field name="name">Personal Activities</field>
+			<field name="res_model">event.event</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="context">{'default_activity':1,'search_default_group_by_branch_activity_site':1,'search_default_group_by_wd_activity_site':1}</field>
+			<field name="domain">[('activity','=',True),('user_id','=',uid)]</field>
+		
+		</record>
+
+		
+		<record id="action_personal_activity_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_activities_wd_tree" />
+			<field name="act_window_id" ref="action_project_personal_activities_wd" />
+		</record>
+
+		<record id="action_personal_activity_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_activity_wd_form" />
+			<field name="act_window_id" ref="action_project_personal_activities_wd" />
+		</record>
+
+
+		<!--<menuitem name="Personal Activities" id="menu_personal_activity_wd" parent="menu_activity_wd_project_main" action="action_project_personal_activities_wd" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_manager_office,hiworth_project_management.group_am_office,hiworth_project_management.group_architect,hiworth_project_management.group_employee" sequence="10" />-->
+
+
+		<record id="view_site_visits_wd_tree" model="ir.ui.view">
+			<field name="name">sitevisits.tree</field>
+			<field name="model">event.event</field>
+			<field name="arch" type="xml">
+				<tree colors="red:state == 'initial';blue:state == 'completed';green:state == 'evaluated';">
+					<field name="company_id" />
+					<field name="wd_id" string="PBA" />
+					<field name="name" string="Description"/>
+					<field name="user_id" string="Work Assigned"/>
+					<field name="current_user" string="Assigned By" />
+					<field name="location" />
+					<field name="state" />					
+				</tree>
+			</field>
+		</record>
+		
+
+		<record id="view_site_visits_wd_form" model="ir.ui.view">
+			<field name="name">sitevisits.form</field>
+			<field name="priority" eval="20" />
+			<field name="model">event.event</field>
+			<field name="arch" type="xml">
+				<form string="Site Visit">
+					<header>
+						<!-- <button name="complete_task" type="object" class="oe_highlight" string="Completed" states="initial" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager" confirm="Are You Sure?"/> -->
+						<button name="complete_task" type="object" class="oe_highlight" string="Completed" states="initial" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/>
+						<!-- <button name="completed_task" type="object" class="oe_highlight" string="Completed" states="draft" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/> -->
+						<field name="state" widget="statusbar" statusbar_visible="initial,completed"/>
+					</header>
+					<sheet>
+					<h1><field name="wd_id" class="oe_inline" attrs="{'readonly':[('state','=','completed')],'required':1}" options="{'no_create': True}" /></h1>
+					<group col="4">
+						<field name="name" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Description"/>
+						<field name="date_begin" attrs="{'readonly':[('state','=','completed')]}"/>
+						<field name="report_time" attrs="{'readonly':[('state','=','completed')]}"/>
+						<field name="date_end" attrs="{'readonly':[('state','=','completed')]}"/>
+						
+						<field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Assigned To" domain="[('employee_id','!=',False)]" required="0" invisible="1"/>
+						<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')],'required':1}" domain="[('employee_id','!=',False)]" widget="many2many_tags" string="Assigned Members"/>
+						<field name="work_stage_site" />
+						<field name="current_user" string="Assigned By" readonly="1" />
+						<field name="location" options="{'no_create':1}" required="1" />
+						<field name="site_visit" invisible="1" />
+						<field name="company_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" invisible="1" />
+						<field name="remarks" attrs="{'readonly':[('state','=','completed')]}"/>
+					</group>
+					
+					<group string="Report" attrs="{'invisible': [('report_id','!=',False)]}">
+                        <field name="report" />
+                        <field name="report_id" invisible="1"/>
+					</group>
+					<group>
+                        <button name="send_work_report" string="Send Report" class="oe_highlight" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office,hiworth_project_management.group_architect" type="object" attrs="{'invisible': [('report_id','!=',False)]}"/>
+                    </group>
+
+				</sheet>
+					
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_project_sitevisits_wd">
+			<field name="name">All Site Visits</field>
+			<field name="res_model">event.event</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="context">{'default_site_visit':1,'search_default_group_by_branch_activity_site':1,'search_default_group_by_wd_activity_site':1}</field>
+			<field name="domain">[('site_visit','=',True)]</field>
+		
+		</record>
+
+		
+		<record id="action_site_visits_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_site_visits_wd_tree" />
+			<field name="act_window_id" ref="action_project_sitevisits_wd" />
+		</record>
+
+		<record id="action_site_visits_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_site_visits_wd_form" />
+			<field name="act_window_id" ref="action_project_sitevisits_wd" />
+		</record>
+
+
+
+
+
+		<menuitem name="All Site Visits" id="menu_site_site_visits_wd_project_all" parent="menu_sitevisit_wd_project_main" action="action_project_sitevisits_wd" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.activity_create_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office" sequence="5" />
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_personal_sitevisits_wd">
+			<field name="name">Personal Site Visits</field>
+			<field name="res_model">event.event</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="context">{'default_site_visit':1,'search_default_group_by_branch_activity_site':1,'search_default_group_by_wd_activity_site':1}</field>
+			<field name="domain">[('site_visit','=',True),('user_id','=',uid)]</field>
+		
+		</record>
+
+		
+		<record id="action_personal_sitevisits_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_site_visits_wd_tree" />
+			<field name="act_window_id" ref="action_project_personal_sitevisits_wd" />
+		</record>
+
+		<record id="action_personal_sitevisits_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_site_visits_wd_form" />
+			<field name="act_window_id" ref="action_project_personal_sitevisits_wd" />
+		</record>
+
+
+		<menuitem name="Personal Site visits" id="menu_personal_sitevisits_wd" parent="menu_sitevisit_wd_project_main" action="action_project_personal_sitevisits_wd" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_manager_office,hiworth_project_management.group_am_office,hiworth_project_management.group_architect" sequence="10" />
+
+
+
+
+
+
+</data>
+</openerp>

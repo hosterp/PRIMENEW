@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<!-- <record id="view_account_form_location_included" model="ir.ui.view">
+			<field name="name">account.account.form.location.incuded</field> <field name="model">account.account</field>
+			<field name="inherit_id" ref="account.view_account_form" /> <field name="arch"
+			type="xml"> <xpath expr="//group/group/field[@name='active']" position="after">
+			<field name="location_id" /> </xpath> </field> </record> -->
+
+		<record id="view_move_form_location_included" model="ir.ui.view">
+			<field name="name">account.move.form.location.included</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//notebook/page/field/tree/field[@name='tax_code_id']"
+					position="replace">
+					<field name="location_id" invisible="1"/>
+				</xpath>
+				<xpath expr="//notebook/page/field/tree/field[@name='name']"
+					position="before">
+					<field name="cheque_no" />
+					<field name="opp_acc_cash_bank" invisible="1" />
+				</xpath>
+				<xpath expr="//button[@name='button_validate']" position="replace">
+					<button name="button_validate" states="draft" string="Post"
+						type="object" class="oe_highlight" groups="account.group_account_manager" />
+				</xpath>
+
+				<xpath expr="//button[@name='button_cancel']" position="replace">
+					<button name="button_cancel" states="posted" string="Cancel Entry"
+						type="object" groups="account.group_account_manager" />
+				</xpath>
+
+				<xpath expr="//notebook/page/field/tree/field[@name='name']"
+					position="before">
+					<field name="invoice_no_id2" options="{'no_create_edit': True}" />
+					<button name="open_invice" type="object"
+						attrs="{'invisible':[('invoice_no_id2','=', False)]}" string="Goto Invoice"
+						icon="gtk-go-forward" class="oe_inline" />
+					<field name="invoice_no2_balance" />
+				</xpath>
+
+				<xpath expr="//notebook/page/field/tree/field[@name='current_balance']"
+					position="after">
+					<field name="project_id" options="{'no_create_edit': True}" />
+					
+				</xpath>
+
+
+
+			</field>
+		</record>
+
+
+		<record id="view_move_tree_hiworth" model="ir.ui.view">
+			<field name="name">account.move.tree.hiworth</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_tree" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="replace">
+				</xpath>
+			</field>
+		</record>
+
+		<record id="action_hiworth_invoice_tree_all" model="ir.actions.act_window">
+			<field name="name">Invoices</field>
+			<field name="res_model">hiworth.invoice</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="hiworth_invoice_tree" />
+		</record>
+
+
+		<record id="view_account_form_hiworth_construction" model="ir.ui.view">
+			<field name="name">account.account.form.hiworth.construction</field>
+			<field name="model">account.account</field>
+			<field name="inherit_id" ref="hiworth_accounting.view_account_form_hiworth" />
+			<field name="arch" type="xml">
+				<xpath expr="//label[1]" position="before">
+					<div class="oe_right oe_button_box" name="buttons">
+						<button type="action" name="%(action_hiworth_invoice_tree_all)d"
+							class="oe_inline oe_stat_button" icon="fa-tasks"
+							attrs="{'invisible':[('invoice_count','=', 0)]}"
+							context="{'search_default_account_id': active_id, 'default_account_id': active_id}">
+							<field name="invoice_count" widget="statinfo" string="Invoices" />
+						</button>
+					</div>
+				</xpath>
+				<xpath expr="//field/tree/field[@name='move_id']" position="before">
+					<field name="cheque_no" />
+				</xpath>
+
+			</field>
+		</record>
+
+
+		<record id="view_account_account_form_hiworth_construction" model="ir.ui.view">
+            <field name="name">view.account.account.form.hiworth.construction</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group/group/field[@name='reconcile']" position="before">
+                    <field name="is_contractor_payable" />
+                    <field name="is_cash_bank" />
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="action_account_contractor_payable_hiworth_view" model="ir.actions.act_window">
+            <field name="name">Contractor Payable</field>
+            <field name="res_model">account.account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="domain">[["is_contractor_payable", "=", True]]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_account_contractor_payable_hiworth_tree_view" model="ir.actions.act_window.view">
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="hiworth_accounting.view_account_list_hiworth" />
+            <field name="act_window_id" ref="action_account_contractor_payable_hiworth_view" />
+        </record>
+
+        <record id="action_account_contractor_payable_hiworth_form_view" model="ir.actions.act_window.view">
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hiworth_accounting.view_account_form_hiworth" />
+            <field name="act_window_id" ref="action_account_contractor_payable_hiworth_view" />
+        </record>
+
+        <!-- <menuitem action="action_account_contractor_payable_hiworth_view"
+            id="menu_contractor_payable_under_journal_entry" parent="account.menu_finance_entries"
+            sequence="56" /> -->
+
+
+	</data>
+</openerp>

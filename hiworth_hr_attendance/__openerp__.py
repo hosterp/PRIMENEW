@@ -1,0 +1,42 @@
+{
+    'name': 'Hiworth Human resource attendance',
+    'description': 'Modifies default attendnace view',
+    'author': 'hiworth',
+    'depends': [
+                'base',
+                'product',
+                'account',
+                'hr_attendance',
+                'hr_holidays',
+                'hr_payroll',
+                # 'hr_public_holidays',
+                'stock'
+#                 'hr_recruitment',
+                ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/ir.rule.csv',
+        'report/hiworth_hr_leave.xml',
+        'report/daily_report.xml',
+        'view/hiworth_hr_attendance.xml',
+        'view/hiworth_hr_leave.xml',
+        'view/hr_holidays.xml',
+        'view/hiworth_hr_attendance_wizard.xml',
+        'data/defaultdata.xml',
+#         'view/custom_layout.xml',
+        'view/report_payslip.xml',
+        'view/report_payslipdetails.xml',
+        'view/hr_employee_view.xml',
+        'view/attendance_today.xml',
+        'view/res_users.xml',
+        'view/attendance_request.xml',
+        'view/sequences.xml',
+        'view/hr_contract.xml',
+        'view/payrule_data.xml',
+        'view/daily_wages.xml',
+        'security/hide_menu.xml',
+        'report/worker_wage.xml',
+        'view/job_title.xml',
+        'report/id_card.xml'
+    ]
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    		<record id="view_res_groups_tree" model="ir.ui.view">
+			<field name="name">Extra Access Right Tree</field>
+			<field name="model">res.groups</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="full_name"/>
+					<!-- <field name="category_id"/>
+					<field name="name"/> -->
+					
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="view_res_groups_form" model="ir.ui.view">
+			<field name="name">Extra Access Right Form</field>
+			<field name="model">res.groups</field>
+			<field name="priority" eval="18"/>
+			<field name="arch" type="xml">
+				<form create="false">
+					
+					<sheet>
+					<group col="4">
+						<field name="category_id" readonly="1"/>
+						<field name="name" readonly="1"/>
+						<field name="ready_bool" invisible="1"/>
+					</group>
+					<notebook>
+                        <page string="Users">
+                        	<group>
+                            <field name="users" widget="many2many_tags" options="{'no_create':True}"/>
+                        </group>
+                        </page>
+                    </notebook>
+						
+			</sheet>
+				</form>
+			</field>
+		</record>
+
+
+	    	<record model="ir.actions.act_window" id="action_admin_sheet_configuration">
+				<field name="name">Extra Access Rights</field>
+				<field name="res_model">res.groups</field>
+				<field name="view_type">form</field>
+				<field name="view_mode">tree,form</field>
+				<field name="domain">[('ready_bool','=',True)]</field>
+				<field name="view_id" ref="view_res_groups_tree"/>
+
+			</record>
+
+			<record id="action_res_groups_tree" model="ir.actions.act_window.view">
+				<field name="view_mode">tree</field>
+				<field name="view_id" ref="view_res_groups_tree" />
+				<field name="act_window_id" ref="action_admin_sheet_configuration" />
+			</record>
+
+			<record id="action_res_groups_form" model="ir.actions.act_window.view">
+				<field name="view_mode">form</field>
+				<field name="view_id" ref="view_res_groups_form" />
+				<field name="act_window_id" ref="action_admin_sheet_configuration" />
+			</record>
+
+
+			<menuitem name="Configurations" id="menu_admin_sheet_configurations" action="action_admin_sheet_configuration" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager" parent="hiworth_project_management.menu_office_management" sequence="150"/>
+
+			<menuitem name="Configurations" id="submenu_admin_sheet_configurations" parent="menu_admin_sheet_configurations"/>
+
+
+			<menuitem name="Access Rights" id="sub_submenu_admin_sheet_configurations" action="action_admin_sheet_configuration" parent="submenu_admin_sheet_configurations"/>
+
+
+
+
+
+
+
+
+		<record id="view_groups_form_hiworth_inheriteddd" model="ir.ui.view">
+			<field name="name">res.groups.form.hiworth</field>
+			<field name="model">res.groups</field>
+			<field name="inherit_id" ref="base.view_groups_form" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="user_categ" invisible="1" />
+				</field>
+			</field>
+		</record>
+
+
+			
+    	
+
+</data>
+</openerp>

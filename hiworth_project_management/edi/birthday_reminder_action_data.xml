@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!--Email template -->
+
+
+        <record id="email_template_edi_birthday_reminder" model="email.template">
+            <field name="name">Birthday Wishes...!!</field>
+            <field name="subject">Happy Birthday ${object.name or 'n/a' }</field>
+            <field name="model_id" ref="hiworth_project_management.model_res_partner" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p>Birthday Wishes</p>
+                        <p> Wish You a very very Happy Birthday, ${object.name}. Hope you have a great Year Ahead. Stay Healthy, Stay Happy.Cheers. </p>
+                    </div>
+                        ]]>
+            </field>
+        </record>
+
+
+        <record id="email_template_edi_anniversary_reminder" model="email.template">
+            <field name="name">Wedding Anniversary Wishes...!!</field>
+            <field name="subject">Happy Wedding Anniversary ${object.name or 'n/a' }</field>
+            <field name="model_id" ref="hiworth_project_management.model_res_partner" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p>Wedding Anniversary Wishes</p>
+                        <p> Wish You a very very Happy Wedding Anniversary, ${object.name}. May the bond of love between you gets stronger every day and may your every anniversary be more exciting. Happy anniversary to both of you., Stay Happy.Cheers. </p>
+                    </div>
+                        ]]>
+            </field>
+        </record>
+
+
+
+        <record id="email_template_edi_special_day_reminder" model="email.template">
+            <field name="name">Greetings.....!!</field>
+            <field name="subject">${object.name} Greetings</field>
+            <field name="model_id" ref="hiworth_project_management.model_greetings_prime" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p>Greetings From Prime Builders & Architecture</p>
+                        <p> Wish You a very very Happy day.. Stay Happy.Cheers. 
+                        </p>
+                    </div>
+                        ]]>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

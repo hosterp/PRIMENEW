@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_customers_tree" model="ir.ui.view">
+			<field name="name">res.partner.tree</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="email" />
+					<field name="mobile" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_customers_form" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="priority" eval="0"/>
+			<field name="arch" type="xml">
+				<form string="Customer Details">
+					<!-- <header>
+						<button name="confirm_do" string="Confirm" type="object" class="oe_highlight"/>
+					</header> -->
+
+					<field name="image" widget='image' class="oe_avatar oe_left" options='{"preview_image": "image_medium"}' nolabel="1"/>
+					<div class="oe_title">
+
+						<h1>
+							<field name="name" default_focus="1" placeholder="Customer Name"
+								   required="1" />
+						</h1>
+					</div>
+
+
+					<group>
+
+						<group>
+							<separator string="Client Details"/><newline/>
+							<newline/><field name="nick_name" groups="hiworth_project_management.make_invisible_in_nickname"/>
+
+							<label for="days and dobm" string="Dob"/>
+							<div>
+								<field name="days"  string ="Dob" class="oe_inline" />-<field name="dobm" class="oe_inline" />-<field name="years" class="oe_inline" />
+							</div>
+							<field name="email" widget="email"
+								   attrs="{'required': [('user_ids','!=', [])]}" required="1" />
+
+							<field name="company_id" string="Branch"/>
+
+							
+							<label for="house_name" string="Permanant Address"/>
+							<div>
+								<field name="house_name" placeholder="House Name."/>
+								<field name="street" placeholder="House Name"/>
+								<field name="street2" string="Post Office"  placeholder="Post Office"/>
+								<field name="city" placeholder="city"/>
+								<field name="state_id" placeholder="State" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+								<field name="country_id" placeholder="Country" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+								<field name="zip" placeholder="zip"/>
+							</div>
+
+							<label for="house_name" string="Communication Address"/>
+							<div>
+								<field name="house_name2" placeholder="House Name."/>
+								<field name="street1" placeholder="House Name"/>
+								<field name="street3" string="Post Office"  placeholder="Post Office"/>
+								<field name="city1" placeholder="city"/>
+								<field name="state_id1" placeholder="State" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+								<field name="country_id1" placeholder="Country" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+								<field name="zip1" placeholder="zip"/>
+							</div>
+							<label for="phone" string="Tel No"/>
+							<div>
+								<field name="phone" widget="phone" placeholder="Work"/>
+								<field name="mobile" widget="phone" placeholder="Residential"/>
+								<group style="width:100%;">
+									<field name="mobile_line_new" nolabel="1">
+										<tree editable="bottom">
+											<field name="mob"/>
+										</tree>
+									</field>
+								</group><newline/>
+							</div>
+							<field name="occupation"/>
+							<field name="is_cus" invisible="1"/>
+							<field name="user" invisible="1"/>
+							<field name="current_user" invisible="1"/>
+
+						</group>
+
+						<group>
+							<separator string="Family Details"/><newline/>
+								<field name="wife_hus"/>
+								<label for="dayswh and dobwh" string="Dob"/>
+								<div>
+									<field name="dayswh" placeholder="day" string ="Dob" class="oe_inline" />-<field name="dobwh" placeholder="month" class="oe_inline" />-<field name="yearswh" class="oe_inline" placeholder="year"/>
+								</div>
+								<!-- <field name="wdng_day" string="Wedding Date" placeholder="Wedding Date"/> -->
+								<label for="wdng_d and wdng_m" string="Wedding Date"/>
+								<div>
+									<field name="wdng_d" string ="Day" class="oe_inline" />-<field name="wdng_m" string="Month" class="oe_inline"/>
+								</div>
+							<!-- <label for="days and dobm" string="children"/>
+							<div>
+								<field name="children" nolabel="1">
+									<tree editable="bottom">
+										<field name="name"/>
+										<field name="dob" string="Birthday" placeholder="BIRTHDAY"/>
+									</tree>
+								</field>
+							</div> -->
+							<newline/>
+							<field name="user_ids" invisible="1" />
+						</group>
+					</group>
+					<group>
+						<field name="cus_date" invisible="1"/>
+						<field name="res_id1" invisible="1"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit">
+			<field name="name">Customer Details</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>			
+			<field name="domain">['|',('is_cus', '=', True),('customer','=',True),('supplier','=',False)]</field>
+			<field name="context">{'search_default_group_by_branch': True}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click here to create a new Customer.
+				</p>
+			</field>
+		</record>
+
+		<record id="action_customers_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customers_tree" />
+			<field name="act_window_id" ref="action_project_inherit" />
+		</record>
+
+		<record id="action_customers_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customers_form" />
+			<field name="act_window_id" ref="action_project_inherit" />
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_customer_only">
+			<field name="name">Customer Details</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('current_user','=',uid)]</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click here to create a new Customer.
+				</p>
+			</field>
+		</record>
+
+		<record id="action_customersonly_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customers_tree" />
+			<field name="act_window_id" ref="action_project_inherit_customer_only" />
+		</record>
+
+		<record id="action_customersonly_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customers_form" />
+			<field name="act_window_id" ref="action_project_inherit_customer_only" />
+		</record>
+
+
+
+
+		<!-- #########################      menu      ########################3 -->
+
+
+		<menuitem id="menu_external_signup_root_employee" sequence="1"
+				  name="Tasks" groups="hiworth_project_management.group_employee"/>
+
+		<!-- <menuitem id="menu_project_management_employee" name="Office Management1232"
+			parent="menu_external_signup_root_employee" sequence="10" /> -->
+
+		<!-- <menuitem name="Activities" id="menu_activity_wd_project_main_employee"
+  	 		parent="menu_project_management_employee" sequence="23" /> -->
+
+		<!-- <menuitem name="Personal Activities" id="menu_activity_wd_project_main_employee_employee"
+            parent="menu_activity_wd_project_main_employee" sequence="2" action="action_project_personal_activities_wd" /> -->
+
+		<!-- <menuitem name=" Site visits Details" id="menu_activity_wd_project_main_employee_site" parent="menu_project_management_employee" sequence="10" /> -->
+		<!--
+                 <menuitem name="Personal Site Activities" id="menu_activity_wd"
+                     parent="menu_activity_wd_project_main_employee_site" sequence="2" action="action_project_personal_sitevisits_wd" /> -->
+
+		<menuitem 
+				id="menu_project_management_employee_file_details" 
+				name="Customer File Details"
+				parent="menu_external_signup_root_employee" 
+				sequence="20" 
+				/>
+
+		<menuitem 
+				name="My Own File Details" 
+				id="menu_activity_wd_project_main_employee_employee_12351"
+				parent="menu_project_management_employee_file_details" 
+				action="action_customer_file_details" 
+				sequence="1" 
+				/>
+
+		<menuitem name="Transferred File Details" id="menu_activity_wd_project_main_employee_employee_123"
+				  parent="menu_project_management_employee_file_details" sequence="1" action="action_customer_file_transfer_details" />
+
+
+
+		<menuitem id="menu_project_management_employee_project54789" name="Tasks"
+				  parent="menu_external_signup_root_employee" sequence="10" />
+
+		<!-- <menuitem id="menu_project_management_employee_project_rojects" name="Projects"
+			parent="menu_project_management_employee_project54789" sequence="1" /> -->
+
+		<!-- <menuitem id="menu_project_management_employee_project_pojects_tasks" name="Tasks"
+			parent="menu_project_management_employee_project54789" sequence="1" /> -->
+
+
+		<record model="ir.actions.act_window" id="action_project_personal_task">
+			<field name="name">Personal Tasks</field>
+			<field name="res_model">event.event</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar,tree,form</field>
+			<field name="domain">[('user_ids','in',uid)]</field>
+
+		</record>
+
+
+		<record id="action_personal_task_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="event_daily_task_tree" />
+			<field name="act_window_id" ref="action_project_personal_task" />
+		</record>
+
+		<record id="action_personal_task_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="event.view_event_form" />
+			<field name="act_window_id" ref="action_project_personal_task" />
+		</record>
+
+		<menuitem name="Personal Tasks" id="menu_activity_wd_project_main_employee_employee_12377"
+				  parent="menu_project_management_employee_project54789" sequence="1" action="action_project_personal_task" />
+
+
+
+
+
+
+
+
+		<!-- ################################ -->
+
+		<menuitem id="menu_office_management" name="Office Management" sequence="30" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_user,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_manager_accounts,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office"/>
+		<menuitem id="sub_menu_office_management" name="Office Management" parent="menu_office_management" sequence="1"/>
+		<menuitem name="Customer Details" id="customer_details_id_inherit"
+				  parent="sub_menu_office_management" action="action_project_inherit" sequence="2" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_manager_accounts,hiworth_project_management.group_dgm"/>
+
+		<menuitem name="Customer Details." id="customeronly_details_id_inherit"
+				  parent="sub_menu_office_management" action="action_project_inherit_customer_only" sequence="2" groups="hiworth_project_management.group_user"/>
+
+
+		<menuitem name="Project"
+				  id="project.menu_project_management"
+				  parent="hiworth_project_management.menu_office_management"
+				  sequence="3"/>
+
+
+
+
+		<record id="view_customers_site_details_tree" model="ir.ui.view">
+			<field name="name">res.partner.tree</field>
+			<field name="model">stock.location</field>
+			<field name="arch" type="xml">
+				<tree create="true">
+					<field name="name"/>
+					<!-- <field name="user_id" string="Customer"/>
+					<field name="location" />
+					<field name="remarks" /> -->
+				</tree>
+			</field>
+		</record>
+
+
+
+
+		<record id="view_site_details_form" model="ir.ui.view">
+			<field name="name">res.partner.form.site.details</field>
+			<field name="model">stock.location</field>
+			<field name="priority" eval="17"/>
+			<field name="arch" type="xml">
+				<form string="Location Details">
+					<sheet>
+						<h1><center>Location Details</center></h1>
+
+						<group>
+							<group>
+								<field name="name"/>
+
+							</group>
+							<group>
+							</group>
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_site_details">
+			<field name="name">Location Details</field>
+			<field name="res_model">stock.location</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('usage','=','internal')]</field>
+		</record>
+
+		<record id="action_site_details_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customers_site_details_tree" />
+			<field name="act_window_id" ref="action_project_inherit_site_details" />
+		</record>
+
+		<record id="action_site_details_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_site_details_form" />
+			<field name="act_window_id" ref="action_project_inherit_site_details" />
+		</record>
+
+		<menuitem name="Locations" id="id_locations_project" parent="menu_office_management" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/>
+
+		<menuitem name="Location Details" id="menu_site_fetails_project"
+				  parent="id_locations_project" action="action_project_inherit_site_details" sequence="6"/>
+
+
+		<record id="search_view_work_description" model="ir.ui.view">
+			<field name="name">Work Description</field>
+			<field name="model">job.assignment</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" string="Project Name"/>
+
+					<field name="user_id" string="Customer"/>
+					<field name="location" string="Location"/>
+
+					<filter name="group_by_customer_wd" string="Customer"
+							context="{'group_by': 'user_id'}"/>
+
+					<filter name="group_by_branch" string="Branch"
+							context="{'group_by': 'branch_name'}"/>
+
+					<filter name="group_by_location_wd" string="Location"
+							context="{'group_by': 'location'}"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="view_job_assignment_form" model="ir.ui.view">
+			<field name="name">res.partner.form.job.assignment</field>
+			<field name="model">job.assignment</field>
+			<field name="arch" type="xml">
+				<form string="Work Description">
+					<header>
+						<button name="convert_to_project" string="Create Project" type="object" class="oe_highlight" attrs="{'invisible':[('state','=','confirm')]}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.work_description_create_project_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/>
+						<field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirm"/>
+					</header>
+					<h1><center>WORK DESCRIPTION SHEET</center></h1>
+
+					<div class="oe_title">
+						<label for="name" string="Work Description Name" />
+						<h1><field name="name" nolabel="1"/></h1>
+					</div>
+					<group>
+						<group>
+
+							<field name="user_id" required="1" string="Name Of The Customer" domain="[('customer','=',True)]" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+							<field name="nick_name" />
+
+						</group>
+						<group>
+							<field name="date_today"/>
+							<field name="project_created" invisible="1"/>
+
+						</group>
+					</group>
+					<group groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.work_description_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office">
+						<label for="house_name" string="Address"/>
+						<div>
+							<field name="house_name" placeholder="House Name" />
+							<field name="street" placeholder="House Name" />
+							<field name="street2" placeholder="Post Office" />
+							<field name="city" placeholder="City" />
+							<field name="state_id" placeholder="State" options="{'no_create':1}" />
+							<field name="country_id" options="{'no_create':1}" placeholder="Country" />
+						</div>
+					</group>
+					<group groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.work_description_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office">
+						<group>
+							<field name="dob"/>
+						</group>
+						<group>
+							<div class="oe_inline">
+								<label for="contact1" string="Contact Number Of Customer"/>
+								<field name="contact1" class="oe_inline" style="width:450px;" />/
+								<field name="contact2" class="oe_inline" style="width:450px;"/>
+							</div>
+						</group>
+					</group>
+
+					<separator string="Site Details"/>
+					<group>
+						<group>
+
+
+							<field name="location" required="1" string="Location of Site" options="{'no_open':True}" domain="[('usage','=','internal')]" context="{'form_view_ref':'hiworth_project_management.view_site_details_form'}" />
+							<field name="work_type" />
+							<field name="bldng_direction"/>
+						</group>
+						<group>
+
+							<field name="area_limit"/>
+
+
+							<field name="no_stories"/>
+							<field name="branch_name" required="1" options="{'no_create':1}" />
+
+						</group>
+					</group>
+					<group>
+						<field name="my_remarks"/>
+						<field name="initial_meeting"/>
+					</group>
+					<separator string="Revisions"/>
+					<group>
+						<field name="revisions" nolabel="1">
+							<tree editable="top">
+								<field name="rev_date"/>
+								<field name="rivision"/>
+								<field name="remarks"/>
+							</tree>
+						</field>
+					</group>
+					<group>
+						<field name="final_meeting"/>
+					</group>
+					<group>
+						<group>
+							<field name="issuing_submission"/>
+							<field name="issuing_working"/>
+						</group>
+						<group>
+							<field name="remark1"/>
+							<field name="remark2"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Activities">
+							<button name="create_activity" type="object" string="Add Activity"/>
+							<group>
+								<field name="activities_line" nolabel="1" context="{'default_activity':True,'default_user_id':False,'default_wd_id':id}">
+									<tree >
+										<field name="activity" invisible="1" />
+										<field name="name" tring="Task Title"/>
+
+										<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')]}" string="Assigned To" domain="[('employee_id','!=',False)]" widget="many2many_tags"  invisible="1"/>
+
+										<field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" string="Assigned To" domain="[('employee_id','!=',False)]"/>
+
+
+
+										<field name="date_begin" />
+										<field name="report_time" />
+										<field name="date_end" />
+
+										<field name="current_user" invisible="1"/>
+										<field name="state" readonly="1" />
+									</tree>
+									<form>
+										<h2>
+											<label for="name" string="Activity"/>
+											<field name="name" /></h2>
+										<group>
+
+											<group>
+
+
+												<field name="user_id" invisible="1"/>
+												<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')]}" string="Assigned To" domain="[('employee_id','!=',False)]" widget="many2many_tags"/>
+
+												<field name="state" readonly="1" invisible="1"/>
+												<field name="activity" invisible="1" />
+											</group>
+											<group>
+												<field name="date_begin" />
+												<field name="report_time" />
+												<field name="date_end" />
+												<field name="current_user" invisible="1"/>
+											</group>
+										</group>
+									</form>
+								</field>
+							</group>
+						</page>
+						<page string="Site Visit Schedule">
+							<button name="create_work_site" type="object" string="Add Site Visit"/>
+							<group>
+								<field name="site_visit_line" nolabel="1" context="{'default_site_visit':True,'default_user_id':False}">
+									<tree >
+										<field name="site_visit" invisible="1" />
+										<field name="name" string="Description" />
+										<field name="date_begin" />
+										<field name="report_time" />
+										<field name="date_end" />
+
+										<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')],'required':1}" string="Assigned Members" domain="[('employee_id','!=',False)]" widget="many2many_tags" required="0" invisible="1"/>
+
+										<field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" string="Assigned To"  domain="[('employee_id','!=',False)]" />
+										<field name="location" />
+										<field name="state" readonly="1" />
+									</tree>
+									<form>
+										<h2>
+											<label for="name" string="Task Name"/>
+											<field name="name" /></h2>
+										<group>
+
+											<group>
+
+												<field name="user_id" invisible="1"/>
+												<field name="user_ids" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','completed')]}" string="Assigned To" domain="[('employee_id','!=',False)]" widget="many2many_tags"/>
+												<field name="location" required="1"/>
+
+												<field name="state" readonly="1" invisible="1"/>
+												<field name="site_visit" invisible="1" />
+											</group>
+											<group>
+												<field name="date_begin" />
+												<field name="report_time" />
+												<field name="date_end" />
+												<field name="current_user" invisible="1"/>
+											</group>
+										</group>
+									</form>
+								</field>
+							</group>
+						</page>
+
+					</notebook>
+
+
+
+
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_customers_job_tree" model="ir.ui.view">
+			<field name="name">res.partner.tree</field>
+			<field name="model">job.assignment</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" string="PBA No"/>
+					<field name="user_id" string="Customer"/>
+					<field name="location"/>
+					<field name="work_type" />
+					<field name="branch_name"/>
+					<field name="bldng_direction" />
+					<field name="my_remarks" string="Remarks"/>
+					<field name="state" />
+
+				</tree>
+			</field>
+		</record>
+
+
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_job_assignment">
+			<field name="name">Work Description</field>
+			<field name="res_model">job.assignment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('project_created','=',False)]</field>
+			<field name="context">{'search_default_group_by_branch':1}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click here to create a new Work Description.
+				</p>
+			</field>
+		</record>
+
+		<record id="action_job_assignment_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customers_job_tree" />
+			<field name="act_window_id" ref="action_project_inherit_job_assignment" />
+		</record>
+
+		<record id="action_job_assignment_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_job_assignment_form" />
+			<field name="act_window_id" ref="action_project_inherit_job_assignment" />
+		</record>
+
+
+		<!--<menuitem name="Work Description" id="menu_job_assignment_project"-->
+				  <!--parent="sub_menu_office_management" sequence="7" action="action_project_inherit_job_assignment" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.work_description_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office"/>-->
+
+		<record id="make_invisible" model="res.groups">
+			<field name="name">visible - Demo</field>
+		</record>
+		<!-- <record model="ir.ui.menu" id="portal.portal_menu">
+            <field name="name">Portal</field>
+            <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+        </record> -->
+		<record model="ir.ui.menu" id="mail.mail_feeds_main">
+			<field name="name">Messaging</field>
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+
+
+		<record model="ir.ui.menu" id="base.menu_reporting">
+			<field name="name">Reporting</field>
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+
+
+
+
+		<record model="ir.ui.view" id="view_site_visit_schedule_search">
+			<field name="name">site.visit.schedule.search.view</field>
+			<field name="model">site.visit.schedule</field>
+			<field name="arch" type="xml">
+				<search string="Site Visit Schedule">
+					<field name="branch" string="Branch" />
+					<field name="pba" string="Project Name" />
+					<field name="assigned" string="Assigned By" />
+					<field name="visit_by" string="Assigned To" />
+					<field name="location" string="Location" />
+					<field name="state" string="Status" />
+
+					<field name="location" string="Location"/>
+
+					<filter name="group_not_visited" string="Not Visited" domain="[('status','=','notvisited')]"/>
+
+					<filter name="group_visited" string="Visited" domain="[('status','=','visited')]"/>
+
+					<filter name="group_by_visitby_svc" string="Assigned To"
+							context="{'group_by': 'visit_by'}"/>
+
+					<filter name="group_by_status_svc" string="Status"
+							context="{'group_by': 'status'}"/>
+
+
+					<filter name="group_by_branch" string="Branch"
+							context="{'group_by': 'branch'}"/>
+
+					<filter name="group_by_project_svc" string="Related Project"
+							context="{'group_by': 'pba'}"/>
+
+					<filter name="date_today_svc" string="Date" context="{'group_by': 'date_today'}"/>
+
+
+				</search>
+			</field>
+		</record>
+
+
+
+
+		<record id="view_site_visit_tree" model="ir.ui.view">
+			<field name="name">site.visit.tree</field>
+			<field name="model">site.visit.schedule</field>
+			<field name="arch" type="xml">
+				<tree colors="red:status == 'notvisited';green:status == 'visited'">
+					<field name="date_today"/>
+					<field name="pba"/>
+					<field name="location"/>
+					<field name="visit_by"/>
+					<field name="state" invisible="1"/>
+					<field name="branch" />
+					<field name="status"/>
+
+				</tree>
+			</field>
+		</record>
+
+
+
+
+		<record id="view_site_visit_form" model="ir.ui.view">
+			<field name="name">site.visit.form</field>
+			<field name="model">site.visit.schedule</field>
+			<field name="arch" type="xml">
+				<form string="Site Visit Details">
+					<header>
+						<button name="complete_task" type="object" class="oe_highlight" string="Done" states="done" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager" confirm="Are You Sure?"/>
+						<button name="completed_task" type="object" class="oe_highlight" string="Visited" states="draft" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/>
+
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<h1><field name="pba" class="oe_inline" attrs="{'required':1,'readonly':[('state','=','complete')]}" options="{'no_create': True}"/></h1>
+						<!-- <group>
+                            <field name="user" invisible="1"/>
+                            <field name="pba" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}"/>
+                        </group> -->
+						<group>
+							<group>
+								<field name="date_today" attrs="{'readonly':[('state','=','complete')]}"/>
+								<field name="visit_by" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','complete')],'required':1}"/>
+								<field name="name" attrs="{'readonly':[('state','=','complete')]}"/>
+
+								<field name="assigned" invisible="1"/>
+								<field name="status1" invisible="1"/>
+
+							</group>
+							<group>
+								<field name="branch" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" invisible="1" />
+								<field name="assigned"/>
+								<field name="location" attrs="{'readonly':[('state','=','complete')],'required':1}" domain="[('usage','=','internal')]" context="{'form_view_ref':'hiworth_project_management.view_site_details_form'}" />
+								<field name="status" attrs="{'readonly':[('state','=','complete')]}" invisible="1"/>
+								<field name="remarks" attrs="{'readonly':[('state','=','complete')]}"/>
+								<field name="update_sel" invisible="1"/>
+								<field name="update" invisible="1"/>
+								<field name="admin" invisible="1"/>
+								<field name="updated_user" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_site_visit">
+			<field name="name">All Site Visits</field>
+			<field name="res_model">site.visit.schedule</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_group_by_branch':1,'search_default_group_by_project_svc':1}
+			</field>
+			<field name="domain">[]</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_site_visit_personal">
+			<field name="name">Personal Site Visits</field>
+			<field name="res_model">site.visit.schedule</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_group_by_project_svc':1}
+			</field>
+			<field name="domain">[('visit_by','=',uid)]</field>
+		</record>
+
+
+
+
+		<!-- <menuitem name="Site Visit Details" id="main_menu_site_visit_project"
+                    parent="sub_menu_office_management" sequence="15" />
+
+
+                    <menuitem name="All Site Visits" id="menu_site_visits" parent="main_menu_site_visit_project" action="action_project_inherit_site_visit" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.site_visit_create_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office" />
+
+
+                    <menuitem name="Personal Site Visits" id="menu_site_visits_personal" parent="main_menu_site_visit_project" action="action_project_inherit_site_visit_personal" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.site_visit_create_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office,hiworth_project_management.group_employee" />
+         -->
+
+
+
+
+
+
+		<!-- <record model="ir.ui.view" id="view_task_entry_search">
+        <field name="name">task.entry.search.view</field>
+        <field name="model">task.entry</field>
+        <field name="arch" type="xml">
+            <search string="Activity">
+                <field name="branch" string="Branch" />
+                <field name="project_id" string="Project Name" />
+                <field name="state" string="Status" />
+                <field name="user_id" string="Assigned To" />
+                <field name="assigned_by" string="Assigned By" />
+
+                <filter name="group_not_completed" string="Not Completed" domain="[('status','=','initial')]"/>
+
+                <filter name="group_completed" string="Completed" domain="[('status','=','completed')]"/>
+
+                <filter name="group_by_assignedto_te" string="Assigned To"
+                      context="{'group_by': 'user_id'}"/>
+
+                  <filter name="group_by_status_te" string="Status"
+                      context="{'group_by': 'status'}"/>
+
+
+                  <filter name="group_by_branch" string="Branch"
+                      context="{'group_by': 'branch'}"/>
+
+                 <filter name="group_by_project_te" string="Related Project"
+                      context="{'group_by': 'project_id'}"/>
+
+                <filter name="date_today" string="Today" domain="[('date_today', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_today', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+
+            </search>
+        </field>
+    </record>
+-->
+
+
+
+
+
+		<record id="view_site_activities_tree" model="ir.ui.view">
+			<field name="name">site.activity.tree</field>
+			<field name="model">task.entry</field>
+			<field name="arch" type="xml">
+				<tree colors="red:status == 'initial';green:status == 'completed' ">
+					<field name="date_today"/>
+					<field name="name" string="Description"/>
+					<field name="project_id" string="PBA"/>
+					<field name="user_id" string="Work Assigned"/>
+
+					<field name="remarks"/>
+					<field name="branch" />
+					<field name="status"/>
+					<field name="state" invisible="1"/>
+
+				</tree>
+			</field>
+		</record>
+
+
+
+
+		<record id="view_site_activity_form" model="ir.ui.view">
+			<field name="name">site.activity.form</field>
+			<field name="model">task.entry</field>
+			<field name="arch" type="xml">
+				<form string="Activities">
+					<header>
+						<button name="complete_task" type="object" class="oe_highlight" string="Done" states="done" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager" confirm="Are You Sure?"/>
+						<button name="completed_task" type="object" class="oe_highlight" string="Completed" states="draft" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_employee" confirm="Are You Sure?"/>
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<h1><field name="project_id" class="oe_inline" attrs="{'readonly':[('state','=','complete')],'required':1}" options="{'no_create': True}" /></h1>
+						<group col="4">
+							<field name="date_today" attrs="{'readonly':[('state','=','complete')]}"/>
+							<field name="branch" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" invisible="1" />
+							<field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open':True}" attrs="{'readonly':[('state','=','complete')],'required':1}"/>
+							<field name="assigned_by" />
+						</group>
+
+						<group>
+							<field name="name" attrs="{'readonly':[('state','=','complete')],'required':1}" string="Activity"/>
+
+
+							<field name="status" attrs="{'readonly':[('state','=','complete')]}" invisible="1"/>
+							<field name="remarks" attrs="{'readonly':[('state','=','complete')]}"/>
+							<field name="status1" invisible="1"/>
+							<field name="update_sel" invisible="1"/>
+							<field name="update" invisible="1"/>
+							<field name="admin" invisible="1"/>
+							<field name="updated_user" invisible="1"/>
+						</group>
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_activities_visit">
+			<field name="name">All Activities</field>
+			<field name="res_model">task.entry</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- <field name="search_view_id" ref="view_task_entry_search" />
+			<field name="context">{'search_default_group_by_branch':1,'search_default_group_by_project_te':1,'search_default_date_today': 1}
+			</field> -->
+			<field name="domain">[]</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_activities_visit_personal">
+			<field name="name">Personal Activities</field>
+			<field name="res_model">task.entry</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- <field name="search_view_id" ref="view_task_entry_search" /> -->
+			<!-- <field name="context">{'search_default_group_by_project_te':1,'search_default_date_today': 1}
+			</field> -->
+			<!-- <field name="domain">[('user_id','=',uid)]</field> -->
+		</record>
+
+
+
+
+		<!-- <menuitem name="Activities" id="menu_site_activity_project_main"
+        parent="sub_menu_office_management" sequence="13" />
+
+        <menuitem name="All Activities" id="menu_site_activity_project_all" parent="menu_site_activity_project_main" action="action_project_inherit_activities_visit" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.activity_create_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office"/>
+
+
+        <menuitem name="Personal Activities" id="menu_site_activity_project_personal" parent="menu_site_activity_project_main" action="action_project_inherit_activities_visit_personal" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_manager_office,hiworth_project_management.group_am_office,hiworth_project_management.group_architect,hiworth_project_management.group_employee"/>
+
+-->
+
+
+
+
+		<record id="project.view_project_project_filter" model="ir.ui.view">
+			<field name="name">project.project.select</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<search string="Search Project">
+					<field name="name" string="Project Name"/>
+					<filter string="Open" name="Current" domain="[('state', '=','open')]"/>
+					<filter string="Pending" name="Pending" domain="[('state', '=','pending')]"/>
+					<filter string="Template" name="Template" domain="[('state', '=','template')]"/>
+					<separator/>
+					<filter string="Member" name="Member" domain="['|',('user_id', '=', uid),('members', '=', uid)]"/>
+					<filter string="Manager" domain="[('user_id','=',uid)]"/>
+					<separator/>
+					<filter string="New Mail" name="message_unread" domain="[('message_unread','=',True)]"/>
+					<field name="user_id" string="Project Manager"/>
+					<field name="partner_id" string="Contact" filter_domain="[('partner_id', 'child_of', self)]"/>
+					<field name="dob" string="DOB"/>
+					<group expand="0" string="Group By">
+						<filter string="Manager" name="Manager" context="{'group_by':'user_id'}"/>
+						<filter string="Contact" name="Partner" context="{'group_by':'partner_id'}"/>
+						<filter string="Parent" name="Parent" help="Parent" context="{'group_by':'parent_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+
+
+
+
+		<record id="view_project_manager_charge_form" model="ir.ui.view">
+			<field name="name">manager.form</field>
+			<field name="model">manager.charge</field>
+			<field name="arch" type="xml">
+				<form string="Manager Incharge">
+
+					<group>
+						<field name="rec" invisible="1"/>
+						<field name="manager" required="1" options="{'no_create': True}"/>
+						<!-- <field name="project_name" /> -->
+						<field name="project_category"/>
+						<field name="branch" string="Branch Name"/>
+					</group>
+					<footer>
+						<button name="confirm_manager" string="Continue" type="object" class="oe_highlight"/>
+						or
+						<button string="Cancel" class="oe_link" special="cancel"/>
+					</footer>
+
+
+				</form>
+			</field>
+		</record>
+
+		<!-- project task xml -->
+		<record id="view_task_wizard_line_form" model="ir.ui.view">
+            <field name="name">task.wizard.line.form</field>
+            <field name="model">task.wizard.line</field>
+            <field name="arch" type="xml">
+                <form string="Events">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" required="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="direct_task" invisible="1"/>
+                                <field name="project_id" attrs="{'readonly':[('direct_task', '=', False)]}" required="1"/>
+                                <field name="manager_id" readonly="1"/>
+                                <field name="company_id" readonly="1"/>
+                                <field name="customer_id" readonly="1"/>
+                                <field name="task_type"/>
+                            </group>
+                            <group>
+                                <field name="date_begin"/>
+								<field name="report_time"/>
+                                <field name="date_end"/>
+                                <field name="assigned" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <field name="remarks"/>
+                    </sheet>
+                    <footer>
+                    <div>
+                        <button string="Save and new" type="object" class="oe_highlight" name="button_save_new"/>
+                        <button string="Save and close" type="object" class="oe_highlight" name="button_save"/>
+                    </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+		<!-- To hide use tasks -->
+<!-- 		<record model="ir.ui.view" id="edit_project_form_inherit_neww">
+            <field name="name">project.project.edit.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//sheet/div/div[@name='options_active']" position="replace">
+
+            	</xpath>
+        	</field>
+        </record> -->
+
+	</data>
+</openerp>

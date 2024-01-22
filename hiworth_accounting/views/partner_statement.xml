@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+
+		<record id="view_partner_statement_form" model="ir.ui.view">
+			<field name="name">view.partner.statement.form</field>
+			<field name="model">partner.statement</field>
+			<field name="arch" type="xml">
+				<form string="Partner Statement">
+					<sheet>
+						<group col="4">
+							<!-- <group> -->
+								<field name="name" string="Description"/>
+								<field name="partner_id" required="True"/>
+								<!-- <field name="name" /> -->
+							<!-- </group>
+							<group> -->
+								<field name="account_id" required="True"/>
+								<!-- <field name="name" /> -->
+						 </group>
+						 <group>
+							<notebook>
+								<page string="Statements">
+									<field name="statement_ids" nolabel="1" >
+										<tree editable="bottom">
+										    <!--  <field name="line_no" /> -->
+											<field name="date" />
+											<field name="name" string="Description"/>
+											<field name="amount" sum="Total"/>
+											<!-- <field name="credit" /> -->
+											<!-- <field name="total" sum="Total"/> -->
+										</tree>
+									</field>
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+
+			</field>
+		</record>
+
+		<record id="view_partner_statement_tree" model="ir.ui.view">
+			<field name="name">view.partner.statement.tree</field>
+			<field name="model">partner.statement</field>
+			<field name="arch" type="xml">
+				<tree string="Partner Statement">
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="account_id" />
+                    <field style="text-align: right;" name="total" />
+                  <!--   <field name="total" /> -->
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_partner_statement_tree" model="ir.actions.act_window">
+            <field name="name">Partner Statement</field>
+            <field name="res_model">partner.statement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_partner_statement_tree" />
+        </record>
+
+       <!--  <menuitem name="Partner Statement" action="action_partner_statement_tree" id="menu_partner_statement_tree"
+            parent="account.menu_finance_entries" sequence="65"  /> -->
+
+        <!-- <record id="view_partner_statement_form_with_payment" model="ir.ui.view">
+            <field name="name">view.partner.statement.form.with.payment</field>
+            <field name="model">partner.statement</field>
+            <field name="arch" type="xml">
+                <form string="Partner Statement">
+                    <group>
+                        <group col="2">
+                            <group>
+                                <field name="name" />
+                                <field name="partner_id" required="True"/>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="account_id" required="True"/>
+                                <field name="name" />
+                                <notebook colspan="2">
+                                <page string="Statements">
+                                    <field name="statement_ids" nolabel="1" >
+                                        <tree editable="bottom">
+                                             <field name="line_no" />
+                                            <field name="date" />
+                                            <field name="name" string="Description"/>
+                                            <field name="amount" sum="Total"/>
+                                            <field name="credit" />
+                                            <field name="total" sum="Total"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                         </group>
+                         <group col="2">
+                            <notebook>
+                                <page string="Payments">
+                                    <field name="move_lines" nolabel="1" >
+                                        <tree editable="bottom">
+                                             <field name="line_no" /> 
+                                            <field name="date" string="Date"/>
+                                            <field name="name" string="Description"/>
+                                            <field name="debit" sum="Total"/>
+                                            <field name="credit" sum="Total"/>
+                                            <field name="credit" />
+                                            <field name="total" sum="Total"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                   </group>
+                </form>
+
+            </field>
+        </record>
+        
+        
+        <record id="action_partner_statement_tree_with_payment" model="ir.actions.act_window">
+            <field name="name">Partner Statement</field>
+            <field name="res_model">partner.statement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_partner_statement_form_with_payment" />
+        </record>
+
+        <menuitem name="Partner Statement" action="action_partner_statement_tree_with_payment" id="menu_partner_statement_tree_with_payment"
+            parent="account.menu_finance_entries" sequence="110"  /> -->
+        
+        
+        
+
+
+	</data>
+</openerp>

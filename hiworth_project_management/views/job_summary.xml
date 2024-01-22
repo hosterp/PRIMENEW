@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+
+		<record id="view_wizard_job_summary_form" model="ir.ui.view">
+			<field name="name">job.summary.wizard.form</field>
+			<field name="model">job.summary.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+						<h1><center>Job Summary</center></h1>
+					<group col="4">
+						<field name="date_from"/>
+						<field name="date_to"/>
+				</group>
+				<group>
+					<field name="employee" options="{'no_create': True}" domain="[('contractor','=',False),('is_cus','=',False)]"/>
+				</group>
+				<footer>
+                        <button name="confirm_date" string="View" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.actions.act_window" id="action_job_summary">
+            <field name="name">Job Summary</field>
+            <field name="res_model">job.summary.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_wizard_job_summary_form"/>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+        </record>
+
+
+         <menuitem action="action_job_summary" id="menu_job_summary" name="Job Summary"
+            parent="event.menu_event_event" sequence="25"
+            groups="project.group_project_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm"/>
+
+
+
+</data>
+</openerp>

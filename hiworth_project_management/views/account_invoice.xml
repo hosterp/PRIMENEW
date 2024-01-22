@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+<data>
+
+
+ <!-- <template id="report_invoice_document222">
+       
+        <div class="page">
+            <t t-set="sl_no" t-value="1" />
+             <t t-set="discount" t-value="0" />
+            
+           
+
+            <table style="width: 100%; font-size: large;outline-style:solid;outline-width:3px;border-bottom-color:grey;border-bottom:inset;border-bottom-width:24px;">
+                <tr>
+
+                    <td colspan="8" style="width:80%;border-bottom: solid;background-color:#ad99cd;">
+                        <div>
+                            <div style="float:left;padding-top:18px;">
+                        <img src="/hiworth_project_management/static/src/img/logo.png" style="width:130px;height:120px;"/>
+                        </div>
+                        <div style="float:left;padding-top:3px;">
+                        
+                        <h2>Prime Builders &amp; Architects</h2>
+                        M.C Road, Padinjarenada, Chaengannur, 689 121<br/>
+                        Kerala, India, Ph: <span t-esc="docs.partner_id.company_id.phone"/><br/>
+                        Email : <span t-esc="docs.partner_id.company_id.email"/>
+                        </div>
+                        </div>
+                    </td>
+                    <td colspan="3" align="center" style="width:20%;border-bottom: solid;background-color:#a6a6a6;font-size:15px;padding-top:2px;">
+                        GST:<br/>
+                        <span t-field="o.partner_id.company_id.gst_no"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left" colspan="5" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                        Invoice No:<span t-field="docs.prime_invoice"/>
+                    </td>
+                    <td class="text-right" colspan="6" style="padding-left:30px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Invoice Date:<span t-field="docs.date_invoice"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left" colspan="11" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Project Title:-<span t-field="docs.number"/>
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Bill To:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;"><strong><span t-esc="docs.partner_id.name" style="padding-left:3em;"/></strong></td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;"><span t-esc="docs.partner_id.street"  style="padding-left:3em;"/>,<span t-esc="docs.partner_id.street2"/>,<span t-esc="docs.partner_id.city"/></td>
+                </tr>
+                <tr colspan="11">
+                    <th colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">Sl No:</th>
+                    <th colspan="2" class="text-center">Description/Nature Of Work</th>
+                    <th colspan="2" class="text-right">Consultancy Fee</th>
+                    <th colspan="2" class="text-right">Cash Discount</th>
+                    <th colspan="2" class="text-right">Net Value</th>
+                    <th colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">Grand Total</th>
+                </tr>
+                <tr colspan="11">
+                    <t t-foreach="docs.invoice_line" t-as="l">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                            <t t-esc="sl_no" />
+                            <t t-set="sl_no" t-value="sl_no+1" />
+                        </td>
+                        <td colspan="2" class="text-center">
+                            <span t-field="l.name" />
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.price_unit" />
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.discount" />%
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.price_unit" />
+                        </td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">
+                            <span t-esc="l.price_subtotal" />
+                        </td>
+                    </t>
+                </tr>
+                <br/>
+                <tr colspan="11">
+                    <t t-foreach="docs.tax_line" t-as="t">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                        </td>
+                        <td colspan="4" class="text-center">
+                            <span t-field="t.name" />
+                        </td>
+                        <td colspan="1" class="text-right">
+                           
+                        </td>
+                        <td colspan="1" class="text-right">
+                            
+                        </td>
+                        <td colspan="2" class="text-right">
+                           
+                        </td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">
+                            <span t-field="t.amount" />
+                        </td>
+                    </t>
+                </tr>
+                <t t-set="nos2" t-value="10"/>
+                <t t-foreach="range(nos2)" t-as="i">
+                    <tr height="20">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;"></td>
+                        <td colspan="2" class="text-center"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;"></td>
+                    </tr>
+                    </t>
+
+                <tr>
+                    <td colspan="5" class="text-center" style="border-top:inset;border-top-width:20px;border-left-color:grey;border-left:inset;border-left-width:24px;">
+                    <span>RECEIVED AMOUNT</span>
+                    </td>
+                    <td colspan="6" class="text-right" style="border-top:inset;border-top-width:20px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Rs:&#160;&#160;&#160;&#160;<span t-esc="docs.amount_total"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-top:20px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        GRAND TOTAL IN WORDS:Rupee &#160;<span t-esc="docs.amount_to_text(docs.amount_total,'Rupee')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-top:20px;padding-left:30px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Mode Of Payment:<span t-esc="docs.get_mode(docs.id,0)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Cheque Details:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Details Of Other Transaction:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Payment Date:<span t-esc="docs.get_mode(docs.id,1)"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                    </td>
+                     <td colspan="6" style="padding-left:50px;padding-top:20px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Authorised Signatory
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td colspan="11" style="padding-top:25px;padding-left:30px;border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Signature Of Payee/Client
+                    </td>
+                     
+                </tr>
+                <t t-set="nos3" t-value="8"/>
+                <t t-foreach="range(nos2)" t-as="i">
+                    <tr height="10">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;"></td>
+                        <td colspan="2" class="text-center"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;"></td>
+                    </tr>
+                    </t>
+
+            </table>
+
+           
+            
+        
+           
+           
+        </div>
+         
+</template>
+
+ -->
+
+
+
+ <template id="report_invoice_document222">
+       
+        <div class="page">
+            <t t-set="sl_no" t-value="1" />
+             <t t-set="discount" t-value="0" />
+             <t t-set="nos2" t-value="0" />
+            
+           
+
+            <table style="width: 100%; font-size: large;outline-style:solid;outline-width:3px;border-bottom-color:grey;border-bottom:inset;border-bottom-width:24px;">
+                <tr>
+
+                    <td colspan="8" style="width:80%;border-bottom: solid;background-color:#ad99cd;">
+                        <div>
+                            <div style="float:left;padding-top:18px;">
+                        <img src="/hiworth_project_management/static/src/img/logo.png" style="width:155px;height:125px;padding-left:2em;"/>
+                        </div>
+                        <div style="float:left;padding-top:7px;padding-left:3em;">
+                        
+                        <h1>Prime Builders &amp; Architects</h1>
+                        M.C Road, Padinjarenada, Chaengannur, 689 121<br/>
+                        Kerala, India, Ph: <span t-esc="docs.partner_id.company_id.phone"/><br/>
+                        Email : <span t-esc="docs.partner_id.company_id.email"/>
+                        </div>
+                        </div>
+                    </td>
+                    <td colspan="3" align="center" style="width:20%;border-bottom: solid;background-color:#a6a6a6;font-size:15px;padding-top:2px;">
+                        GST:<br/>
+                        <span t-field="o.partner_id.company_id.gst_no"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left" colspan="5" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                        Invoice No:<span t-field="docs.prime_invoice"/>
+                    </td>
+                    <td class="text-right" colspan="6" style="padding-left:30px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Invoice Date:<span t-field="docs.date_invoice"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left" colspan="11" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Project Title:-<span t-field="docs.number"/>
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;">
+                        Bill To:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;"><strong><span t-esc="docs.partner_id.name" style="padding-left:3em;"/></strong></td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="text-left" style="border-left-color:grey;border-left:inset;border-left-width:24px;border-right-color:grey;border-right:outset;border-right-width:24px;"><span t-esc="docs.partner_id.street"  style="padding-left:3em;"/>,<span t-esc="docs.partner_id.street2"/>,<span t-esc="docs.partner_id.city"/></td>
+                </tr>
+                <tr colspan="11">
+                    <th colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">Sl No:</th>
+                    <th colspan="2" class="text-center">Description/Nature Of Work</th>
+                    <th colspan="2" class="text-right">Consultancy Fee</th>
+                    <th colspan="2" class="text-right">Cash Discount</th>
+                    <th colspan="2" class="text-right">Net Value</th>
+                    <th colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">Grand Total</th>
+                </tr>
+                <tr colspan="11">
+                    <t t-foreach="docs.invoice_line" t-as="l">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                            <t t-esc="sl_no" />
+                            <t t-set="sl_no" t-value="sl_no+1" />
+                            <t t-set="nos2" t-value="nos2+1" />
+                        </td>
+                        <td colspan="2" class="text-center">
+                            <span t-field="l.name" />
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.price_unit" />
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.discount" />%
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <span t-field="l.price_unit" />
+                        </td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">
+                            <span t-esc="l.price_subtotal" />
+                        </td>
+                    </t>
+                </tr>
+                <br/>
+                <tr colspan="11">
+                    <t t-foreach="docs.tax_line" t-as="t">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;">
+                        </td>
+                        <td colspan="4" class="text-center">
+                            <span t-field="t.name" />
+                        </td>
+                        <td colspan="1" class="text-right">
+                           
+                        </td>
+                        <td colspan="1" class="text-right">
+                            
+                        </td>
+                        <td colspan="2" class="text-right">
+                           
+                        </td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;">
+                            <span t-field="t.amount" />
+                             <t t-set="nos2" t-value="nos2+1" />
+                        </td>
+                    </t>
+                </tr>
+                <t t-set="nos3" t-value="25-nos2"/>
+                <t t-foreach="range(nos3)" t-as="i">
+                    <tr height="26">
+                        <td colspan="1" style="border-left-color:grey;border-left:inset;border-left-width:24px;"></td>
+                        <td colspan="2" class="text-center"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:outset;border-right-width:24px;"></td>
+                    </tr>
+                    </t>
+                </table>
+
+
+           
+            
+        
+           
+           
+        </div>
+
+        <div class="footer">
+                    <table style="width: 100%; font-size: large;outline-style:solid;outline-width:3px;border-bottom-color:grey;border-bottom:inset;border-bottom-width:24px;">
+
+                <tr>
+                    <td colspan="5" class="text-center" style="border-top-width:20px;border-left-color:grey;border-left:outset;border-left-width:24px;">
+                    <span>RECEIVED AMOUNT</span>
+                    </td>
+                    <td colspan="6" class="text-right" style="border-top-width:20px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Rs:&#160;&#160;&#160;&#160;<span t-esc="docs.amount_total"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-top:20px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        GRAND TOTAL IN WORDS:Rupee &#160;<span t-esc="docs.amount_to_text(docs.amount_total,'Rupee')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-top:20px;padding-left:30px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Mode Of Payment:<span t-esc="docs.get_mode(docs.id,0)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Cheque Details:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Details Of Other Transaction:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="padding-left:30px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Payment Date:<span t-esc="docs.get_mode(docs.id,1)"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" style="border-left-color:grey;border-left:outset;border-left-width:24px;">
+                    </td>
+                     <td colspan="6" style="padding-left:50px;padding-top:20px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Authorised Signatory
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td colspan="11" style="padding-top:25px;padding-left:30px;border-left-color:grey;border-left:outset;border-left-width:24px;border-right-color:grey;border-right:inset;border-right-width:24px;">
+                        Signature Of Payee/Client
+                    </td>
+                     
+                </tr>
+                <t t-set="nos3" t-value="2"/>
+                <t t-foreach="range(nos2)" t-as="i">
+                    <tr height="2">
+                        <td colspan="1" style="border-left-color:grey;border-left:outset;border-left-width:24px;"></td>
+                        <td colspan="2" class="text-center"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right"></td>
+                        <td colspan="2" class="text-right" style="border-right-color:grey;border-right:inset;border-right-width:24px;"></td>
+                    </tr>
+                    </t>
+
+            </table>
+        </div>
+         
+</template>
+
+ 
+<template id="report_invoice5">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'hiworth_project_management.report_invoice_document222')"/>
+        </t>
+    </t>
+</template>
+
+
+<report 
+        id="account.account_invoices"
+        model="account.invoice"
+        string="Invoices"
+        report_type="qweb-pdf"
+        name="hiworth_project_management.report_invoice5"
+        file="hiworth_project_management.report_invoice5"
+        attachment_use="True"
+        menu="False"
+        attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+
+
+
+        <report id="report_hotel_res_invoice_bill" 
+            string="Customer Bill"
+            model="account.invoice" 
+            report_type="qweb-pdf" 
+            file="hiworth_project_management.report_invoice5"
+            name="hiworth_project_management.report_invoice5" 
+            />
+
+            <record id="paperformat_report_invoice_hiworth_pm" model="report.paperformat">
+            <field name="name">Invoice Prime</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">75</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+
+        <!-- <record id="paperformat_report_invoice_hiworth_pm" model="report.paperformat">
+            <field name="name">Invoice Prime</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">20</field>
+            <field name="margin_right">20</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record> -->
+
+
+        <record id="hiworth_project_management.report_hotel_res_invoice_bill" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="hiworth_project_management.paperformat_report_invoice_hiworth_pm" />
+        </record>
+
+        <record id="account.account_invoices" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="hiworth_project_management.paperformat_report_invoice_hiworth_pm" />
+        </record>
+
+
+
+
+</data>
+</openerp>
+
+
+
+
+<!-- width: 100%;
+    font-size: large;
+    outline-style: solid;
+    outline-width: 3px;
+    border-width: 172px;
+    border: solid;
+    border-right-color: red;
+    border-right-width: 14px;
+    border-left-color: red;
+    border-left-width: 10px;
+} -->

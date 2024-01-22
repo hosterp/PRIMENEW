@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record id="hiworth_hr_attendance_view_employee_attendance_form" model="ir.ui.view">
+            <field name="name">Modified attendance tree view</field>
+            <field name="model">hiworth.hr.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="state" invisible="1" />
+                            <field name="sign_in" attrs="{'invisible':[('state','=','sign_out')]}" />
+                            <field name="sign_out" attrs="{'invisible': [('state','=','sign_in')]}" />
+                            <field name="location" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hiworth_hr_attendance_view_employee_attendance_tree" model="ir.ui.view">
+            <field name="name">Modified attendance tree view</field>
+            <field name="model">hiworth.hr.attendance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" readonly="1" />
+                    <field name="sign_in" />
+                    <field name="sign_out" />
+                    <field name="location" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hiworth_hr_attendance_view_employee_attendance_action1" model="ir.actions.act_window">
+            <field name="name">Open tree view showing attendance</field>
+            <field name="res_model">hiworth.hr.attendance</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="hiworth_hr_attendance_view_employee_attendance_tree" />
+        </record>
+
+        <!-- Modified employee tree view -->
+        <record id="hiworth_hr_attendance_view_employee_tree" model="ir.ui.view">
+            <field name="name">hr.employee.hiworth.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">17</field>
+            <field name="arch" type="xml">
+                <tree string="Employees" create="false">
+                    <field name="name"/>
+                    <field name="employee_type"/>
+                    <field name="work_phone"/>
+                    <field name="work_email"/>
+                    <field name="location" invisible="1"/>
+                    <field name="coach_id" invisible="1"/>
+                    <button string="View Product" icon="gtk-redo" type="object" name="load_employee_attendance" context="{'employee_id':id}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hiworth_hr_attendance_view_employee_tree_action" model="ir.actions.act_window">
+            <field name="name">Employees attendance sheet</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('status1','=','active')]</field>
+            <field name="view_id" ref="hiworth_hr_attendance_view_employee_tree" />
+        </record>
+
+        <!-- <menuitem 
+                id="hiworth_hr_menu_attendance_view_employees" 
+                name="Attendance" 
+                parent="hr.menu_hr_main" 
+                action="hiworth_hr_attendance_view_employee_tree_action" 
+                sequence="10" 
+                groups="hiworth_project_management.group_admin1,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager"
+                /> -->
+    </data>
+</openerp>

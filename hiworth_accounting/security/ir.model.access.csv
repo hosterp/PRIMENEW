@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_accounts_invoice,Access accounts invoice,model_account_invoice_no,accounts_user,1,1,1,0
+access_accounts_partner_statement,Access accounts Partner Statement,model_partner_statement,accounts_user,1,1,1,0
+access_accounts_partner_statement_line,Access accounts Partner Statement Line,model_partner_statement_line,accounts_user,1,1,1,0
+access_accounts_opening_entry,Access accounts Opening Entry,model_opening_entry,accounts_user,1,1,1,0
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_accounts_invoice_cloud,Access accounts invoice cloud,model_account_invoice_no,group_cloud_user,1,1,1,0
+access_accounts_partner_statement_cloud,Access accounts Partner Statement cloud,model_partner_statement,group_cloud_user,1,1,1,0
+access_accounts_partner_statement_line_cloud,Access accounts Partner Statement Line cloud,model_partner_statement_line,group_cloud_user,1,1,1,0
+access_accounts_opening_entry_cloud,Access accounts Opening Entry cloud,model_opening_entry,group_cloud_user,1,1,1,0
+,,,,,,,
+,,,,,,,
+access_accounts_invoice_no_cloud,Access accounts invoice no cloud,model_account_invoice_no,group_non_cloud_user,1,1,1,0
+access_accounts_partner_statement_no_cloud,Access accounts Partner Statement no cloud,model_partner_statement,group_non_cloud_user,1,1,1,0
+access_accounts_partner_statement_line_no_cloud,Access accounts Partner Statement Line  no cloud,model_partner_statement_line,group_non_cloud_user,1,1,1,0
+access_accounts_opening_entry_no_cloud,Access accounts Opening Entry no cloud,model_opening_entry,group_non_cloud_user,1,1,1,0

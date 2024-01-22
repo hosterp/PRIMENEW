@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_feedback_tree" model="ir.ui.view">
+			<field name="name">feedback.prime.tree</field>
+			<field name="model">feedback.prime</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="email"/>
+					
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_feedback_form" model="ir.ui.view">
+			<field name="name">feedback.prime.form</field>
+			<field name="model">feedback.prime</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="submit_feedback" type="object" class="oe_highlight" string="Submit" states="draft"/>
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<group>
+							<field name="date" attrs="{'readonly':[('state','=','submit')]}"/>
+						</group>
+						<br/><br/>
+						<h4 align="text-left">
+							Based On Your EXPERIENCE, How Likely Are You To Recommend PRIME BUILDERS &amp; ARCHITECTS To Your Friends?
+						</h4>
+						<br/>
+						<br/>
+						<p>
+							5&#160;<field name="recmnd1" attrs="{'readonly':[('state','=','submit')]}"/>
+							&#160;&#160;&#160;4&#160;<field name="recmnd2" attrs="{'readonly':[('state','=','submit')]}"/>
+							&#160;&#160;&#160;3&#160;<field name="recmnd3" attrs="{'readonly':[('state','=','submit')]}"/>
+							&#160;&#160;&#160;2&#160;<field name="recmnd4" attrs="{'readonly':[('state','=','submit')]}"/>
+							&#160;&#160;&#160;1&#160;<field name="recmnd5" attrs="{'readonly':[('state','=','submit')]}"/>
+						</p>
+						<br/>
+						<br/>
+						<h4>
+							Please rate PRIME BUILDERS &amp; ARCHITECTS for its functional aspects
+						</h4>
+						<table style="width:100%;" class="table table-bordered">
+							<tr>
+								<td style="font-weight:bolder;">Sl No:</td>
+								<td style="font-weight:bolder;">Criteria</td>
+								<td style="font-weight:bolder;">Excellent</td>
+								<td style="font-weight:bolder;">Good</td>
+								<td style="font-weight:bolder;">Satisfactory</td>
+								<td style="font-weight:bolder;">Can Improve More</td>
+								<td style="font-weight:bolder;">Poor</td>
+							</tr>
+							
+							<tr>
+								<td>1</td>
+								<td>Customer Care Service</td>
+								<td><center><field name="customer_care1" widget="priority" class="star_inherited" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="customer_care2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="customer_care3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="customer_care4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="customer_care5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Response to your calls and requirements</td>
+								<td><center><field name="response1" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="response2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="response3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="response4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="response5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Details in Drawings issued</td>
+								<td><center><field name="details1" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="details2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="details3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="details4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="details5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>On time delivery of details</td>
+								<td><center><field name="on_time1" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="on_time2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="on_time3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td> 
+								<td><center><field name="on_time4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="on_time5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Coordination of site works</td>
+								<td><center><field name="coordination1" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="coordination2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="coordination3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="coordination4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="coordination5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Site visits by Staff</td>
+								<td><center><field name="site1" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="site2" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="site3" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="site4" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+								<td><center><field name="site5" widget="priority" attrs="{'readonly':[('state','=','submit')]}"/></center></td>
+							</tr>
+						</table>
+						<h3 style="text-decoration:underline;">
+							REMARKS
+						</h3>
+						<div>
+							<field name="remarks" nolabel="1" class="textarea_inherited" attrs="{'readonly':[('state','=','submit')]}"/>
+						</div>
+						<h3 style="text-decoration:underline;">
+							GRIVENCES
+						</h3>
+						<group>
+							<field name="grivences" nolabel="1" class="textarea_inherited" attrs="{'readonly':[('state','=','submit')]}"/>
+						</group>
+					<group>
+						<field name="name" invisible="1"/>
+						<field name="email" invisible="1"/>
+				</group>
+			</sheet>
+				</form>
+			</field>
+		</record>
+
+		
+
+
+
+		<record model="ir.actions.act_window" id="action_feedback_prime">
+            <field name="name">Feedbacks</field>
+            <field name="res_model">feedback.prime</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+
+         <menuitem id="menu_feedback_prime" name=" CustomerFeedbacks"
+            parent="hiworth_project_management.menu_office_management" sequence="140"/>
+
+             <menuitem action="action_feedback_prime" id="sub_menu_feedback_prime" name="Customer Feedbacks"
+            parent="menu_feedback_prime" sequence="140" groups="base.group_erp_manager,hiworth_project_management.group_user,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager"/>
+</data>
+</openerp>

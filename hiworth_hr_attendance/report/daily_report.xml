@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+       
+        <record id="report_hiworth_hr_leave_summary_view11" model="ir.actions.report.xml">
+            <field name="name">Leaves View Summary</field>
+            <field name="model">hiworth.hr.leave</field>
+            <field name="report_name">hiworth_hr_attendance.template_hiworth_hr_leave_summary_view1</field>
+            <field name="report_type">qweb-html</field>
+        </record>
+
+        
+
+        <template id="hiworth_hr_attendance.template_hiworth_hr_leave_summary_view1">
+            <style>
+                table {
+                    margin: 0 auto;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+                .attendance_holiday {
+                    background: orange;
+                }
+                .attendance_present {
+                    background: green;
+                }
+                .attendance_absent {
+                    background: red;
+                }
+                .attendance_day {
+                    background: grey;
+                }
+                .attendance_mark {
+                    color: white;
+                }
+                .attendance_table_head {
+                    color: black;
+                    font-size: 10px;
+                }
+                .attendance_mark_time {
+                    color: white;
+                    white-space: nowrap;
+                    padding: 3px;
+                }
+                .attendance_page_title,
+                .attendance_month_heading {
+                    font-weight: normal;
+                    text-transform: uppercase;
+                }
+
+                .center_cell_content {
+                    vertical-align : middle;
+                    text-align: center;
+                }
+                .cell-content {
+                    font-size: 11px;
+                }
+                .padding_extra {
+                    padding: 5px;
+                }
+            </style>
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page" style="padding-top:150px;">
+                        <t t-set="attendance_days" t-value="docs[0].get_attendance_days(docs[0].active_ids, docs[0].from_date, docs[0].to_date)" />
+                        <t t-set="selected_users" t-value="docs[0].get_selected_users(docs[0].active_ids)" />
+                        <h2 class="text-center attendance_page_title">ATTENDANCE REPORT</h2>
+                        <div class="col-xs-12 text-center">
+                            <table>
+                                <t t-set="sl_no" t-value="1"/>
+                                <thead>
+                                    <tr>
+                                        <th t-att-colspan="len(attendance_days)+6" class="center_cell_content padding_extra attendance_month_heading">
+                                            <span t-esc="attendance_days[0][0].strftime('%B')" />
+                                            <span t-esc="attendance_days[0][0].strftime('%d')" />
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td><center>sl No:</center></td>
+                                        <td>
+                                            <span><center>Employee Name</center></span>
+
+                                        </td>
+                                        <td>
+                                            <span><center>Employee Code</center></span>
+                                        </td>
+                                        <td>
+                                            <span><center>Location</center></span>
+                                        </td>
+                                        <t t-foreach="attendance_days" t-as="day">
+                                            <td width="3.22%" class="center_cell_content">
+                                                <span class="attendance_table_head" t-esc="day[0].strftime('%-d')" />
+                                            </td>
+                                        </t>
+                                        <td class="center_cell_content attendance_table_head padding_extra">
+                                            Sign In
+                                        </td>
+                                        <td class="center_cell_content attendance_table_head padding_extra">
+                                            Sign Out
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="selected_users" t-as="o">
+                                    <t t-set="attendance_days" t-value="o.get_attendance_days(o.id, docs[0].from_date, docs[0].to_date)" />
+                                    <t t-set="total_present_days" t-value="o.get_total_present_days1(attendance_days,o,docs[0].from_date)" />
+                                    <t t-set="total_leaves" t-value="o.get_total_leaves1(attendance_days,o,docs[0].from_date)" />
+                                    <tbody>
+                                        <tr>
+                                            <td><center><t t-esc="sl_no"/></center></td>
+                                            <td class="center_cell_content padding_extra cell-content">
+                                                <span t-esc="o.name_related" />
+                                            </td>
+                                            <td><t t-esc="docs.get_employee_code(o)"/></td>
+                                            <td>
+                        <t t-esc="docs.get_employee_location(o,docs[0].from_date)"/>
+                                            </td>
+                                            <t t-foreach="attendance_days" t-as="day">
+                                                <t t-if="day[1]=='H'">
+                                                    <td class="attendance_holiday center_cell_content cell-content">
+                                                        <span class="attendance_mark" t-esc="day[1]" />
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='P'">
+                                                    <td class="attendance_present center_cell_content cell-content">
+                                                       
+                                                        <t t-if="day[2] != ''">
+                                                            <span class="attendance_mark_time" t-esc="day[2].strftime('%I:%M %p')" /><br />
+                                                        </t>
+                                                        <t t-if="day[3] != ''">
+                                                            <span class="attendance_mark_time" t-esc="day[3].strftime('%I:%M %p')" /><br />
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='A'">
+                                                    <td class="attendance_absent center_cell_content cell-content">
+                                                        <span class="attendance_mark" t-esc="day[1]" />
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='D'">
+                                                    <td class="attendance_day center_cell_content cell-content">
+                                                        <span class="attendance_mark" t-esc="'D'" />
+                                                    </td>
+                                                </t>
+                                            </t>
+                                            <td class="center_cell_content cell-content">
+                                                <t t-esc="total_present_days" />
+                                            </td>
+                                            <td class="center_cell_content cell-content">
+                                                <t t-esc="total_leaves" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <t t-set="sl_no" t-value="sl_no+1"/>
+
+                                </t>
+                            </table>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="report_hiworth_hr_leave_summary1" model="ir.actions.report.xml">
+            <field name="name">Leaves Summary</field>
+            <field name="model">hr.employee</field>
+            <field name="report_name">hiworth_hr_attendance.template_hiworth_hr_leave_summary1</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="hiworth_attendance_paperformat"/>
+        </record>
+
+
+        <template id="hiworth_hr_attendance.template_hiworth_hr_leave_summary1">
+            <style>
+                table {
+                    margin: 0 auto;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+                .attendance_holiday {
+                    background: orange;
+                }
+                .attendance_present {
+                    background: green;
+                }
+                .attendance_absent {
+                    background: red;
+                }
+                .attendance_day {
+                    background: grey;
+                }
+                .attendance_mark {
+                    color: white;
+                    font-weight: bold;
+                }
+                .attendance_mark_day-no {
+                    color: black;
+                    font-weight: bold;
+                }
+                .attendance_mark_time {
+                    color: white;
+                }
+                .attendance_page_title,
+                .attendance_month_heading {
+                    font-weight: normal;
+                    text-transform: uppercase;
+                }
+
+                .center_cell_content {
+                    vertical-align : middle;
+                    text-align: center;
+                }
+            </style>
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <t t-set="attendance_days" t-value="docs[0].get_attendance_days(docs[0].id, docs._context['start_date'], docs._context['end_date'])" />
+                        <h2 class="text-center attendance_page_title">ATTENDANCE REPORT</h2>
+                        <div class="col-xs-12 text-center">
+                            <table>
+                                <t t-set="sl_no" t-value="1"/>
+                                <thead>
+                                    <tr>
+                                        <th t-att-colspan="len(attendance_days)+6" class="center_cell_content attendance_month_heading">
+                                            <span t-esc="attendance_days[0][0].strftime('%B')" />
+                                            <span t-esc="attendance_days[0][0].strftime('%Y')" />
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                       <td><center>sl No:</center></td>
+                                        <td>
+                                            <span><center>Employee Name</center></span>
+
+                                        </td>
+                                        <td>
+                                            <span><center>Employee Code</center></span>
+                                        </td>
+                                        <td>
+                                            <span><center>Location</center></span>
+                                        </td>
+                                        <t t-foreach="attendance_days" t-as="day">
+                                            <td width="3.22%" class="center_cell_content">
+                                                <span class="attendance_mark_day-no" t-esc="day[0].strftime('%-d')" />
+                                            </td>
+                                        </t>
+                                        <td class="center_cell_content">
+                                            SignIn
+                                        </td>
+                                        <td class="center_cell_content">
+                                            SignOut
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="docs" t-as="o">
+                                    <t t-set="attendance_days" t-value="o.get_attendance_days(o.id, docs._context['start_date'], docs._context['end_date'])" />
+                                    <t t-set="total_present_days" t-value="o.get_total_present_days1(attendance_days,o,docs._context['start_date'])" />
+                                    <t t-set="total_leaves" t-value="o.get_total_leaves1(attendance_days,o,docs._context['start_date'])" />
+                                    <tbody>
+                                        <tr>
+                                            <td><center><t t-esc="sl_no"/></center></td>
+                                            <td class="center_cell_content">
+                                                <span class="lead" t-esc="o.name_related" />
+                                            </td>
+                                            <td><t t-esc="docs.get_employee_code(o)"/></td>
+                                            <td>
+                                                <t t-esc="docs.get_employee_location(o,docs._context['start_date'])"/>
+                                            </td>
+                                            <t t-foreach="attendance_days" t-as="day">
+                                                <t t-if="day[1]=='H'">
+                                                    <td class="attendance_holiday center_cell_content">
+                                                        <span class="attendance_mark" t-esc="day[1]" />
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='P'">
+                                                    <td class="attendance_present center_cell_content center_cell_content">
+                                                        <!-- <span class="attendance_mark" t-esc="day[1]" /><br /> -->
+                                                        <t t-if="day[2] != ''">
+                                                            <span class="attendance_mark_time" t-esc="day[2].strftime('%I:%M %p')" /><br />
+                                                        </t>
+                                                        <t t-if="day[3] != ''">
+                                                            <span class="attendance_mark_time" t-esc="day[3].strftime('%I:%M %p')" /><br />
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='A'">
+                                                    <td class="attendance_absent center_cell_content">
+                                                        <span class="attendance_mark" t-esc="day[1]" />
+                                                    </td>
+                                                </t>
+                                                <t t-if="day[1]=='D'">
+                                                    <td class="attendance_day center_cell_content">
+                                                        <span class="attendance_mark" t-esc="'D'" />
+                                                    </td>
+                                                </t>
+                                            </t>
+                                            <td class="center_cell_content">
+                                                <t t-esc="total_present_days" />
+                                            </td>
+                                            <td class="center_cell_content">
+                                                <t t-esc="total_leaves" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <t t-set="sl_no" t-value="sl_no+1"/>
+
+                                </t>
+                            </table>
+
+                        </div>
+                        <div class="watermark"
+                                style="position: absolute;top: 80px;bottom: 0;left: 0;right: 0;
+                                    margin: auto;opacity:0.1;text-align:center;z-index:1000;">
+                                <!-- <p t-field="o.name" /> -->
+                                <img style="width: 750px;height: 750px;"
+                                    src="/hiworth_hr_attendance/static/src/img/logo.jpeg" />
+                            </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

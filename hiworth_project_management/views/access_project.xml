@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="action2" model="ir.actions.act_window">
+			<field name="name">Subordinate Hierarchy</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">hr.employee</field>
+			<field name="domain">[('parent_id','=',False)]</field>
+			<field name="view_type">tree</field>
+			<field name="view_id" ref="hr.view_partner_tree2"/>
+		</record>
+
+		<menuitem name="Level Hierarchy" id="employee_structure_hrs" parent="hr.menu_hr_main" action="action2" sequence="1" groups="hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager"/>
+
+		<menuitem name="Leave Requests to Approve" parent="hr_holidays.menu_open_ask_holidays" id="hr_holidays.menu_request_approve_holidays" action="hr_holidays.request_approve_holidays" groups="hiworth_project_management.group_manager_office"/>
+
+		<record model="ir.ui.view" id="edit_hr_employee_lop">
+			<field name="name">Hr Lop</field>
+			<field name="model">hr.holidays</field>
+			<field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//header//button[@name='validate']" position="after">
+					<button string="Approve Leave" type="object" class="oe_highlight" name="approve_leave"  attrs="{'invisible':['|',('type','=','add'),('state','in',['draft','validate','confirm'])]}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office"/>
+				</xpath>
+
+				<xpath expr="//header//button[@name='validate']" position="replace">
+					<button string="Approve" name="validate" type="workflow" class="oe_highlight" attrs="{'invisible':['|',('type','=','remove'),('state','!=','confirm')]}"/>
+				</xpath>
+
+				
+				<xpath expr="//sheet//field[@name='notes']" position="after">
+					<group>
+						<field name="lop_emp" invisible="1"/>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="project_access_form_new" model="ir.ui.view">
+			<field name="name">project.project.form</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="project.edit_project" />
+			<field name="arch" type="xml">
+				<field name="date" position="replace">
+					<field name="date" invisible="1"/>
+				</field>
+				<field name="date_start" position="replace">
+					<field name="date_start" invisible="1"/>
+				</field>
+				<xpath expr="//sheet//div//field[@name='name']" position="attributes">
+					<attribute name="required">0</attribute>
+				</xpath>
+				<!-- <xpath expr="//sheet//div//field[@name='name']" position="after">
+					<group>
+						<group>
+						</group>
+						<group>
+							<div>
+								<label for="latitude" string="GPS Co-ordinates"/>
+								Latitude
+								<field name="latitude" class="oe_inline"/>Longitude
+								<field name="longitude" class="oe_inline"/>
+								<button name="show_google_map" type="object" class="oe_inline" string="GO"/>
+							</div>
+						</group>
+					</group>
+
+				</xpath> -->
+
+				<xpath expr="//button[@name='set_pending'] " position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				
+				<xpath expr="//button[@name='set_template'] " position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+                <xpath expr="//button[@name='set_template'] " position="after">
+					<button name="set_customer_user" string="Customer User" type="object" invisible="1"/>
+				</xpath>
+
+				<xpath expr="//sheet//div//button//field" position="replace">
+					<field string="Estimations" name="task_count" widget="statinfo"/>
+				</xpath>
+				<xpath expr="//group[1]" position="after">
+					<group string="Project Details" >
+						<field string="Show Project Details" name="show_project_details" col="4"/>
+							<group attrs="{'invisible': [('show_project_details', '=', False)]}" >
+								<field name="start_date"/>
+								<field name="building_nature"/>
+								<field name="status_pro" invisible="1"/>
+								<field name="project_count" invisible="1"/>
+								<field name="no_story"/>
+								<field name="face_direction"/>
+							</group>
+							<group attrs="{'invisible': [('show_project_details', '=', False)]}" >
+								<field name="area"/>
+								<field name="plote_data"/>
+								<field name="initial_meeting_date"/>
+								<field name="date_end"/>
+								<field name="keywords" widget="many2many_tags" string="Keywords/Tags"/>
+								<field name="sup_project_description"
+									   attrs="{'invisible':[('is_subproject','!=',True)]}"/>
+							</group>
+						</group>
+
+
+					<group string="Plot Details">
+							<field string="Show Plot Details" name="plot_details" col="4"/>
+						<group attrs="{'invisible': [('plot_details', '=', False)]}">
+							<field name="survey_no"/>
+							<field name="extend"/>
+							<field name="village"/>
+							<field name="taluk"/>
+							<field name="district"/>
+							<field name="ward_no"/>
+							<field name="building_no"/>
+						</group>
+						<group attrs="{'invisible': [('plot_details', '=', False)]}">
+							<field name="deed_no"/>
+							<field name="type_of_deed"/>
+							<field name="sub_registrar_office"/>
+							<field name="permit_authority"/>
+							<field name="local_body"/>
+							<field name="inv_button" invisible="1"/>
+						</group>
+					</group>
+					<group string="Permit Details">
+						<field string="Show Permit Details" name="permit_details" col="4"/>
+						<group attrs="{'invisible': [('permit_details', '=', False)]}">
+							<field name="file_submitted_on"/>
+							<field name="permit_no"/>
+							<field name="permit_date"/>
+							<label for="permit_from" string="permit Validity"/>
+							<div>From
+								<field name="permit_from" class="oe_inline"/>To
+								<field name="permit_to" class="oe_inline"/>
+							</div>
+						</group>
+						<group  attrs="{'invisible': [('permit_details', '=', False)]}">
+							<field name="fire_noc"/>
+							<field name="fire_noc_remark" attrs="{'invisible':[('fire_noc','=',False)]}"/>
+							<field name="other_permits"/>
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_ir_attachment_form_view_image" model="ir.ui.view">
+			<field name="name">ir.attachment.form</field>
+			<field name="model">ir.attachment</field>
+			<field name="arch" type="xml">
+				<form width="25%">
+					<group>
+						<field name="project_image" invisible="1"/>
+						<field name="name" readonly="1" invisible="1"/>
+						<field name="datas" widget="image" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [150, 150]}" readonly="1" nolabel="1"/>
+					</group>
+					<footer>
+						<center>
+							<button string="Ok" class="btn-default" special="cancel"/>
+						</center>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_project_changed_tree" model="ir.ui.view">
+			<field name="name">project.project.tree.changed</field>
+			<field name="model">project.project</field>
+			<field name="field_parent">child_ids</field>
+			<field name="inherit_id" ref="project.view_project" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="customer_nick_name"/>
+				</xpath>
+				<tree position="attributes">
+					<attribute name="fonts">bold:id==False</attribute>
+				</tree>
+				<field name="partner_id" position="replace">
+					<field name="partner_id" invisible="1"/>
+					<field name="is_subproject" invisible="1"/>
+					<field name="sup_project_description" attrs="{'invisible':[('is_subproject','!=',True)]}"/>
+				</field>
+<!--				<field name="partner_id" position="after">-->
+<!--					<field name="sup_project_description"/>-->
+<!--				</field>-->
+			</field>
+		</record>
+
+		<record id="view_ir_attachment_form_view" model="ir.ui.view">
+			<field name="name">ir.attachment.form</field>
+			<field name="model">ir.attachment</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="project_image" invisible="1"/>
+						<field name="name"/>
+						<field name="datas" widget="image" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [130, 130]}"/>
+						<field name="drawing_id"/>
+					</group>
+					<footer>
+						<button name="set_image" string="ADD" type="object" class="oe_highlight" />Or
+						<button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+
+
+
+
+
+
+
+		<record id="project_access_form" model="ir.ui.view">
+			<field name="name">project.project.form</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="hiworth_construction.edit_project_changed" />
+			<field name="arch" type="xml">
+				<xpath expr="//header" position="attributes">
+					<attribute name="groups">base.group_erp_manager,hiworth_project_management.group_manager_office</attribute>
+				</xpath>
+				<xpath expr="//group//group//field[@name='building_sqf']" position="replace">
+				</xpath>
+				<xpath expr="//group//group//field[@name='rate']" position="replace">
+				</xpath>
+				<xpath expr="//group//group//field[@name='remark1']" position="replace">
+				</xpath>
+				<xpath expr="//group//group//field[@name='cent']" position="replace">
+				</xpath>
+				<xpath expr="//group//group//field[@name='total_value']" position="replace">
+				</xpath>
+				<xpath expr="//group//group//field[@name='estimated_cost']" position="replace">
+				</xpath>
+				<xpath expr="//group/group[1]" position="replace">
+					<group groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.work_description_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office">
+						<field name="year" invisible="1"/>
+						<field name="co_applicants">
+							<tree editable="bottom">
+								<field name="project_id" invisible="1"/>
+								<field name="name"/>
+							</tree>
+						</field>
+						<label for="house_name" string="Address"/>
+						<div>
+							<field name="house_name" placeholder="House Name" />
+							<field name="street" placeholder="House Name" />
+							<field name="street2" placeholder="Post Office" />
+							<field name="city" placeholder="City" />
+							<field name="state_id" placeholder="State" options="{'no_create':1}" />
+							<field name="country_id" options="{'no_create':1}" placeholder="Country" />
+						</div>
+					</group>
+				</xpath>
+				<xpath expr="//group" position="after">
+					<group groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.work_description_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office">
+						<separator string="Google Map Location"/>
+						<group col="6">
+							<field name="latitude"/>
+							<field name="longitude"/>
+							<button type="object" name="show_google_map" string="show-in-google-maps" class="oe_highlight"/>
+						</group>
+						<group>
+							<field name="dob"/>
+						</group>
+						<group>
+							<div class="oe_inline">
+								<label for="contact1" string="Contact Number Of Customer"/>
+								<field name="contact1" class="oe_inline" style="width:450px;" />/
+								<field name="contact2" class="oe_inline" style="width:450px;"/>
+							</div>
+						</group>
+					</group>
+					<group>
+						<field name="customer_email" string="Customer UserID"/>
+						<field name="user_part_id" invisible="1"/>
+
+						<field name="customer" invisible="1"/> <!-- Boolean -->
+						<field name="customer_nick_name" attrs="{'invisible':[('customer','=',True)]}"/>
+						<field name="job_assignment" invisible="1"/>
+						<field name="company_id" options="{'no_create':1}" string="Branch" />
+						<field name="inactive_project"/>
+						<field name="is_subproject" invisible="1"/>
+						<field name="parent_project" attrs="{'invisible':[('is_subproject','=',False)]}"/>
+						<field name="project_category"/>
+						<field name="location_id" string="Project Location"
+							   required="True" />
+						<field name="user_id" string="Project Manager" colspan="2"
+							   attrs="{'readonly':[('state','in',['close', 'cancelled'])]}" required="1"
+							   context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_manager']}" options="{'no_create':1}"/>
+					</group>
+				</xpath>
+
+
+				<xpath expr="//page[1]" position="attributes">
+					<attribute name="string">Estimation</attribute>
+				</xpath>
+				<xpath expr="//page[@string='Directory']" position="replace">
+
+				</xpath>
+
+				<xpath expr="//page[1]" position="before">
+					<page string="Revisions">
+						<field name="revisions" nolabel="1">
+							<tree editable="bottom">
+								<field name="name" readonly="1"/>
+								<field name="rev_date"/>
+								<field name="rivision"/>
+								<field name="done_by" domain="[('employee_id','!=',False)]"/>
+								<field name="remarks"/>
+							</tree>
+						</field>
+					</page>
+					<page string="Tasks">
+						<button name="create_task" type="object" string="Add Task"/>
+						<button name="confirm_task" type="object" string="Confirm Task"/>
+						<group string="Task Details">
+							<field name="task_wizard_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="project_id" invisible="1"/>
+									<field name="manager_id" invisible="1"/>
+									<field name="company_id" invisible="1"/>
+									<field name="customer_id" invisible="1"/>
+									<field name="name"/>
+									<field name="assigned" widget="many2many_tags"/>
+									<field name="task_type"/>
+									<field name="date_begin"/>
+									<field name="report_time"/>
+									<field name="date_end"/>
+									<field name="remarks"/>
+								</tree>
+							</field>
+						</group>
+						<field name="event" context="{'default_project_id':active_id}">
+							<tree>
+								<field name="project_id" invisible="1"/>
+								<field name="name" string="Task Name"/>
+								<field name="user_id"/>
+								<field name="civil_contractor" invisible="1"/>
+								<field name="reviewer_id" invisible="1"/>
+								<field name="project_manager" invisible="1"/>
+								<field name="date_begin"/>
+								<field name="report_time"/>
+								<field name="date_end"/>
+								<field name="status"/>
+								<field name="state" invisible="1"/>
+							</tree>
+						</field>
+						<field name="work_report_man" invisible="1"/>
+					</page>
+				</xpath>
+
+				<xpath expr="//page[@string='Work Report']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//page[@string='Estimation']" position="after">
+					<page string="Work Reports">
+						<field name="work_reports">
+							<tree>
+								<field name="date_today"/>
+								<field name="report"/>
+								<field name="notes"/>
+
+							</tree>
+						</field>
+						<field name="work_report_man" invisible="1"/>
+					</page>
+					<page string="Drawings">
+						<button string="Add Image" type="object" name="add_image"/>
+						<field name="site_image" domain="[('gallery','=',False)]" mode="kanban" create="false" widget="many2many_kanban" edit="false">
+
+					</field>
+
+
+					</page>
+					<page string="Gallery">
+						<group string="Gallery">
+							<field name="drawing_sheet" nolabel="1">
+								<tree editable="bottom">
+									<field name="name"/>
+									<field name="datas"/>
+								</tree>
+							</field>
+						</group>
+					</page>
+				</xpath>
+				<xpath expr="//page[@string='Payment Schedule']" position="attributes">
+					<attribute name="groups">project.group_project_manager,hiworth_construction.group_project_management_user,hiworth_project_management.group_user,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager</attribute>
+				</xpath>
+				<xpath expr="//page[@string='Modifications']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//group//group//button[@name='compute_estimated_cost']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//page[@string='Team']" position="replace">
+					<page string="Team" name="team">
+						<field colspan="4" name="members" widget="many2many_kanban" context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_user']}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_user,hiworth_project_management.group_dgm" domain="[('employee_id','!=',False)]">
+							<kanban quick_create="false" create="true" delete="true">
+								<field name="name"/>
+								<templates>
+									<t t-name="kanban-box">
+										<div style="position: relative">
+											<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+											<div class="oe_module_vignette">
+												<img t-att-src="kanban_image('res.users', 'image_small', record.id.value)" class="oe_avatar oe_kanban_avatar_smallbox"/>
+												<div class="oe_module_desc">
+													<field name="name"/>
+												</div>
+											</div>
+										</div>
+									</t>
+								</templates>
+							</kanban>
+						</field>
+					</page>
+				</xpath>
+				<xpath expr="//header//button[@name='set_cancel']" position="after">
+					<button name="reopen_project" string="Add SubProject" type="object" class="oe_highlight" confirm="Are You Sure To Reopen This Project??" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager" states="open" attrs="{'invisible':[('inv_button','=',True)]}" />
+				</xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="partner_view_buttons">
+			<field name="name">partner.view.buttons</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="priority" eval="25"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group//group//field[@name='email']" position="attributes">
+					<attribute name="required">1</attribute>
+				</xpath>
+				<xpath expr="//group//group//field[@name='email']" position="after">
+					<field name="dob" string="Date Of Birth"/>
+					<field name="wdng_day" string="Wedding Anniversary"/>
+				</xpath>
+			</field>
+		</record>
+
+		<menuitem id="hiworth_construction.menu_view_work_order" parent="hiworth_construction.main_menu_view_work_order"
+				  action="hiworth_construction.action_view_work_order" name="Work Order" sequence="10" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_contractor,base.group_erp_manager"/>
+
+
+		<menuitem name="Contracting" id="base.menu_main_pm"
+				  groups="hiworth_construction.group_estimation_user,hiworth_project_management.group_admin2,hiworth_project_management.group_dgm"
+				  sequence="4000" />
+
+		<menuitem id="hiworth_construction.menu_document_details_under_project" parent="base.menu_main_pm"
+				  name="Directory Management" sequence="5" groups="base.group_erp_manager"/>
+
+		<menuitem action="hiworth_construction.open_view_project_all_list" id="project.menu_projects"
+				  name="Sub Projects" parent="project.menu_project_management" sequence="3" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_user,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm" />
+
+		<record id="hiworth_construction.action_view_task_list" model="ir.actions.act_window">
+			<field name="name">Tasks</field>
+			<field name="res_model">project.task</field>
+			<field name="view_type">form</field>
+			<field name="domain">[["is_extra_work", "=", False]]</field>
+			<field name="view_mode">kanban,tree,form,calendar,gantt,graph</field>
+			<field name="view_id" ref="hiworth_construction.view_task_tree2_changed" />
+			<field name="search_view_id" ref="project.view_task_search_form" />
+			<field name="context">{'search_default_project':
+				1,'search_default_category': 1,}
+			</field>
+		</record>
+
+
+		<record id="view_task_form2_changed" model="ir.ui.view">
+			<field name="name">project.task.form.changed</field>
+			<field name="model">project.task</field>
+			<field eval="2" name="priority" />
+			<field name="inherit_id" ref="hiworth_construction.view_task_form2_changed" />
+			<field name="arch" type="xml">
+				<xpath expr="//header//button[@name='task_approve']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager</attribute>
+				</xpath>
+				<xpath expr="//header//button[@name='reset_task']" position="attributes">
+					<attribute name="groups">base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.menu" id="knowledge.menu_document">
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_construction.make_invisible')])]" />
+		</record>
+		<record model="ir.ui.view" id="employee_inherit_site_visit_view">
+			<field name="name">project.task.form</field>
+			<field name="model">site.visit.schedule</field>
+			<field name="inherit_id" ref="hiworth_project_management.view_site_visit_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_today']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='visit_by']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='pba']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='location']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="employee_inherit_site_visit_new_group_view">
+			<field name="name">project.task.form</field>
+			<field name="model">site.visit.schedule</field>
+			<field name="inherit_id" ref="hiworth_project_management.employee_inherit_site_visit_view" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.site_visit_create_group')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_today']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+				<xpath expr="//field[@name='visit_by']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='pba']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+				<xpath expr="//field[@name='location']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="employee_inherit_view_employee_types">
+			<field name="name">hr.employee.form</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//notebook//page[1]" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="employee_inherit_view_employee_types">
+			<field name="name">hr.employee.form</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='change_password']" position="replace">
+					<button class="oe_inline oe_stat_button" name="change_password" type="object" icon="fa-pencil" string="Reset Password" attrs="{'invisible':[('reset_pswd','=',False)]}" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_hr_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_admin1"
+					/>
+				</xpath>
+				<xpath expr="//button[@name='change_password']" position="replace">
+					<button class="oe_inline oe_stat_button" name="change_password" type="object" icon="fa-pencil" string="Set Password" attrs="{'invisible':[('reset_pswd','=',True)]}" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_hr_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_admin1"/>
+				</xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="employee_inherit_activities_view">
+			<field name="name">task.entry.form</field>
+			<field name="model">task.entry</field>
+			<field name="inherit_id" ref="hiworth_project_management.view_site_activity_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_today']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="employee_inherit_activities_new_group_view">
+			<field name="name">task.entry.form</field>
+			<field name="model">task.entry</field>
+			<field name="inherit_id" ref="hiworth_project_management.employee_inherit_activities_view" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.activity_create_group')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_today']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">0</attribute>
+				</xpath>
+
+
+
+
+
+			</field>
+		</record>
+
+		<record id="project_work_order_form_new" model="ir.ui.view">
+			<field name="name">work.oder.formsss</field>
+			<field name="model">work.order</field>
+			<field name="inherit_id" ref="hiworth_construction.form_view_work_order" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_contractor')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='action_approve']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//button[@name='action_reject']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//button[@name='action_cancel']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//button[@name='action_draft']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+
+
+				<xpath expr="//button[@name='action_start']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//button[@name='action_done']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//button[@name='action_paid']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='state']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+
+			</field>
+		</record>
+
+
+		<record id="project_task_access_form_employee_readonly" model="ir.ui.view">
+			<field name="name">event.event.forms</field>
+			<field name="model">event.event</field>
+			<field name="inherit_id" ref="hiworth_project_management.event_all_tasks_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='project_manager']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='reviewer_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+
+				<xpath expr="//field[@name='civil_contractor']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='type']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_begin']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='state']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='report_time']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_end']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='is_silent']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="project_task_access_form_new" model="ir.ui.view">
+			<field name="name">event.event.formsss</field>
+			<field name="model">event.event</field>
+			<field name="inherit_id" ref="hiworth_project_management.event_daily_tasks_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='project_manager']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='reviewer_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+
+				<xpath expr="//field[@name='civil_contractor']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='type']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_begin']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='report_time']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_end']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+			</field>
+		</record>
+
+
+
+		<record id="project_task_access_form_new_personal" model="ir.ui.view">
+			<field name="name">event.event.formss1s</field>
+			<field name="model">event.event</field>
+			<field name="inherit_id" ref="hiworth_project_management.event_personal_tasks_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='project_manager']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='reviewer_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+
+				<xpath expr="//field[@name='civil_contractor']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='type']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_begin']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='state']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='report_time']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_end']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+			</field>
+		</record>
+
+		<menuitem id="hr.menu_hr_main" parent="hr.menu_hr_root" name="Human Resources" sequence="0" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_hr_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_am_office"/>
+
+		<menuitem action="hr.open_view_employee_list_my" id="hr.menu_open_view_employee_list_my" sequence="3" parent="hr.menu_hr_main" name="Employee Details" groups="hiworth_project_management.group_admin1,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_hr_manager,hiworth_project_management.group_am_office"/>
+
+		<record id="open_view_employee_list_employee" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('status1','!=','resign')]</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a new employee.
+				</p><p>
+				With just a quick glance on the employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+			</field>
+		</record>
+
+
+		<menuitem 
+				id="hr.menu_open_view_employee_list_my" 
+				name="Employee Details" 
+				parent="hr.menu_hr_main" 
+				action="open_view_employee_list_employee" 
+				groups="hiworth_project_management.group_admin1,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager"
+				sequence="3" 
+				/>
+
+		<!-- ################################################################################################################# -->
+		
+		<record id="employees_action_manager_office" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('status1','!=','resign'),'|',('parent_id.user_id','=',uid),('user_id','=',uid)]</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a new employee.
+				</p><p>
+				With just a quick glance on the employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+			</field>
+		</record>
+
+		<menuitem 
+				id="menu_manager_office_group" 
+				name="Employee Details" 
+				parent="hr.menu_hr_main" 
+				action="employees_action_manager_office" 
+				groups="group_manager_office"
+				sequence="4" 
+				/>
+
+		<!-- <record id="employees_attendance_action_manager_office" model="ir.actions.act_window">
+			<field name="name">Attendance</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="domain">[('status1','!=','resign'),'|',('parent_id.user_id','=',uid),('user_id','=',uid)]</field>
+			<field name="view_id" ref="hr.view_employee_tree"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>			
+		</record>
+
+		<menuitem 
+				id="menu_manager_office_group_attendance" 
+				name="Attendance" 
+				parent="hr.menu_hr_main" 
+				action="employees_attendance_action_manager_office" 
+				groups="group_manager_office"
+				sequence="5" 
+				/>
+ -->
+
+		<record id="employees_action_dgm" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('status1','!=','resign'),'|',('user_category.sequence','>=',3),('user_id','=',uid)]</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a new employee.
+				</p><p>
+				With just a quick glance on the employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+			</field>
+		</record>
+
+		<menuitem 
+				id="menu_dgm_group" 
+				name="Employee Details" 
+				parent="hr.menu_hr_main" 
+				action="employees_action_dgm" 
+				groups="group_dgm"
+				sequence="5" 
+				/>
+				
+		<!-- <record id="employees_attendance_action_dgm" model="ir.actions.act_window">
+			<field name="name">Attendance</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="domain">[('status1','!=','resign'),'|',('user_category.sequence','>=',3),('user_id','=',uid)]</field>
+			<field name="view_id" ref="hr.view_employee_tree"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>			
+		</record>
+
+		<menuitem 
+				id="menu_dgm_group_attendance" 
+				name="Attendance" 
+				parent="hr.menu_hr_main" 
+				action="employees_attendance_action_dgm" 
+				groups="group_dgm,group_trainee"
+				sequence="6" 
+				/>
+ -->
+		<record id="employees_action_employee_group" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('status1','!=','resign'),('user_id','=',uid)]</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a new employee.
+				</p><p>
+				With just a quick glance on the employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+			</field>
+		</record>
+
+		<menuitem 
+				id="menu_employee_group" 
+				name="Employee Details" 
+				parent="hr.menu_hr_main" 
+				action="employees_action_employee_group" 
+				groups="group_employee,group_trainee"
+				sequence="6" 
+				/>
+
+		<!-- <record id="employees_attendance_action_employee_group" model="ir.actions.act_window">
+			<field name="name">Attendance</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="domain">[('status1','!=','resign'),('user_id','=',uid)]</field>
+			<field name="view_id" ref="hr.view_employee_tree"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>			
+		</record>
+
+		<menuitem 
+				id="menu_employee_group_attendance" 
+				name="Attendance" 
+				parent="hr.menu_hr_main" 
+				action="employees_attendance_action_employee_group" 
+				groups="group_employee"
+				sequence="7" 
+				/> -->
+
+		<record id="employees_action_superemployee_group" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="domain">[('status1','!=','resign'),('user_id','=',uid)]</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click to add a new employee.
+				</p><p>
+				With just a quick glance on the employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+			</field>
+		</record>
+
+		<menuitem 
+				id="menu_superemployee_group" 
+				name="Employee Details" 
+				parent="hr.menu_hr_main" 
+				action="employees_action_superemployee_group" 
+				groups="group_architect"
+				sequence="7" 
+				/>	
+
+		<!-- <record id="employees_attendance_action_superemployee_group" model="ir.actions.act_window">
+			<field name="name">Attendance</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="domain">[('status1','!=','resign'),('user_id','=',uid)]</field>
+			<field name="view_id" ref="hr.view_employee_tree"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>			
+		</record>
+
+		<menuitem 
+				id="menu_superemployee_group_attendance" 
+				name="Attendance" 
+				parent="hr.menu_hr_main" 
+				action="employees_attendance_action_superemployee_group" 
+				groups="group_architect"
+				sequence="8" 
+				/>	
+ -->
+		<!-- ################################################################################################################# -->
+
+
+		<record id="open_view_resign_employee_list_employee1_resigned" model="ir.actions.act_window">
+			<field name="name">Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="context">{}</field>
+			<field name="view_id" eval="False"/>
+			<field name="search_view_id" ref="hr.view_employee_filter"/>
+		</record>
+
+		<menuitem 
+				id="menu_open_view_resign_employee_list_employee_resigned" 
+				parent="hr.menu_hr_main"
+				action="open_view_resign_employee_list_employee1_resigned" 
+				sequence="4" 
+				name="Resign Employee Details" 
+				groups="hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,base.group_erp_manager"
+				/>
+
+		<act_window id="hiworth_hr_attendance.hiworth_hr_signin_wizard_action"
+					name="Sign in Wizard" res_model="hiworth.hr.signin.wizard"
+					view_mode="form" target="new" multi="True"
+					view_id="hiworth_hr_attendance.hiworth_signin_wizard"
+					src_model="hr.employee"
+					context="{'default_employee_ids': active_ids}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office" />
+
+		<act_window id="hiworth_hr_attendance.hiworth_hr_signout_wizard_action"
+					name="Sign out Wizard" res_model="hiworth.hr.signout.wizard"
+					view_mode="form" target="new" multi="True"
+					view_id="hiworth_hr_attendance.hiworth_signout_wizard"
+					src_model="hr.employee"
+					context="{'default_employee_ids': active_ids}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office"/>
+
+		<menuitem 
+				name="Pending Attendance" 
+				id="hiworth_hr_attendance.menu_attendance_request_sub2" 
+				parent="hiworth_hr_attendance.menu_attendance_request_root" 
+				action="hiworth_hr_attendance.hiworth_hr_attendance_request_employee1" 
+				groups="base.group_erp_manager,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_admin2,hiworth_project_management.group_admin1"/>
+
+		<menuitem 
+                id="hiworth_hr_menu_attendance_view_employees_neww" 
+                name="Attendance Today" 
+                parent="hr.menu_hr_main" 
+                action="hiworth_hr_attendance.hiworth_hr_attendance_view_employee_attendance_action1" 
+                sequence="12" 
+                />
+
+		<menuitem name="Leaves" parent="hr.menu_hr_root" id="hr_holidays.menu_open_ask_holidays" sequence="20" groups="base.group_erp_manager,group_manager_office,group_employee,group_general_manager,group_admin1,group_admin2"/>
+
+		<menuitem name="Leave Requests to Approve" parent="hr_holidays.menu_open_ask_holidays" id="hr_holidays.menu_request_approve_holidays" action="hr_holidays.request_approve_holidays" groups="base.group_hr_user,group_general_manager,group_dgm,group_admin2,group_admin1"/>
+
+		<menuitem parent="hr_holidays.menu_open_ask_holidays" id="hr_holidays.menu_open_allocation_holidays" action="hr_holidays.open_allocation_holidays" groups="base.group_erp_manager,hiworth_project_management.group_manager_office"/>
+
+		<menuitem name="Leaves Summary" parent="hr_holidays.menu_open_ask_holidays" id="hr_holidays.menu_open_company_allocation" action="hr_holidays.open_company_allocation" sequence="40" groups="base.group_erp_manager,hiworth_project_management.group_manager_office"/>
+
+		<record id="project.view_project_project_filter" model="ir.ui.view">
+			<field name="name">project.project.select</field>
+			<field name="model">project.project</field>
+			<field name="arch" type="xml">
+				<search string="Search Project">
+					<field name="name" string="Project Name"/>
+					<field name="building_no" string="Building No"/>
+					<field name="keywords" string="Keyword"/>
+					<field name="permit_authority" string="Permit Authority"/>
+					<field name="survey_no" string="Survey No"/>
+					<field name="permit_no" string="Permit No No"/>
+					<field name="face_direction" string="Facing Direction"/>
+					<field name="no_story" string="No Of Story"/>
+					<field name="customer_email" string="Customer Nick Name"/>
+					<field name="status_pro" string="Status"/>
+
+					<field name="company_id" string="Branch"/>
+
+					<filter string="Main Projects" name="main_projects" domain="[('inv_button','!=',True)]"/>
+					<filter string="Open" name="Current" domain="[('state', '=','open')]"/>
+					<filter string="Pending" name="Pending" domain="[('state', '=','pending')]"/>
+					<filter string="Template" name="Template" domain="[('state', '=','template')]"/>
+					<separator/>
+					<filter string="Member" name="Member" domain="['|',('user_id', '=', uid),('members', '=', uid)]"/>
+					<filter string="Manager" domain="[('user_id','=',uid)]"/>
+					<separator/>
+					<filter string="New Mail" name="message_unread" domain="[('message_unread','=',True)]"/>
+					<field name="company_id" string="Branch"/>
+					<field name="user_id" string="Project Manager"  />
+					<field name="partner_id" string="Contact" filter_domain="[('partner_id', 'child_of', self)]"/>
+					<filter string="My Project" name="my_projects" domain="[('user_id','=',uid)]"/>
+					<group expand="0" string="Group By">
+						<field name="company_id" string="Branch"/>
+						<filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+						<filter string="Manager" name="Manager" context="{'group_by':'user_id'}"/>
+						<filter string="Contact" name="Partner" context="{'group_by':'partner_id'}"/>
+						<filter string="Parent" name="Parent" help="Parent" context="{'group_by':'parent_id'}"/>
+						<filter string="Status" name="status_pro" context="{'group_by':'status_pro'}"/>
+						<filter string="Parent Project" name="parent_project" context="{'group_by':'parent_project'}" domain="[('parent_project','!=',False)]"/>
+					
+						<filter string="Month" name="group_by_month" context="{'group_by':'year'}"/>
+
+
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+
+		<record id="view_company_form_hiworth_project_management" model="ir.ui.view">
+			<field name="name">res.company.form.hiworth</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="base.view_company_form" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//notebook/page/group/group/field[@name='website']"
+					   position="after">
+					<field name="gst_no" />
+					<field name="pan_no" />
+
+				</xpath>
+
+
+			</field>
+		</record>
+
+		<!-- <menuitem id="hr.menu_open_view_employee_list_my" name="Employee Details"/> -->
+
+
+		<record id="view_event_form112233" model="ir.ui.view">
+			<field name="name">event.event.forms3s</field>
+			<field name="model">event.event</field>
+			<field name="inherit_id" ref="event.view_event_form" />
+			<field name="groups_id" eval="[(6,0,[ref('hiworth_project_management.group_employee')])]" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="attributes">
+					<attribute name="readonly">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='project_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='project_manager']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='reviewer_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+
+				<xpath expr="//field[@name='civil_contractor']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='user_id']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='type']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_begin']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='state']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='report_time']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='date_end']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='current_user']" position="attributes">
+					<attribute name="readonly">1</attribute>
+
+				</xpath>
+
+			</field>
+		</record>
+		<record id="view_groups_form_share_newww1" model="ir.ui.view">
+			<field name="name">res.groups.form</field>
+			<field name="model">res.groups</field>
+			<field name="inherit_id" ref="base.view_groups_form"/>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="sequence"/>
+				</field>
+			</field>
+		</record>
+
+
+
+	</data>
+</openerp>

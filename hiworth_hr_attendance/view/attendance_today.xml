@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <record id="hiworth_hr_attendance_view_employee_attendance_form1" model="ir.ui.view">
+            <field name="name">Modified attendance tree view</field>
+            <field name="model">hiworth.hr.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="state" invisible="1" />
+                            <field name="sign_in" attrs="{'invisible':[('state','=','sign_out')]}" />
+                            <field name="sign_out" attrs="{'invisible': [('state','=','sign_in')]}" />
+                            <field name="location" invisible="1"/>
+                            <field name="employee_type" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hiworth_hr_attendance_view_employee_attendance_tree1" model="ir.ui.view">
+            <field name="name">Modified attendance tree view</field>
+            <field name="model">hiworth.hr.attendance</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false">
+                    <field name="name" readonly="1" />
+                    <field name="sign_in" />
+                    <field name="sign_out" />
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_attendance_search_new">
+            <field name="name">hiworth.hr.attendance.search</field>
+            <field name="model">hiworth.hr.attendance</field>
+            <field name="arch" type="xml">
+                <search string="Events">
+                    <filter string="Today" name="sign_in_today" domain="[('sign_in','>=', ((context_today()).strftime('%Y-%m-%d')))]" help="Todays"/>                   
+                    <!-- <filter string="Today" name="sign_in" domain="[('state','=', 'sign_in')]" help="Todays"/> -->
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" icon="terp-personal" domain="[]" context="{'group_by':'name'}"/>
+                        <filter string="Monthly" icon="terp-personal" domain="[]" context="{'group_by':'sign_in'}"/>                        
+                    </group>         
+                </search>
+            </field>
+        </record>
+
+        <record id="hiworth_hr_attendance_view_employee_attendance_action1" model="ir.actions.act_window">
+            <field name="name">Attendance Today</field>
+            <field name="res_model">hiworth.hr.attendance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{"search_default_sign_in_today":1}</field>
+            <field name="view_id" ref="hiworth_hr_attendance_view_employee_attendance_tree1" />
+            <field name="search_view_id" ref="view_employee_attendance_search_new"/>            
+        </record>
+        
+        <!-- <menuitem name="Level Hierarchy" id="employee_structure_hrs" parent="hr.menu_hr_main" action="hr.action2" sequence="1"/> -->
+
+    </data>
+</openerp>

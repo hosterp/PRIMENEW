@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="hiworth_hr_leave_print_popup_form" model="ir.ui.view">
+            <field name="name">Leave print pop up form</field>
+            <field name="model">hiworth.hr.leave</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                        </group>
+                        <group>
+                            <field name="to_date" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="attendance_type"/>
+                        <field name="type_selection" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="print_hiworth_hr_leave_summary_confirmed" string="Print" type="object" class="oe_highlight"/>
+                        or
+                        <button name="view_hiworth_hr_leave_summary_confirmed" string="View" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

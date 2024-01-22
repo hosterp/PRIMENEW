@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<menuitem name="Messaging" id="menu_messaging_project" sequence="1" groups="hiworth_project_management.group_user,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+
+
+		<!-- search view -->
+
+		<record id="search_view_messaging" model="ir.ui.view">
+			<field name="name">Messaging</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<search>
+					<!--<field name="from_id" string="From"/>-->
+					<!--<field name="message_type" string="Message Category"/>-->
+					<field name="related_project" string="Related Project"/>
+					<field name="to_id" string="Sent To"/>
+					<field name="from_id" string="Sent From"/>
+					<!--<filter name="group_to" string="To Me" domain="[('to_id','=',uid)]"/>-->
+					<!--<filter name="group_by_project" string="Related Project"-->
+							<!--context="{'group_by': 'related_project'}"/>-->
+					<!--<filter name="group_by_from" string="Sent By"-->
+							<!--context="{'group_by': 'from_id'}"/>-->
+					<!--<filter name="group_by_to" string="Sent To"-->
+							<!--context="{'group_by': 'to_id'}"/>-->
+				</search>
+			</field>
+		</record>
+
+		<!-- message pending admin tree view -->
+
+		<record id="view_project_message_rquirement_tree" model="ir.ui.view">
+			<field name="name">messaging.tree444</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<tree create="false" colors="red:state == 'pending';">
+					<field name="from_id" string="FROM"/>
+					<field name="to_id" string="TO"/>
+					<field name="message" string="Message."/>
+					<field name="reply"/>
+					<field name="date_today"/>
+					<field name="req_nofify" invisible="1"/>
+					<field name="state" invisible="1"/>
+					<field name="pending_task_reply" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<!-- message pending admin form view -->
+
+		<record id="view_project_message_requirement_form" model="ir.ui.view">
+			<field name="name">messaging.form44</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<form create="false">
+					<header>
+						<button name="approved_message" type="object" string="Approve" class="oe_highlight" groups="base.group_erp_manager,hiworth_project_management.pending_message_approval_button_group,hiworth_project_management.group_admin2,hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager" attrs="{'invisible':[('state','=','approved')]}" invisible="0"/>
+						<field name="state" widget="statusbar" nolabel="1" invisible="1"/>
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<field name="from_id" string="FROM"/>
+							<field name="to_id" string="TO" options="{'no_create': True}" readonly="1"/>
+							<field name="message_type" readonly="1"/>
+							<field name="date_today" readonly="1"/>
+							<field name="cc_ids" options="{'no_create': True}" widget="many2many_tags"/>
+							<field name="cc_id" invisible="1"/>
+
+							<field name="related_project" readonly="1"/>
+							<field name="bool_msg" invisible="1"/>
+							<field name="reply" readonly="1" string="Message"/>
+							<field name="message" string="Reply" />
+							<field name="user_id" invisible="1"/>
+							<field name="done_mem" invisible="1"/>
+							<field name="req_nofify" invisible="1"/>
+							<field name="pending_task_reply" invisible="1"/>
+							<field name="approved_user" invisible="1"/>
+
+						</group>
+						<group string="Attachments">
+							<field name="attachment_idss" nolabel="1">
+								<tree editable="bottom">
+									<field name="datas" filename="datas_fname"/>
+									<field name="name"/>
+									<field name="datas_fname" invisible="1" />
+								</tree>
+							</field>
+							<field name="has_attachment" invisible="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_project_message_requirement_form_forward" model="ir.ui.view">
+			<field name="name">messaging.form44</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<form create="false">
+					<header>
+						<!-- <button name="approved_message" type="object" string="Approve" class="oe_highlight" groups="base.group_erp_manager,hiworth_project_management.pending_message_approval_button_group" attrs="{'invisible':[('state','=','approved')]}" invisible="0"/> -->
+						<field name="state" widget="statusbar" nolabel="1" invisible="1"/>
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<field name="from_id" string="FROM"/>
+							<field name="customer" attrs="{'invisible':[('to_admin_req','=',False)]}" />
+							<field name="to_id" string="TO" options="{'no_create': True}" attrs="{'readonly':[('to_admin_req','=',False)]}"/>
+							<field name="message_type" readonly="1"/>
+							<field name="date_today" readonly="1"/>
+							<field name="to_admin_req" invisible="1"/>
+							<field name="cc_ids" options="{'no_create': True}" widget="many2many_tags" attrs="{'invisible':[('to_admin_req','=',True)]}"/>
+							<field name="cc_id" invisible="1"/>
+							<field name="forward_by" readonly="1" attrs="{'invisible':[('to_admin_req','=',False)]}"/>
+
+							<field name="related_project" readonly="1"/>
+							<field name="bool_msg" invisible="1"/>
+							<field name="message" readonly="1" string="Message"/>
+							<field name="user_id" invisible="1"/>
+							<field name="done_mem" invisible="1"/>
+							<field name="req_nofify" invisible="1"/>
+							<field name="pending_task_reply" invisible="1"/>
+							<field name="approved_user" invisible="1"/>
+
+						</group>
+						<group string="Attachments">
+							<field name="attachment_idss" nolabel="1">
+								<tree editable="bottom">
+									<field name="datas" filename="datas_fname"/>
+									<field name="name"/>
+									<field name="datas_fname" invisible="1" />
+								</tree>
+							</field>
+							<field name="has_attachment" invisible="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<!-- message pending acton view -->
+
+		<record model="ir.actions.act_window" id="action_project_inherit_messaging_requirement_pending">
+			<field name="name">Pending Messages</field>
+			<field name="res_model">im_chat.message.req</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state','=','pending')]</field>
+
+		</record>
+
+		<record id="action_project_messaging_requirement_tree11_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_project_message_rquirement_tree" />
+			<field name="act_window_id" ref="action_project_inherit_messaging_requirement_pending" />
+		</record>
+
+		<record id="action_job_assignment_requirement_form11_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_project_message_requirement_form" />
+			<field name="act_window_id" ref="action_project_inherit_messaging_requirement_pending" />
+		</record>
+
+		<menuitem name="Messaging" id="menu_messaging_sub_requirement_project" parent="menu_messaging_project"/>
+
+
+		<menuitem name="Pending Messages" id="menu_messaging_sub_pending_message_project" parent="menu_messaging_sub_requirement_project" action="action_project_inherit_messaging_requirement_pending" groups="base.group_erp_manager,hiworth_project_management.pending_message_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm" sequence="15"/>
+
+
+
+
+		<!-- sent message tree view -->
+
+		<record id="view_sent_message_tree_is" model="ir.ui.view">
+			<field name="name">im_chat-tree</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<tree edit="false" create="false">
+					<field name="from_id" string="FROM"/>
+					<field name="to_id" string="TO"/>
+					<field name="related_project" string="PBA"/>
+					<field name="message" string="Message."/>
+					<field name="date_today"/>
+				</tree>
+			</field>
+		</record>
+
+		<!-- sent message form view -->
+
+		<record id="view_snt_msg_is_form" model="ir.ui.view">
+			<field name="name">im_chat-form</field>
+			<field name="model">im_chat.message.req</field>
+			<!-- <field name="priority" eval="17"/> -->
+			<field name="arch" type="xml">
+				<form string="Sent" edit="false" create="false">
+					<header>
+						<!-- <button name="reply_message" string="Reply" class="oe_highlight" type="object" groups="hiworth_project_management.group_manager" attrs="{'invisible':[('state','=','approved')]}"/> -->
+						<field name="state" widget="statusbar" invisible="1"/>
+						<label for="seen" string="Seen"/>
+						<field name="seen" readonly="1"/>
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<field name="from_id" string="FROM"/>
+							<field name="fwd_msg" invisible="1" />
+							<field name="customer" attrs="{'invisible':[('fwd_msg','=',False)]}"/>
+							<field name="message_type"/>
+							<field name="related_project"/>
+							<field name="to_admin_req" invisible="1" />
+							<field name="to_id" string="TO" options="{'no_create': True}"/>
+							<field name="forward_by" attrs="{'invisible':[('to_admin_req','=',False)]}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,hiworth_project_management.group_general_manager"/>
+							<field name="cc_ids" widget="many2many_tags"/>
+							<field name="cc_id" invisible="1"/>
+							<field name="date_today" readonly="1"/>
+							<field name="message" string="MESSAGE"/>
+							<field name="bool_msg" invisible="1"/>
+							<field name="user_id" invisible="1"/>
+							<field name="sent" invisible="1"/>
+
+						</group>
+						<group string="Attachments">
+							<field name="attachment_idss" nolabel="1">
+								<tree editable="bottom">
+									<field name="datas" filename="datas_fname"/>
+									<field name="name"/>
+									<field name="datas_fname" invisible="1" />
+								</tree>
+							</field>
+							<field name="has_attachment" invisible="1"/>
+						</group>
+						<group>
+							<!-- <field name="reply" groups="hiworth_project_management.group_manager,hiworth_project_management.group_employee,base.group_erp_manager" attrs="{'invisible':[('reply','=',False)]}"/> -->
+						</group>
+					</sheet>
+
+
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_sent_messages333">
+			<field name="name">Sent Messages</field>
+			<field name="res_model">im_chat.message.req</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'group_by':'message_type'}</field>
+			<field name="domain">['|',('from_id','=',uid),('forward_by','=',uid),('cc_bool','=',False),('sent','=',False)]</field>
+		</record>
+
+		<record id="action_sent_messagesw_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_sent_message_tree_is" />
+			<field name="act_window_id" ref="action_project_inherit_sent_messages333" />
+		</record>
+
+		<record id="action_swnt_messagesd_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_snt_msg_is_form" />
+			<field name="act_window_id" ref="action_project_inherit_sent_messages333" />
+		</record>
+
+		<menuitem name="Sent Messages" id="menu_messaging_sent_requirement_project" parent="menu_messaging_sub_requirement_project" action="action_project_inherit_sent_messages333" groups="hiworth_project_management.group_user,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm" sequence="8"/>
+
+
+
+		<record id="view_sent_message_tree_is_inbox" model="ir.ui.view">
+			<field name="name">im_chat-tree</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<tree colors="blue:status == 'draft';green:status == 'shown' ">
+					<field name="from_id" string="FROM"/>
+					<field name="nick_name" string="Nick Name" invisible="1"/>
+					<field name="related_project" string="PBA"/>
+					<!-- <field name="to_id" string="TO"/> -->
+					<field name="message" string="Message."/>
+					<field name="date_today" string="DateTime"/>
+					<field name="message_type" string="Category"/>
+					<field name="status" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_snt_msg_is_form_inbox" model="ir.ui.view">
+			<field name="name">im_chat-form</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="priority" eval="17"/>
+			<field name="arch" type="xml">
+				<form string="Message">
+					<header>
+						<button name="delete_msg_inbox" string="Delete" type="object" class="oe_highlight"/>
+						<button name="forward_msg" type="object" string="Forward" class="oe_highlight" attrs="{'invisible':['|',('to_id','!=',1),('to_admin_req','=',False)]}" groups="base.group_erp_manager,hiworth_project_management.group_employee,hiworth_project_management.group_manager_office"/>
+						<!-- <button name="general_message" string="General" class="oe_highlight" type="object" groups="hiworth_project_management.group_manager,hiworth_project_management.group_employee,base.group_erp_manager" attrs="{'invisible':[('state','!=','approved')]}" confirm="Are You Sure That It Is A General Message??"/> -->
+						<button name="task_message" string="Done Adding Members" class="oe_highlight" type="object" groups="hiworth_project_management.group_manager,base.group_erp_manager,hiworth_project_management.requirement_message_group,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_manager_office" attrs="{'invisible':['|',('message_type','!=','requirement'),('req_gen','=',True)]}" confirm="Are You Sure??"/>
+						<button name="reply_message" string="Reply" class="oe_highlight" type="object" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,base.group_erp_manager,hiworth_project_management.group_user,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm,hiworth_project_management.group_admin2" attrs="{'invisible':[('req_gen','=',False)]}"/>
+						<!-- attrs="{'invisible':[('req_gen','=',False)]}" -->
+						<field name="state" widget="statusbar" invisible="1"/>
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<group>
+
+								<field name="from_id" string="FROM"/>
+								<field name="nick_name" invisible="1"/>
+								<field name="fwd_msg" invisible="1" />
+								<field name="customer" attrs="{'invisible':[('fwd_msg','=',False)]}" />
+								<field name="done_mem" invisible="1"/>
+								<field name="message_type" attrs="{'readonly':[('no_edit','=',True)], 'required':[('message_type2','=',False)]}" groups="hiworth_project_management.group_general_manager,hiworth_project_management.group_admin1,hiworth_project_management.group_admin2,hiworth_project_management.group_dgm,hiworth_project_management.group_manager_office,hiworth_project_management.group_am_office,hiworth_project_management.group_manager_accounts,hiworth_project_management.group_architect,hiworth_project_management.group_hr_manager,hiworth_project_management.group_employee" />
+								<field name="message_type2" attrs="{'readonly':[('no_edit','=',True)], 'required':[('message_type','=',False)]}" groups="hiworth_project_management.group_user" />
+								<field name="related_project" options="{'no_create': True}" attrs="{'required':['|',('message_type','=','requirement'),('message_type2','=','requirement')],'readonly':[('no_edit','=',True)]}"/>
+
+								<field name="to_id" string="TO" options="{'no_create': True}" attrs="{'readonly':[('no_edit','=',True)],'required':1}"/>
+								<field name="forward_by" attrs="{'invisible':[('fwd_msg','=',False)]}" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_employee"/>
+								<field name="cc_ids" string="Cc" options="{'no_create': True}" attrs="{'readonly':['|',('message_type','=',False),('no_edit','=',True)]}" widget="many2many_tags" />
+								<field name="cc_id" invisible="1"/>
+								<field name="date_today" readonly="1"/>
+								<field name="to_admin_req" invisible="1"/>
+							</group>
+							<group>
+
+							</group>
+						</group>
+						<div>
+							<label for="message" string="Reply" attrs="{'invisible':['|','|',('bool_msg','=',False),('req_gen','=',False),('to_admin_req','=',True)]}"/>
+							<label for="message" string="Message3" attrs="{'invisible':['|',('message_type','!=','requirement'),('done_mem','=',False)]}"/>
+							<label for="message" string="Message" domain="[('message_type','=','requirement')]"/>
+						</div>
+						<group>
+							<field name="message" placeholder="Type Your Message Here....." attrs="{'readonly':[('no_edit','=',True)]}" nolabel="1"/>
+						</group>
+						<field name="bool_msg" invisible="1"/>
+						<field name="user_id" invisible="1"/>
+						<field name="require" invisible="1"/>
+						<field name="admin" invisible="1"/>
+						<field name="status" invisible="1"/>
+						<field name="status1" invisible="1"/>
+						<field name="no_edit" invisible="1"/>
+						<field name="req_gen" invisible="1"/>
+						<field name="sent" invisible="1"/>
+						<field name="req_id" invisible="1" />
+						<field name="delete_msg" invisible="1"/>
+						<group string="Attachments">
+							<field name="attachment_idss" nolabel="1" attrs="{'readonly':[('no_edit','=',True)]}">
+								<tree editable="bottom">
+									<field name="datas" filename="datas_fname"/>
+									<field name="name"/>
+									<field name="datas_fname" invisible="1" />
+								</tree>
+							</field>
+							<field name="has_attachment" invisible="1"/>
+						</group>
+						<group>
+							<label for="reply" string="Message" attrs="{'invisible':['|','|',('to_admin_req','=',True),('bool_msg','=',False),('req_gen','=',False)]}"/>
+
+							<field name="reply" nolabel="1" attrs="{'invisible':['|',('bool_msg','=',False),('req_gen','=',False)],'readonly':[('no_edit','=',True)]}"/>
+						</group>
+						<h2 groups="hiworth_project_management.group_employee" attrs="{'invisible':[('message_type','!=','requirement')]}">
+							<i>
+								Sorry....!!! This Is A Requirement Message..!! You Are Not Allowed To Reply This Message..!!
+							</i>
+						</h2>
+
+						<h2 groups="hiworth_project_management.requirement_message_group" attrs="{'invisible':[('message_type','!=','requirement')]}">
+							<i>
+								But You Can Now Add Members And Reply To This Message With Special Permission.
+							</i>
+						</h2>
+						<notebook>
+
+							<page string="ADD MEMBER" attrs="{'invisible':[('message_type','!=','requirement')]}" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.requirement_message_group,hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager,hiworth_project_management.group_am_office,hiworth_project_management.group_admin2">
+								<group>
+									<field name="add_member" nolabel="1" attrs="{'readonly':[('req_gen','=',True)]}">
+										<tree editable="bottom">
+											<field name="assigned_to" options="{'no_create': True}" required="1"/>
+											<button name="add_member" type="object" class="oe_highlight" string="ADD"/></tree>
+									</field>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+
+
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_inbox">
+			<field name="name">Messages</field>
+			<field name="res_model">im_chat.message.req</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'group_by':'message_type'}</field>
+			<field name="domain">[('cc_id','=',uid),('require','=',True),('delete_msg','=',False),('state','=','approved')]</field>
+		</record>
+
+		<record id="action_sent_messagesw_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_sent_message_tree_is_inbox" />
+			<field name="act_window_id" ref="action_project_inherit_inbox" />
+		</record>
+
+		<record id="action_swnt_messagesd_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_snt_msg_is_form_inbox" />
+			<field name="act_window_id" ref="action_project_inherit_inbox" />
+		</record>
+
+		<menuitem name="Inbox" id="menu_messaging_sub_sub_requirement_project" parent="menu_messaging_sub_requirement_project" action="action_project_inherit_inbox" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_user,hiworth_project_management.group_employee,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm" sequence="1"/>
+
+
+
+
+
+
+
+
+
+		<record id="view_delete_message_tree" model="ir.ui.view">
+			<field name="name">Delete Message-tree</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="arch" type="xml">
+				<tree edit="false" create="false">
+					<field name="from_id" string="FROM"/>
+					<field name="to_id" string="TO"/>
+					<field name="related_project" string="PBA"/>
+					<field name="message" string="Message."/>
+					<field name="date_today"/>
+					<field name="status" invisible="1"/>
+					<field name="reply"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_delete_message_form" model="ir.ui.view">
+			<field name="name">Deleted Message-form</field>
+			<field name="model">im_chat.message.req</field>
+			<field name="priority" eval="17"/>
+			<field name="arch" type="xml">
+				<form string="Message" edit="false" create="false">
+					<header>
+						<button name="back_to_inbox" string="Back To Inbox" type="object" class="oe_highlight"/>
+
+						<field name="state" widget="statusbar" invisible="1"/>
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<field name="from_id" string="FROM"/>
+							<field name="message_type" attrs="{'readonly':[('no_edit','=',True)]}"/>
+							<field name="related_project" options="{'no_create': True}" attrs="{'required':[('message_type','=','requirement')],'readonly':[('no_edit','=',True)]}"/>
+
+							<field name="to_id" string="TO" options="{'no_create': True}" attrs="{'readonly':['|',('message_type','=',False),('no_edit','=',True)],'required':1}"/>
+							<field name="date_today" readonly="1"/>
+							<field name="message" string="MESSAGE" placeholder="Type Your Message Here....." attrs="{'readonly':[('no_edit','=',True)]}"/>
+							<field name="delete_msg" invisible="1"/>
+						</group>
+						<group string="Attachments">
+							<field name="attachment_idss" nolabel="1" attrs="{'readonly':[('no_edit','=',True)]}">
+								<tree editable="bottom">
+									<field name="datas" filename="datas_fname"/>
+									<field name="name"/>
+									<field name="datas_fname" invisible="1" />
+								</tree>
+							</field>
+							<field name="has_attachment" invisible="1"/>
+							<field name="no_edit" invisible="1"/>
+						</group>
+						<group>
+
+							<field name="reply"/>
+						</group>
+
+
+					</sheet>
+
+
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_delete_mesage">
+			<field name="name">Deleted Messages</field>
+			<field name="res_model">im_chat.message.req</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">['|',('to_id','=',uid),('cc_id','=',uid),('delete_msg','=',True)]</field>
+		</record>
+
+		<record id="action_delete_message_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_delete_message_tree" />
+			<field name="act_window_id" ref="action_delete_mesage" />
+		</record>
+
+		<record id="action_delete_message_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_delete_message_form" />
+			<field name="act_window_id" ref="action_delete_mesage" />
+		</record>
+
+		<menuitem name="Trash" id="menu_deleted_message" parent="menu_messaging_sub_requirement_project" action="action_delete_mesage" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_user,hiworth_project_management.group_employee,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm" sequence="15"/>
+
+
+
+
+		<record id="view_popup_message_tree" model="ir.ui.view">
+			<field name="name">Popup Message-tree</field>
+			<field name="model">popup.notifications</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="status"/>
+					<field name="message"/>
+				</tree>
+			</field>
+		</record>
+
+
+
+		<record id="view_popup_message_form" model="ir.ui.view">
+			<field name="name">Popup Message-form</field>
+			<field name="model">popup.notifications</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="status"/>
+							<field name="message"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+
+
+
+
+
+
+
+		<record model="ir.actions.act_window" id="popup_action">
+			<field name="name">PopUp</field>
+			<field name="res_model">popup.notifications</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<!-- <menuitem name="Popups" id="menu_popup_message" parent="menu_messaging_sub_requirement_project" action="popup_action" groups="hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm,hiworth_project_management.group_employee,hiworth_project_management.group_architect,hiworth_project_management.group_manager_office,hiworth_project_management.group_am_office,base.group_erp_manager" sequence="45"/> -->
+
+
+
+
+
+
+
+
+
+
+		<record id="view_sent_message_tree_is_inbox011" model="ir.ui.view">
+			<field name="name">im_chat-tree1</field>
+			<field name="model">task.message</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="from_id" string="FROM"/>
+					<field name="to" string="TO"/>
+					<field name="message" string="Message."/>
+					<field name="convert_task" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_snt_msg_is_form_inbox0111" model="ir.ui.view">
+			<field name="name">im_chat-form</field>
+			<field name="model">task.message</field>
+			<field name="arch" type="xml">
+				<form string="Message" create="false">
+					<header>
+						<button name="task_convert" type="object" class="oe_highlight" string="Approve Task" attrs="{'invisible':[('convert_task','=',True)]}"/>
+						<!-- attrs="{'invisible':[('convert_task','=',True)]}" -->
+						<!-- <button name="reply_message" string="Reply" class="oe_highlight" type="object" groups="hiworth_project_management.group_manager" attrs="{'invisible':[('state','=','draft')]}"/> -->
+						<!-- <field name="state" widget="statusbar"/> -->
+					</header>
+					<sheet>
+						<h1><center><i>MESSAGE</i></center></h1>
+						<group>
+							<field name="from_id" string="From"/>
+							<field name="to" string="Customer" options="{'no_create': True}"/>
+							<field name="project" string="Related Project"/>
+							<field name="assigned" string="Task Assigned"/>
+							<field name="message" string="Task Message"/>
+
+							<!-- <field name="bool_msg" invisible="1"/> -->
+							<!-- <field name="user_id" invisible="1"/> -->
+							<!-- <field name="require" invisible="1"/> -->
+							<!-- <field name="reply"/> -->
+							<!-- <field name="manager" invisible="1"/> -->
+							<field name="convert_task" invisible="1"/>
+							<field name="admin" invisible="1"/>
+						</group>
+					</sheet>
+
+
+				</form>
+			</field>
+		</record>
+
+		<record id="view_task_message_form" model="ir.ui.view">
+			<field name="name">im_chat-form1</field>
+			<field name="priority" eval="18"/>
+			<field name="model">task.mes</field>
+			<field name="arch" type="xml">
+				<form string="Message">
+					<sheet>
+						<h1><center><i>Task Message</i></center></h1>
+						<group>
+							<field name="rec" invisible="1"/>
+							<field name="convert_task" invisible="1"/>
+						</group>
+						<group>
+							<group>
+								<field name="from_id" string="Customer" readonly="1"/>
+
+
+								<field name="date"/>
+
+
+							</group>
+							<group>
+								<field name="message" string="Job Title"/>
+								<field name="project"/>
+								<field name="to" invisible="1"/>
+								<field name="manager" invisible="1"/>
+							</group>
+						</group>
+						<group col="4">
+							<field name="assigne"/>
+							<button name="add_member" string="Add Member" class="oe_highlight" type="object"/>
+						</group>
+
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record model="ir.actions.act_window" id="action_project_inherit_inbox0111">
+			<field name="name">Task Messages</field>
+			<field name="res_model">task.message</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+		</record>
+
+		<record id="action_sent_messagesw_tree_view011" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_sent_message_tree_is_inbox011" />
+			<field name="act_window_id" ref="action_project_inherit_inbox0111" />
+		</record>
+
+		<record id="action_swnt_messagesd_form_view011" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_snt_msg_is_form_inbox0111" />
+			<field name="act_window_id" ref="action_project_inherit_inbox0111" />
+		</record>
+
+
+		<record id="view_project_employee_charge_form" model="ir.ui.view">
+			<field name="name">employee.form</field>
+			<field name="model">employee.charge</field>
+			<field name="arch" type="xml">
+				<form>
+
+					<group>
+						<field name="recs" invisible="1"/>
+						<field name="task_category"/>
+						<field name="employee" required="1" groups="hiworth_project_management.group_general_manager,base.group_erp_manager,hiworth_project_management.group_admin2" options="{'no_create': True}"/>
+					</group>
+					<footer>
+						<button name="confirm_employee" string="Continue" type="object" class="oe_highlight"/>
+						or
+						<button string="Cancel" class="oe_link" special="cancel"/>
+					</footer>
+
+
+				</form>
+			</field>
+		</record>
+
+
+
+
+
+	</data>
+</openerp>

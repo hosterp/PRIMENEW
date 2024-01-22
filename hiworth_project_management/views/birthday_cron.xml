@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+    <record model="ir.cron" id="availability_create_cron">
+        <field name="name"> Birthday Reminder </field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'res.partner'"/>
+        <field name="function" eval="'_cron_birthday_reminder'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <record model="ir.cron" id="availability_annivrsary_create_cron">
+        <field name="name"> Anniversary Reminder </field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'res.partner'"/>
+        <field name="function" eval="'_cron_anniversary_reminder'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <record model="ir.cron" id="availability_common_greetings_create_cron">
+        <field name="name">Special Greetings</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'greetings.prime'"/>
+        <field name="function" eval="'_cron_special_day_reminder'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <record model="ir.cron" id="availability_feedback_record_create_cron">
+        <field name="name">Feedback</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'feedback.prime'"/>
+        <field name="function" eval="'_cron_feedback_reminders'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<!--<record id="form_project_added_work_schedule" model="ir.ui.view">-->
+			<!--<field name="name">project.project.form.schedule</field>-->
+			<!--<field name="model">project.project</field>-->
+			<!--<field name="inherit_id" ref="edit_project_changed" />-->
+			<!--<field name="arch" type="xml">-->
+
+				<!--<xpath expr="//notebook/page[@string='Project Status']"-->
+					<!--position="after">-->
+					<!--<page string="Site Schedule">-->
+						<!--<group string="Site Schedule">-->
+							<!--<field name="schedule_ids" nolabel="1" >-->
+								<!--<tree>-->
+									<!--<field name="name" />-->
+								<!--</tree>-->
+								<!--<form string="Work Schedule">-->
+									<!--<group>-->
+										<!--<field name="name" required="True" />-->
+										<!--&lt;!&ndash; <field name="state" reqiured="True" /> &ndash;&gt;-->
+									<!--</group>-->
+									<!--<group string="Schedule Lines">-->
+										<!--<field name="schedule_line" nolabel="1">-->
+											<!--<tree editable="bottom">-->
+												<!--<field name="sequence" widget="handle" />-->
+												<!--<field name="name" string="Job Description" />-->
+												<!--<field name="start_date" />-->
+												<!--<field name="end_date" />-->
+												<!--<field name="status" />-->
+												<!--<field name="payment_to_contractor"/>-->
+												<!--<field name="remarks" />-->
+
+											<!--</tree>-->
+										<!--</field>-->
+									<!--</group>-->
+								<!--</form>-->
+							<!--</field>-->
+						<!--</group>-->
+						<!--<group string="Payment Schedule">-->
+							<!--<field name="schedule_id" nolabel="1" >-->
+								<!--<tree editable="bottom">-->
+									<!--<field name="sequence" widget="handle" />-->
+									<!--<field name="seq" required="True" />-->
+									<!--<field name="name" required="True" />-->
+									<!--<field name="amount" sum="Total" />-->
+									<!--<field name="due_on" />-->
+									<!--<field name="stage_total" readonly="True" />-->
+
+								<!--</tree>-->
+							<!--</field>-->
+						<!--</group>-->
+					<!--</page> -->
+
+				<!--</xpath>-->
+			<!--</field>-->
+		<!--</record>-->
+
+
+	</data>
+</openerp>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+    
+    <t t-name="JobSummaryQuickAdd">
+        <div class="oe_hiworth_project_management_quickadd ui-toolbar" style="margin-bottom:0px;">
+            <div class="oe_form_dropdown_section">
+                <h4>Date From :</h4> 
+               <!--  <select class="oe_account_select_period">
+                    
+                </select> -->
+            </div>
+            <div class="oe_form_dropdown_section">
+                <h4>Date To :</h4> 
+                <!-- <select class="oe_account_select_journal" >
+                    
+                </select> -->
+            </div>
+        </div>
+    </t>
+
+</templates>

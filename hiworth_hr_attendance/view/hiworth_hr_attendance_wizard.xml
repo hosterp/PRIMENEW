@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Sign in wizard -->
+        <record id="hiworth_signin_wizard" model="ir.ui.view">
+            <field name="name">Sign in Wizard</field>
+            <field name="model">hiworth.hr.signin.wizard</field>
+            <!-- <field name="context">{'default_employee_ids': active_ids}</field> -->
+            <field name="arch" type="xml">
+                <form>
+                    <field name="employee_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="work_phone"/>
+                            <field name="work_email"/>
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="is_daily_worker" invisible="1"/>
+                            <field name="location" invisible="1"/>
+                         <field name="signin_time" /> 
+                     </group>
+                    </group>
+                    <footer>
+                        <button type="object" name="do_mass_update"
+                            string="SignIn" class="oe_highlight"
+                            attrs="{'invisible':
+                            [('signin_time', '=',False)]}" />
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Sign out wizard -->
+        <record id="hiworth_signout_wizard" model="ir.ui.view">
+            <field name="name">Sign out Wizard</field>
+            <field name="model">hiworth.hr.signout.wizard</field>
+            <!-- <field name="context">{'default_employee_ids': active_ids}</field> -->
+            <field name="arch" type="xml">
+                <form>
+                    <field name="employee_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="work_phone"/>
+                            <field name="work_email"/>
+                        </tree>
+                    </field>
+                    <group>
+                        <group> <field name="signout_time" /> </group>
+                    </group>
+                    <footer>
+                        <button type="object" name="do_mass_update"
+                            string="SignOut" class="oe_highlight"
+                            attrs="{'invisible':
+                            [('signout_time', '=',False)]}" />
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <act_window id="hiworth_hr_signin_wizard_action"
+            name="Sign in Wizard" res_model="hiworth.hr.signin.wizard"
+            view_mode="form" target="new" multi="True"
+            view_id="hiworth_signin_wizard"
+            src_model="hr.employee"
+            context="{'default_employee_ids': active_ids}"
+            groups="hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager,hiworth_project_management.group_admin1,hiworth_project_management.group_admin2"/>
+
+        <act_window id="hiworth_hr_signout_wizard_action"
+            name="Sign out Wizard" res_model="hiworth.hr.signout.wizard"
+            view_mode="form" target="new" multi="True"
+            view_id="hiworth_signout_wizard"
+            src_model="hr.employee"
+            context="{'default_employee_ids': active_ids}"
+            groups="hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager,hiworth_project_management.group_admin1,hiworth_project_management.group_admin2"/>
+    </data>
+</openerp>

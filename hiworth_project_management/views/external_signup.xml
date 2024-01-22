@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+<record id="view_customers_form_external" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<form string="Customer Details">
+					
+					<field name="image" widget='image' class="oe_avatar oe_left" options='{"preview_image": "image_medium"}'/>
+					<div class="oe_title">
+						
+						<h1>
+							<field name="name" default_focus="1" placeholder="Customer Name"
+								required="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="nick_name"/>
+						<field name="dob"/>
+					</group>
+
+					<group>
+						<separator string="Address"/><newline/>
+						<group>
+							<field name="street"/>
+							<field name="street2" string="Post Office"/>
+							<field name="city"/>
+							<field name="state_id"/>
+							<field name="country_id"/>
+							<field name="zip"/>
+							<field name="user" invisible="1"/>
+							<field name="is_cus" invisible="1"/>
+
+						</group>
+						<group>
+							<field name="mobile" widget="phone" />
+							<field name="phone" widget="phone" string="Phone No" />
+							<field name="user_ids" invisible="1" />
+							<field name="email" widget="email"/>
+						</group>
+					</group>
+					<group>
+						
+						<field name="cus_date" invisible="1"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="custmer_reservation_tree">
+			<field name="name">customer.tree</field>
+			<field name="model">res.partner</field>
+			<field name="priority" eval="17" />
+			<field name="arch" type="xml">
+				<tree string="Office Management">
+					<field name="name" />
+					<field name="email" />
+					<field name="mobile" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_project_external_reservation5" model="ir.actions.act_window">
+			<field name="name">Office Management</field>
+			<field name="res_model">res.partner</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="domain">[]</field>
+			<!-- <field name="domain">[('id','=', 'self_id')]</field> -->
+			
+			<field name="target">current</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="view_customers_form_external" />
+		</record>
+
+
+		<record id="action_project_external_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+
+			<field name="view_id" ref="custmer_reservation_tree" />
+			<field name="act_window_id" ref="action_project_external_reservation5" />
+		</record>
+
+		<record id="action_project_external_reservation5_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customers_form_external" />
+			<field name="act_window_id" ref="action_project_external_reservation5" />
+		</record>
+
+		<menuitem id="menu_external_signup_root" sequence="1"
+			name="Office Management" groups="hiworth_project_management.project_signup_external"/>
+
+		<menuitem id="menu_project_management" name="Office Management"
+			parent="menu_external_signup_root" sequence="10" />
+
+
+		 <menuitem action="action_project_external_reservation5" id="menu_customer_reservation"
+			name="Your Details" parent="menu_project_management" sequence="10" />
+
+
+
+		</data>
+	</openerp>
+

@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="make_invisible_in_project_management" model="res.groups">
+			<field name="name">Visible Project</field>
+		</record>
+
+		<record id="make_invisible_in_nickname" model="res.groups">
+			<field name="name">Visible Nickname</field>
+		</record>
+
+		<record model="ir.ui.menu" id="project.menu_action_view_task">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="project.menu_estimate_extra_request">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="event.event_configuration">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction._project_task_estimation">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="project.menu_project_category_act">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_project_bill_of_material">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_project_products">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_task_report_wizard">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_activity_details_under_project">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_project_report">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_stock_details_under_project">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.main_menu_view_work_order">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.menu_document_details_under_project">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="base.menu_definitions">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="hiworth_construction.root_activity_reports_menu">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="id_locations_project">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="menu_admin_sheet_configurations">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.ui.menu" id="menu_sitevisit_wd_project_main">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible_in_project_management')])]" />
+		</record>
+
+		<record model="ir.module.category" id="module_management">
+			<field name="name">Prime</field>
+			<field name="description">User access level</field>
+			<field name="sequence">3</field>
+		</record>
+
+		<record id="group_user" model="res.groups">
+			<field name="name">Customer</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_contractor" model="res.groups">
+			<field name="name">Contractor</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_general_manager" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">General Manager</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_admin1" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Admin 1</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_admin2" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Admin 2</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_dgm" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">DGM</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_manager_office" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Manager (Office)</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_am_office" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">AM (Office)</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_manager_accounts" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Manager (Accounts)</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_architect" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Super Employee</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_also_customer" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Also Customer</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<!--  <record id="group_engineer" model="res.groups">
+           <field name="user_categ" eval="1" />
+          <field name="name">Engineer</field>
+          <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+          <field name="category_id" ref="hiworth_project_management.module_management"/>
+         </record>
+
+         <record id="group_project_engineer" model="res.groups">
+           <field name="user_categ" eval="1" />
+          <field name="name">Project Engineer</field>
+          <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+          <field name="category_id" ref="hiworth_project_management.module_management"/>
+         </record> -->
+
+		<record id="group_hr_manager" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Hr Manager</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_employee" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Employee.</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_jr_eng" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Junior Engineer</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_trainee" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Trainee</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record id="group_engineer" model="res.groups">
+			<field name="user_categ" eval="1" />
+			<field name="name">Engineer</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="category_id" ref="hiworth_project_management.module_management"/>
+		</record>
+
+		<record model="ir.module.category" id="access_menus_buttons_prime">
+			<field name="name">Access Right</field>
+			<field name="description">User access level</field>
+		</record>
+
+		<record model="res.groups" id="pending_message_group">
+			<field name="name">Pending Message Menu</field>
+			<field name="description">Pending Message Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="pending_message_approval_button_group">
+			<field name="name">Pending Message Approval Button</field>
+			<field name="description">Pending Message Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="work_description_group">
+			<field name="name">Work Description</field>
+			<field name="description">Pending Message Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="work_description_create_project_group">
+			<field name="name">Work Description - Create Project Button</field>
+			<field name="description">Pending Message Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="activity_create_group">
+			<field name="name">Activity Creation</field>
+			<field name="description">Activity Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="site_visit_create_group">
+			<field name="name">Site Visit Creation</field>
+			<field name="description">Site Visit Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="pending_files_to_customer_group">
+			<field name="name">Pending File Transfers Menu</field>
+			<field name="description">Pending File Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="pending_files_approval_group">
+			<field name="name">Pending Files Approval Button</field>
+			<field name="description">Pending File Approve Button Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="schedule_task_menu_group">
+			<field name="name">Schedule Task Menu</field>
+			<field name="description">Schedule Task Menu Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="requirement_message_group">
+			<field name="name">Requirement Message</field>
+			<field name="description">Requirement Message Access</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+			<field name="ready_bool">True</field>
+		</record>
+
+		<record model="res.groups" id="daily_report_approve_button">
+			<field name="name">Daily Report - Approve Button</field>
+			<field name="description">Daily Report approve button</field>
+			<field name="category_id" ref="hiworth_project_management.access_menus_buttons_prime"/>
+		</record>		
+
+		<record id="hr_holidays_rule" model="ir.rule">
+			<field name="name">HrHolidaysRule</field>
+			<field name="model_id" ref="hiworth_hr_attendance.model_hr_holidays"/>
+			<field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('employee_id.user_id','=',user.id),('next_approver','=',user.id)]</field>
+		</record>
+
+		<!-- TASK ENTRY -->
+		<!-- Rule for Admin2 (Activity) -->
+		<record id="task_entry_admin2" model="ir.rule">
+			<field name="name">User can only see his/her Actvities Admin2</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_admin2'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'child_of', [user.company_id.id]),('user_id.groups_id','not in',admin2)]</field>
+		</record>
+
+		<!-- Rule for General Manager (Activity) -->
+		<record id="task_entry_general_manager" model="ir.rule">
+			<field name="name">User can only see his/her Actvities General Manager</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_general_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'child_of', [user.company_id.id]),('user_id.groups_id','not in',gm)]</field>
+		</record>
+
+		<!-- Rule for DGM (Activity) -->
+		<record id="task_entry_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Actvities DGM</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'in', [i.id for i in user.company_ids]),('user_id.groups_id','not in',dgm)]</field>
+		</record>
+
+		<!-- Rule for DGM (Manager Office) -->
+		<record id="task_entry_mo" model="ir.rule">
+			<field name="name">User can only see his/her Actvities Manager Office</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('user_id.groups_id','not in',mo)]</field>
+		</record>
+
+		<!-- Rule for DGM (Assistant Manager Office) -->
+		<record id="task_entry_am" model="ir.rule">
+			<field name="name">User can only see his/her Actvities Assistant Manager Office</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('user_id.groups_id','not in',am)]</field>
+		</record>
+
+		<!-- Rule for DGM (Super Employee) -->
+		<record id="task_entry_se" model="ir.rule">
+			<field name="name">User can only see his/her Actvities Super Employee</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('user_id.groups_id','not in',se)]</field>
+		</record>
+
+		<!-- Rule for employees(Activity) -->
+		<record id="task_entry_employee" model="ir.rule">
+			<field name="name">User can only see his/her Actvities Employee</field>
+			<field name="model_id" ref="model_task_entry"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('user_id','=',user.id),('branch','=',user.company_id.id)]</field>
+		</record>
+
+		<!-- SITE VISIT SCHEDULE -->
+		<!-- Rule for Admin2 (Activity) -->
+		<record id="site_visit_schedule_admin2" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details Admin2</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_admin2'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'child_of', [user.company_id.id]),('visit_by.groups_id','not in',admin2)]</field>
+		</record>
+
+		<!-- Rule for General Manager (Activity) -->
+		<record id="site_visit_schedule_general_manager" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details General Manager</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_general_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'child_of', [user.company_id.id]),('visit_by.groups_id','not in',gm)]</field>
+		</record>
+
+		<!-- Rule for DGM (Activity) -->
+		<record id="site_visit_schedule_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details DGM</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch', '=', False),('branch', 'in',[i.id for i in user.company_ids]),('visit_by.groups_id','not in',dgm)]</field>
+		</record>
+
+		<!-- Rule for DGM (Manager Office) -->
+		<record id="site_visit_schedule_mo" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details Manager Office</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('visit_by.groups_id','not in',mo)]</field>
+		</record>
+
+		<!-- Rule for DGM (Assistant Manager Office) -->
+		<record id="site_visit_schedule_am" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details Assistant Manager Office</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('visit_by.groups_id','not in',am)]</field>
+		</record>
+
+		<!-- Rule for DGM (Super Employee) -->
+		<record id="site_visit_schedule_se" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details Super Employee</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch', '=', user.company_id.id),('visit_by.groups_id','not in',se)]</field>
+		</record>
+
+
+		<!-- Rule For Employee(Site Visit Schedule) -->
+		<record id="site_visit_schedule_employee" model="ir.rule">
+			<field name="name">User can only see his/her Site Visit Details Employee</field>
+			<field name="model_id" ref="model_site_visit_schedule"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('visit_by','=',user.id),('branch','=',user.company_id.id)]</field>
+		</record>
+
+		<!-- Customer File Details -->
+		<!-- Rule for Admin2 (Activity) -->
+		<record id="customer_file_details_admin2" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details Admin2</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_admin2'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch_id', '=', False),('branch_id', 'child_of', [user.company_id.id]),('logged_user.groups_id','not in',admin2)]</field>
+		</record>
+
+		<!-- Rule for General Manager (Activity) -->
+		<record id="customer_file_details_general_manager" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details General Manager</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_general_manager')),(4, ref('group_dgm')),(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch_id', '=', False),('branch_id', 'child_of', [user.company_id.id])]</field>
+		</record>
+
+		<!-- Rule for DGM (Activity) -->
+		<record id="customer_file_details_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details DGM</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('logged_user','=',user.id)]</field>
+		</record>
+
+		<!-- Rule for DGM (Manager Office) -->
+		<record id="customer_file_details_mo" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details Manager Office</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('logged_user','=',user.id)]</field>
+		</record>
+
+
+		<!-- Rule for DGM (Assistant Manager Office) -->
+		<record id="customer_file_details_am" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details Assistant Manager Office</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=', user.company_id.id),('logged_user.groups_id','not in',am)]</field>
+		</record>
+
+		<!-- Rule for DGM (Super Employee) -->
+		<record id="customer_file_details_se" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details Super Employee</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=', user.company_id.id),('logged_user.groups_id','not in',se)]</field>
+		</record>
+
+		<!-- Rule for employees(Activity) -->
+		<!-- <record id="customer_file_details_employee" model="ir.rule">
+			<field name="name">User can only see his/her Customer File Details Employee</field>
+			<field name="model_id" ref="model_customer_file_details"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('logged_user','=',user.id)]</field>
+		</record> -->
+
+		<!-- Project Project -->
+		<!-- Rule for Admin2 (project) -->
+		<record id="project_customer" model="ir.rule">
+			<field name="name">User can only see his/her Project Customer</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_user'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('partner_id', '=',user.partner_id.id)]</field>
+		</record>
+
+		<record id="project_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Project DGM</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id','in',[i.id for i in user.company_ids])]</field>
+		</record>
+
+		<record id="also_customer_project_rule" model="ir.rule">
+			<field name="name">Project Rule</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_also_customer'))]"/>
+			<field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+		</record>
+
+		<delete model="ir.rule" id="project.project_public_members_rule"/>
+
+		<record id="project_manager_office" model="ir.rule">
+			<field name="name">User can only see his/her Project Manager Office</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+		</record>
+
+		<record id="project_am_office" model="ir.rule">
+			<field name="name">User can only see his/her Project AM Office</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+		</record>
+
+		<record id="project_architect" model="ir.rule">
+			<field name="name">User can only see his/her Project Architect</field>
+			<field name="model_id" ref="model_project_project"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id','=',user.company_id.id)]</field>
+		</record>
+
+
+		<!-- EVENT EVENT -->
+		<record id="event_event_admin2" model="ir.rule">
+			<field name="name">User can only see his/her Project Admin2</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_admin2'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('company_id', '=', False),('company_id', 'child_of', [user.company_id.id]),('user_id.groups_id','not in', admin2)]</field>
+		</record>
+
+		<record id="event_event_general_manager" model="ir.rule">
+			<field name="name">User can only see his/her Project General Manager</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_general_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('company_id', '=', False),('company_id', 'child_of', [user.company_id.id]),('user_id.groups_id','not in',gm)]</field>
+		</record>
+
+		<record id="event_event_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Project DGM</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', 'in',[i.id for i in user.company_ids]),('user_id.groups_id','not in',dgm)]</field>
+		</record>
+
+		<record id="event_event_manager_office" model="ir.rule">
+			<field name="name">User can only see his/her Project Manager Office</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id)]</field>
+		</record>
+
+		<record id="event_event_am" model="ir.rule">
+			<field name="name">User can only see his/her Project AM Office</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id),('user_id.groups_id','not in',am)]</field>
+		</record>
+
+		<record id="event_event_super_employee" model="ir.rule">
+			<field name="name">User can only see his/her Project Super Employee</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id),('user_id.groups_id','not in',se)]</field>
+		</record>
+
+		<record id="event_event_employee" model="ir.rule">
+			<field name="name">User can only see his/her Project Employee</field>
+			<field name="model_id" ref="model_event_event"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id),('user_id','=',user.id)]</field>
+		</record>
+
+		<!-- WORK REPORT -->
+		<record id="work_report_admin2" model="ir.rule">
+			<field name="name">User can only see his/her Project Admin2</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_admin2'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('branch_id', '=', False),('branch_id', 'child_of', [user.company_id.id]),('user_id.groups_id','not in',admin2)]</field>
+		</record>
+
+		<!-- <record id="work_report_general_manager" model="ir.rule">
+			<field name="name">User can only see his/her Project General Manager</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_general_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">['|',('user_id.employee_id.user_category.sequence','>',user.employee_id.user_category.sequence),('id','=',user.employee_id.id)]</field>
+		</record> -->
+
+		<record id="work_report_dgm" model="ir.rule">
+			<field name="name">User can only see his/her Project DGM</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_dgm'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', 'in', [i.id for i in user.company_ids]),('user_id.groups_id','not in',dgm)]</field>
+		</record>
+
+
+		<record id="work_report_manager_office" model="ir.rule">
+			<field name="name">User can only see his/her Project Manager</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=',user.company_id.id),('user_id.groups_id','not in',mo)]</field>
+		</record>
+
+
+		<record id="work_report_am_office" model="ir.rule">
+			<field name="name">User can only see his/her Project AM Office</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=', user.company_id.id),('user_id.groups_id','not in',am)]</field>
+		</record>
+
+
+		<record id="work_report_super_employee" model="ir.rule">
+			<field name="name">User can only see his/her Project Super Employee</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_architect'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=', user.company_id.id),('user_id.groups_id','not in',se)]</field>
+		</record>
+
+		<record id="work_report_customer" model="ir.rule">
+			<field name="name">User can only see his/her Project Customer</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_user'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('customer_id', '=', user.partner_id.id)]</field>
+		</record>
+
+		<record id="work_report_employee" model="ir.rule">
+			<field name="name">User can only see his/her Project Employee</field>
+			<field name="model_id" ref="model_work_report"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('branch_id', '=', user.company_id.id),('user_id','=',user.id)]</field>
+		</record>
+
+		<record id="hr_employee_hr_manager" model="ir.rule">
+			<field name="name">User can only see his/her Project HR Manager</field>
+			<field name="model_id" ref="model_hr_employee"/>
+			<field name="groups" eval="[(4, ref('group_hr_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id)]</field>
+		</record>
+
+		<record id="hr_employee_branch_user" model="ir.rule">
+			<field name="name">User can only view his/her Branch users</field>
+			<field name="model_id" ref="model_hr_employee"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="active" eval="False"/>
+			<field name="domain_force">[('company_id', 'in',user.company_ids.ids)]</field>
+		</record>
+
+		<record id="hr_employee_am" model="ir.rule">
+			<field name="name">User can only see his/her Project AM</field>
+			<field name="model_id" ref="model_hr_employee"/>
+			<field name="groups" eval="[(4, ref('group_am_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('company_id', '=', user.company_id.id),('user_id.groups_id','not in',am)]</field>
+		</record>
+
+		<delete model="ir.rule" id="base.res_users_rule" />
+
+		<record id="res_users_rule" model="ir.rule">
+			<field name="name">user rule</field>
+			<field name="model_id" ref="base.model_res_users"/>
+			<field eval="True" name="global"/>
+			<field name="domain_force">['|',('company_ids','child_of',[user.company_id.id]),('company_id','=',user.company_id.parent_id.id)]</field>
+		</record>
+
+		<!--  general manager rule for employee details -->
+		<record id="general_manager_hr_employee_rule" model="ir.rule">
+			<field name="name">General Manager Rule</field>
+			<field name="model_id" ref="model_hr_employee"/>
+			<field name="groups" eval="[(4, ref('group_general_manager'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="True"/>
+			<field name="domain_force">[(1,'=',1)]</field>
+		</record>
+
+		<!--  employee rule for employee details -->
+		<!-- <record id="employee_rule_hr_employee_neww" model="ir.rule">
+			<field name="name">employee rule for hr employee</field>
+			<field name="model_id" ref="model_hr_employee"/>
+			<field name="groups" eval="[(4, ref('group_employee'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('id','=',user.employee_id.id)]</field>
+		</record> -->
+
+		<record id="hr_holidays.property_rule_holidays_employee" model="ir.rule">
+	        <field name="name">Employee Holidays</field>
+	        <field name="model_id" ref="hr_holidays.model_hr_holidays"/>
+	        <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+	        <field name="perm_create" eval="False"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_unlink" eval="False"/>
+	        <field name="groups" eval="[(4,ref('base.group_user')),(4, ref('group_employee'))]"/>
+	    </record>
+
+		<!-- <record id="hiworth_hr_attendance_rule_dgm_mo" model="ir.rule">
+			<field name="name">HR Attendance Rule</field>
+			<field name="model_id" ref="hiworth_hr_attendance.model_hiworth_hr_attendance"/>
+			<field name="groups" eval="[(4, ref('group_dgm')),(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('name.company_id','=',user.company_id.id),'|',('name.user_category.sequence','>',user.employee_id.user_category.sequence),('name','=',user.employee_id.id)]</field>
+		</record> -->
+
+		<!-- hiworth hr attendance rule -->
+		<record id="hiworth_hr_attendance_rule_dgm_mo" model="ir.rule">
+			<field name="name">HR Attendance Rule</field>
+			<field name="model_id" ref="hiworth_hr_attendance.model_hiworth_hr_attendance"/>
+			<field name="groups" eval="[(4, ref('group_manager_office'))]"/>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[('name.company_id','=',user.company_id.id)]</field>
+		</record>
+	
+
+	</data>
+
+</openerp>

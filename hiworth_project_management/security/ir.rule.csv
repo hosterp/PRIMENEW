@@ -1,0 +1,18 @@
+"id","name","model_id/id","domain_force","perm_read","perm_write","perm_create","perm_unlink"
+
+"__export__.ir_rules_78500","projects","hiworth_construction.model_project_task","['|',('user_id','=',user.id),('project_id.user_id','=',user.id)]","True","True","False","False"
+"__export__.ir_rules_78502220","projectstaskss","hiworth_project_management.model_task_message","[('manager','=',user.id)]","True","True","False","False"
+
+"__export__.ir_rules_work","workorder","hiworth_construction.model_work_order","[('partner_id','=',user.partner_id.id)]","True","True","False","False"
+
+
+
+"__export__.ir_customer_feedback","CustomerFeedBack","hiworth_project_management.model_feedback_prime","[('name','=',user.id)]","True","True","True","False"
+
+
+"__export__.ir_job_assignment","JobAssignment","hiworth_project_management.model_job_assignment","['|',('branch_name', '=', False),('branch_name', 'child_of', [user.company_id.id]),]","True","True","True","False"
+
+
+
+
+

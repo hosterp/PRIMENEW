@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+		<function name="write" model="ir.model.data">
+			<function name="search" model="ir.model.data">
+				<value eval="[('module', '=', 'hr_payroll'), ('name', '=', 'hr_rule_net')]" />
+			</function>
+			<value eval="{'noupdate': False}" />
+		</function>
+
+		<record id="hr_rule_hra" model="hr.salary.rule">
+            <field name="name">HR</field>
+            <field name="sequence" eval="90"/>
+            <field name="code">HRA</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.hra
+    		</field>
+        </record>
+
+        <record id="hr_rule_other" model="hr.salary.rule">
+            <field name="name">Other Allowance</field>
+            <field name="sequence" eval="95"/>
+            <field name="code">Other</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.other
+    		</field>
+        </record>
+
+
+
+		<record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
+			<field name="amount_python_compute">result =  categories.BASIC + categories.ALW - categories.DED</field>
+		</record>
+
+		
+
+		<record id="hr_rule_deduct" model="hr.salary.rule">
+            <field name="name">Deduction</field>
+            <field name="sequence" eval="110"/>
+            <field name="code">DED</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result =( (contract.wage/30)*(payslip.lop))
+    		</field>
+        </record>
+
+
+        <record id="hr_rule_advance" model="hr.salary.rule">
+            <field name="name">Advance Salary</field>
+            <field name="sequence" eval="110"/>
+            <field name="code">ADV</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result =(payslip.advance)
+            </field>
+        </record>
+
+		<!-- <delete id="hr_payroll.hr_rule_basic" model="hr.salary.rule"/> -->
+
+		<!-- <delete id="hr_payroll.hr_rule_taxable" model="hr.salary.rule"/> -->
+<!-- 
+		<record id="hr_rule_deduct" model="hr.salary.rule">
+            <field name="name">Deduction</field>
+            <field name="sequence" eval="100"/>
+            <field name="code">DED</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.monthly_leave 
+if (result >1) :
+    result = ( (contract.wage/30)*(employee.monthly_leave-1))
+else:
+    result = 0
+    		</field>
+        </record> -->
+
+		<function name="write" model="ir.model.data">
+			<function name="search" model="ir.model.data">
+				<value eval="[('module', '=', 'hr_payroll'), ('name', '=', 'hr_rule_net')]" />
+			</function>
+			<value eval="{'noupdate': True}" />
+		</function>
+
+
+
+		<!-- <delete id="hr_holidays.holiday_status_sl" model="hr.holidays.status"/> -->
+
+		<!-- <delete id="hr_holidays.holiday_status_comp" model="hr.holidays.status"/> -->
+
+		<!-- <delete id="hr_holidays.holiday_status_unpaid" model="hr.holidays.status"/> -->
+
+            
+
+
+</data>
+</openerp>

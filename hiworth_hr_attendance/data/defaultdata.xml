@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="leave_type_public_holiday" model="hr.holidays.status">
+            <field name="name">Public holidays</field>
+        </record>
+    </data>
+</openerp>

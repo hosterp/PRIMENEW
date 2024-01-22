@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<openerp>
+    <data>
+
+
+    	 <record id="hiworth_hr_job_title_tree" model="ir.ui.view">
+            <field name="name">hr.job.tree</field>
+            <field name="model">hr.job</field>
+            <field name="arch" type="xml">
+                <tree> 
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="hiworth_hr_job_title_form" model="ir.ui.view">
+            <field name="name">hr.job.form</field>
+            <field name="model">hr.job</field>
+            <field name="arch" type="xml">
+                <form> 
+                	<sheet>
+                		<h1><center>Job Title</center></h1>
+                		<group>
+                	
+                			<field name="name" required="1"/>
+                            <field name="code"/>
+                		</group>
+
+                		</sheet>
+                            
+                        
+                </form>
+            </field>
+        </record>
+
+
+ <record id="action_job_title" model="ir.actions.act_window">
+            <field name="name">Job Title</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hiworth_hr_job_title_tree" />
+        </record>
+
+        <record id="action_hr_job_title_tree_view" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="hiworth_hr_job_title_tree" />
+			<field name="act_window_id" ref="action_job_title" />
+		</record>
+
+		<record id="action_hr_job_title_form_view" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="hiworth_hr_job_title_form" />
+			<field name="act_window_id" ref="action_job_title" />
+		</record>
+
+
+        
+
+         <!-- <menuitem name="Job Title" id="menu_job_title" parent="hr.menu_hr_root" sequence="15"/> -->
+
+
+        <!-- <menuitem name="Job Title" id="menu_sub_job_title" parent="menu_job_title" sequence="15" action="action_job_title"/>
+
+
+        <record id="demo_manager" model="hr.job">
+        	<field name="name">Manager.</field>
+            <field name="code">MAN</field>
+        </record>
+        <record id="demo_employee" model="hr.job">
+        	<field name="name">Employee.</field>
+            <field name="code">EMP</field>
+        </record>
+        <record id="demo_trainee" model="hr.job">
+        	<field name="name">Trainee.</field>
+            <field name="code">TRA</field>
+        </record> -->
+
+    </data>
+</openerp>

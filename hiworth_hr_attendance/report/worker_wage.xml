@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+
+
+		<report id="report_worker_wage" string="Worker Wage Report"
+			model="daily.wages" report_type="qweb-pdf"
+			name="hiworth_hr_attendance.report_worker_wage_daysnew" file="hiworth_hr_attendance.report_worker_wage_daysnew" />
+
+
+		<template id="report_worker_wage_daysnew">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="report.external_layout">
+						<div class="page">
+							<center><b><h2>Worker Wage Summary</h2></b></center>
+							
+
+							<t t-set="sl_no" t-value="1" />
+							
+							<div>
+								<center>
+
+									<table style="width: 100%; font-size:16px;margin-top:50px;">
+			                            <thead>
+			                                <tr style="height: 30px;">
+			                                    <td style="width: 50%;"><b>Date From:</b>
+			                                        <span t-field="o.date_from"/>
+			                                    </td>
+			                                    <td style="width: 50%;text-align: right;"><b>Date To:</b>
+			                                        <span t-field="o.date_to"/>
+			                                    </td>
+			                                </tr>
+			                            </thead>
+			                        </table>
+
+
+										<table class="table table-bordered">
+
+										<thead>
+											<tr>
+												<th>SlNo:</th>
+												<th>Worker</th>
+												<th>worker Type</th>
+												<th>No Of Days Present</th>
+												<th>Advance</th>
+												<th>Wage Per Day</th>
+												<th>Total Wage</th>
+											</tr>
+										</thead>
+										<tbody>
+			                            	<tr t-foreach="o.daily_wage" t-as="m">
+			                            		<td>
+			                            		<t t-esc="sl_no" />
+													<t t-set="sl_no" t-value="sl_no+1" />
+													</td>
+			                            		<td><span t-esc="m.employee.name"/></td>
+			                            		<td><span t-esc="m.employee_type"/></td>
+			                            		<td><span t-esc="m.days"/></td>
+			                            		<td><span t-esc="m.advance"/></td>
+			                            		<td><span t-esc="m.wage"/></td>
+			                            		<td><span t-esc="m.amount"/></td>
+			                            	</tr>
+			                            	</tbody>
+
+									</table>
+
+								</center>
+							</div>
+			               
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</openerp>

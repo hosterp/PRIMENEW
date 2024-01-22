@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<record model="ir.ui.view" id="comment_reply_form">
+			<field name="name">comment.reply.form</field>
+			<field name="model">comment.reply</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="comment"/>
+					</group>
+					<footer>
+                        <button string="Comment &amp; Sent" name="comment_and_reply" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+    	<record model="ir.ui.view" id="view_work_report_search">
+            <field name="name">work.report.search.view</field>
+            <field name="model">work.report</field>
+            <field name="arch" type="xml">
+                <search string="Work Report">
+                	<field name="user_id" string="Customer"/>
+
+                	<filter name="group_user_wr" string="User" context="{'group_by': 'user_id'}"/>
+
+            
+                	<filter name="branch" string="Branch" context="{'group_by': 'branch_id'}"/>
+                	<filter name="project" string="Project" context="{'group_by': 'project'}"/>
+                	<filter name="task" string="Task" context="{'group_by': 'task_id'}"/>
+                	
+
+
+                    
+                </search>
+            </field>
+        </record>
+
+
+    	
+
+
+    	<record id="view_work_report_tree" model="ir.ui.view">
+			<field name="name">work.report.tree</field>
+			<field name="model">work.report</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="user_id" string="From"/>
+					<field name="project" string="Related Project"/>
+					<field name="branch_id" />
+					<field name="date_today"/>
+					<field name="customer_id" string="Customer"/>
+					<field name="report"/>
+					<field name="notes" />
+					<field name="work_report" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_work_report_form">
+            <field name="name">wor.report.form</field>
+            <field name="model">work.report</field>
+            <field name="priority" eval="18"/>
+            <field name="arch" type="xml">
+                <form string="Work Reports">
+                	<header>
+                	 <button string="Validate" name="send_report" type="object" class="oe_highlight" states="draft" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_dgm,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager" confirm="Are You Sure??"/>
+
+                        <button string="Approve" name="send_report" type="object" class="oe_highlight" states="validate" groups="base.group_erp_manager,hiworth_project_management.daily_report_approve_button,hiworth_project_management.group_dgm,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager" confirm="Are You Sure??"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,validate,transfer" groups="hiworth_project_management.group_manager_office,hiworth_project_management.group_employee,base.group_erp_manager"/>
+                    </header>
+
+                    
+                    <sheet>
+                    	<h1><center>Work Report</center></h1><br/>
+                        <group>
+                        	<field name="user_id" string="Report From" readonly="1"/>
+                        	<field name="project" string="Related Project"/>
+                        	<field name="branch_id" invisible="1" />
+                        	<field name="date_today" readonly="1"/>
+							<field name="report" />
+							<field name="customer_id"/>
+							<field name="work_report" invisible="1"/>
+							<field name="manager" invisible="1"/>
+							</group>
+							<notebook>
+								<page string="Extra">
+									<group>
+										<field name="notes" />
+									</group>
+								</page>
+							</notebook>
+							
+                        
+                        
+                        
+                       
+                      
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+    	<record model="ir.actions.act_window" id="action_work_report">
+			<field name="name">Work Report</field>
+			<field name="res_model">work.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state','=','transfer'),('work_report','=',True)]</field>
+		</record>
+
+		<record id="action_work_report_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_work_report_tree" />
+			<field name="act_window_id" ref="action_work_report" />
+		</record>
+
+		<record id="action_work_report_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_work_report_form" />
+			<field name="act_window_id" ref="action_work_report" />
+		</record>
+
+		<menuitem id="menu_work_reports_cus" name="Work Report" sequence="35"/>
+		<menuitem id="menu_work_report_cus" name="Work Report" sequence="35" parent="menu_work_reports_cus"/>
+
+		<menuitem id="menu_work_report_cus_sub" name="Work Reports" sequence="35" parent="menu_work_report_cus" action="action_work_report" groups="hiworth_project_management.group_user"/>
+
+
+		<record model="ir.actions.act_window" id="action_work_report_for_staff">
+			<field name="name">Work Report</field>
+			<field name="res_model">work.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'default_work_report' : True,'search_default_branch':1,'search_default_project':1}</field>
+			<field name="domain">[('work_report','=',True)]</field>
+		</record>
+
+
+		<record id="action_work_report_for_staff_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_work_report_tree" />
+			<field name="act_window_id" ref="action_work_report_for_staff" />
+		</record>
+
+		<record id="action_work_report_for_staff_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_work_report_form" />
+			<field name="act_window_id" ref="action_work_report_for_staff" />
+		</record>
+		
+
+
+
+
+		<record id="view_work_report_staff_tree" model="ir.ui.view">
+			<field name="name">work.report.my.tree</field>
+			<field name="model">work.report</field>
+			<field name="arch" type="xml">
+				<tree colors="blue:state == 'draft';red:state == 'validate';green:state == 'approved' ">
+					<field name="user_id" string="Send By"/>
+					<field name="date_today"/>
+					<field name="project"/>
+					<field name="branch_id" />
+					<field name="customer_nick"/>
+					<field name="to_id"/>
+					<field name="report"/>
+					<field name="notes" />
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_project_send_document_wizard" model="ir.ui.view">
+			<field name="name">transfer.document.forms</field>
+			<field name="model">transfer.document</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="recs" invisible="1"/>
+						<field name="user_id" domain="[('partner_id.customer','!=',True)]" options="{'no_create': True}" required="1"/>
+
+					</group>
+					<footer>
+						<button name="send_doc" string="Send" type="object" class="oe_highlight" confirm="Are You Sure?"/>Or
+	                        <button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_work_report_staff_form">
+            <field name="name">work.report.my.form</field>
+            <field name="model">work.report</field>
+            <field name="priority" eval="18"/>
+            <field name="arch" type="xml">
+                <form string="Daily Report">
+                    <header>
+                        <button string="Validate" name="send_report" type="object" class="oe_highlight" states="draft" groups="base.group_erp_manager,hiworth_project_management.group_manager_office,hiworth_project_management.group_dgm,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager" confirm="Are You Sure??"/>
+                        <button string="Comment &amp; Reply" name="comment_reply" type="object" class="oe_highlight"/>
+
+                        <button string="Approve" name="send_report" type="object" class="oe_highlight" states="validate,send" groups="base.group_erp_manager,hiworth_project_management.daily_report_approve_button,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm" confirm="Are You Sure??"/>
+
+                        <button string="Send Report" name="send_report_user" type="object" class="oe_highlight" states="validate" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_dgm" confirm="Are You Sure??"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,validate,send,approved"/>
+
+
+                        
+                    </header>
+                    <sheet>
+                    	<h1><center>Daily Report</center></h1><br/>
+                        <group>
+                        	<group>
+                        	<field name="date_today" readonly="1" />
+                        	<field name="project" readonly="1" />
+                        	<field name="task_id" options="{'no_create': True}"  attrs="{'readonly':[('state','in',['validate','approved'])]}" domain="[('activity','=',False),('site_visit','=',False)]" />
+                        	<field name="customer_nick" />
+                        	<field name="manager" invisible="1"/>
+                        	<field name="validated" invisible="1"/>
+                        </group>
+                        <group>
+                        	<field name="date_end" readonly="1" />
+                        	<field name="req_end" invisible="1" />
+                        	<field name="normal_end" readonly="1"/>
+							<field name="to_id" options="{'no_create': True}" required="1" domain="[('partner_id.is_cus','!=',True)]" />
+							<field name="branch_id" invisible="1" />
+						</group>
+					</group>
+					<group>
+							<field name="report" attrs="{'readonly':[('state','in',['validate','approved'])]}" />
+							
+							<field name="sent_report" invisible="1" />
+
+							</group>
+							<notebook>
+								<page string="Extra">
+									<group>
+										<field name="notes" attrs="{'readonly':[('state','in',['validate','approved'])]}" />
+										<field name="user_id" />
+									</group>
+								</page>
+								<page string="Comments">
+									<field name="comment_line" label="0">
+										<tree create="0" edit="0">
+											<field name="comment"/>
+										</tree>
+									</field>
+								</page>
+							</notebook>
+							<group>
+								<field name="status" invisible="1" />
+								<field name="status_admin" invisible="1" />
+								<field name="status_sent" invisible="1" />
+							</group>
+                        
+                       
+                      
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+    	
+
+		<record model="ir.actions.act_window" id="action_work_report_staff">
+			<field name="name">Daily Report</field>
+			<field name="res_model">work.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_branch':1,'search_default_project':1,'search_default_task':1}</field>
+			<field name="domain">[('work_report','=',False)]</field>
+		</record>
+
+		<record id="action_work_report_staff_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_work_report_staff_tree" />
+			<field name="act_window_id" ref="action_work_report_staff" />
+		</record>
+
+		<record id="action_work_report_staff_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_work_report_staff_form" />
+			<field name="act_window_id" ref="action_work_report_staff" />
+		</record>
+
+
+		<menuitem id="menu_work_reports" name="Daily Report" sequence="35"/>
+		<menuitem id="menu_work_report" name="Daily Report" sequence="35" parent="menu_work_reports"/>
+
+
+		<menuitem id="menu_work_report_staff_sub" name="Daily Reports" sequence="30" parent="menu_work_report" action="action_work_report_staff" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+
+		<menuitem id="menu_sub_work_report_staff" name="Client Reports" sequence="35" parent="menu_work_report" action="action_work_report_for_staff" groups="hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_employee,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+		<record id="base.lang_en"  model="res.lang">
+		    <field name="date_format">%d/%m/%Y</field>
+		</record>
+
+
+</data>
+</openerp>

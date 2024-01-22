@@ -1,0 +1,429 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+demo_task_wizard, Model Task Wizard,hiworth_project_management.model_task_wizard,hiworth_project_management.group_manager_office,1,1,1,0
+demo_project_task_type, Model Project Task Type,project.model_project_task_type,hiworth_project_management.group_manager_office,1,1,1,0
+demo_hr_leave_manager, Model Hr Holidays,hr_holidays.model_hr_holidays,hiworth_project_management.group_manager_office,1,1,1,0
+demo_leave_manager, Model Approved Persons Manager,hiworth_hr_attendance.model_approved_persons,hiworth_project_management.group_manager_office,1,1,1,0
+demo_leave_manager4, Model Approved Persons Manager,hiworth_project_management.model_task_wizard,hiworth_project_management.group_manager_office,1,1,0,0
+demo_evaluate_rating, Model Evaluate Rating Manager,hiworth_project_management.model_evaluate_rating,hiworth_project_management.group_manager_office,1,1,1,0
+demo_evaluate_rating_line, Model Evaluate Rating Line Manager,hiworth_project_management.model_evaluate_rating_line,hiworth_project_management.group_manager_office,1,1,1,1
+demo_task_rate_line, Model Task Rate Line,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_file_transfer_details, Model File Transfer Details Manager,hiworth_project_management.model_transfer_document,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_stock_location_details, Model Stock Location Details Manager,hiworth_project_management.model_stock_location,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_charge, Model Manager Charge,hiworth_project_management.model_manager_charge,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_office_file_details, Model File Details Manager Officer,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_manager_office,1,1,1,0
+demo_user, Model User access,model_task_entry,hiworth_project_management.group_manager_office,1,1,1,0
+demo_user_site, Model User access Site,model_site_visit,hiworth_project_management.group_manager_office,1,1,1,0
+demo_user_site_schedule, Model User access Site schedule,model_site_visit_schedule,hiworth_project_management.group_manager_office,1,1,1,0
+demo_facing_direction, Model Facing Direction,hiworth_project_management.model_facing_direction,hiworth_project_management.group_manager_office,1,1,1,0
+demo_user_messaging3, Model Messaging3,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_task_creation, Model Task Creation,hiworth_project_management.model_assigned_member,hiworth_project_management.group_manager_office,1,1,1,0
+demo_branch_project_manager, Model Branch Project Manager,hiworth_hr_attendance.model_branch_project,hiworth_project_management.group_manager_office,1,1,1,0
+demo_keywords_tags, Model Keywords Tags,hiworth_project_management.model_keywords_tags,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_wizard, Model manager Wizard,hiworth_project_management.model_task_mes,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_work_report, Model manager Work Report,hiworth_project_management.model_work_report,hiworth_project_management.group_manager_office,1,1,1,1
+project_job_assignment_manager_522, Model Job AssignmentManager333,hiworth_project_management.model_job_assignment,hiworth_project_management.group_manager_office,1,1,1,0
+project_job_summary_wizard_manager, Model Job Summary Wizard Manager,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_manager_office,1,1,1,0
+project_event_type_522, Model Event Type3,event.model_event_type,hiworth_project_management.group_manager_office,1,1,1,0
+project_rivision_remark_522, Model Rivision Remark,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_manager_office,1,1,1,0
+project_task_estimation012, Model Manager Task Estimation99,hiworth_construction.model_project_task_estimation,hiworth_project_management.group_manager_office,1,1,1,0
+project_stock_picking_4535678, Model Stock Picking Manager,hiworth_construction.model_stock_picking,hiworth_project_management.group_manager_office,1,1,1,0
+project_task_111, Model Project Task Create,hiworth_project_management.model_event_event,hiworth_project_management.group_manager_office,1,1,1,1
+demo_children_details_man, Model Children DetailsMan,hiworth_project_management.model_children_details,hiworth_project_management.group_manager_office,1,1,1,0
+access_task_rate_line_manager,Task rate Line Manager,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_work_schedule, Model Manager work schedule,hiworth_construction.model_work_schedule,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_labour_report, Model Manager Project Labour Report,hiworth_construction.model_project_labour_report,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_directory, Model manager Project Directory,hiworth_construction.model_project_directory,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_product, Model manager Project Product,hiworth_construction.model_project_product,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_schedulee, Model manager Project Schedule22,hiworth_construction.model_project_schedule,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_stages, Model manager Project Stages,hiworth_construction.model_project_stages,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_account_move11, Model manager Account Move12,account.model_account_move,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_account_move_line, Model manager Account Move Line,hiworth_construction.model_account_move_line,hiworth_project_management.group_manager_office,1,1,1,0
+demo_employee_charge, Model Employee InCharge,model_employee_charge,hiworth_project_management.group_manager_office,1,1,1,0
+demo_project_task66,Model project Task0,hiworth_construction.model_project_task,hiworth_project_management.group_manager_office,1,1,1,0
+demo_project_task2ww60,Model Manager4 Type55,model_task_message,hiworth_project_management.group_manager_office,1,1,1,0
+demo_manager_project_category, Model Manager Project category,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_manager_office,1,1,1,0
+demo_hr_employee_manager, Model Hr Employee Manager,hr.model_hr_employee,hiworth_project_management.group_manager_office,1,1,0,0
+demo_user_project_modification_manager, Model Manager Project modification,hiworth_construction.model_project_modification,hiworth_project_management.group_manager_office,1,1,1,0
+demo_equ_qualify, Model Equ Qualify,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_manager_office,1,0,0,0
+demo_hr_pyslip_manager, Model Hr Payslip Manager,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_manager_office,1,0,0,0
+demo_res_partner_manager, Model Res Partner Manager,hiworth_project_management.model_res_partner,hiworth_project_management.group_manager_office,1,1,1,0
+access_popup_notifications_manager_office, Model Popup Notifications Manager Office,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_manager_office,1,1,1,1
+access_project_project_manager_office, Model Project Project Manager Office,hiworth_project_management.model_project_project,hiworth_project_management.group_manager_office,1,1,1,0
+access_account_analytic_account_manager_office, Model Account Analytic Account Manager Office,hiworth_project_management.model_account_analytic_account,hiworth_project_management.group_manager_office,1,1,1,0
+access_hiworth_hr_attendance_manager_office, Model Hiworth Hr Attendance Manager Office,hiworth_hr_attendance.model_hiworth_hr_attendance,hiworth_project_management.group_manager_office,1,1,1,0
+access_res_users_manager_office, Model Res Users manager office Right,hiworth_project_management.model_res_users,hiworth_project_management.group_manager_office,1,1,1,0
+access_facing_direction_manager_office,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_manager_office,1,1,1,1
+access_day_abstract_wizard_manager_office,Modelday_abstract_wizard,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_manager_office,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+demo_leave_employee, Model Approved Persons Employee,hiworth_hr_attendance.model_approved_persons,hiworth_project_management.group_employee,1,1,0,0
+demo_task_rate_line_employee, Model Task Rate Line Employee,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_employee,1,1,1,0
+demo_emp, Model emp access,model_task_entry,hiworth_project_management.group_employee,1,1,0,0
+demo_emp_site, Model emp access Site,model_site_visit,hiworth_project_management.group_employee,1,1,1,0
+demo_emp_site_schedule, Model emp access Site schedule,model_site_visit_schedule,hiworth_project_management.group_employee,1,1,0,0
+demo_empp_messaging3, Model Messaging543,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_employee,1,1,1,1
+demo_assigned_mmbr1, Model Assig Mem1,hiworth_project_management.model_assigned_member,hiworth_project_management.group_employee,1,1,1,0
+project_task_222, Model Project Task Create Employee,hiworth_project_management.model_event_event,hiworth_project_management.group_employee,1,1,0,0
+demo_facing_direction_employee, Model Facing Direction Employee,hiworth_project_management.model_facing_direction,hiworth_project_management.group_employee,1,1,0,0
+demo_employee_file_details, Model File Details Employee,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_employee,1,1,1,0
+demo_employee_file_transfer_details, Model File Transfer Details Employee,hiworth_project_management.model_transfer_document,hiworth_project_management.group_employee,1,1,1,0
+demo_hr_employee_employee, Model Hr Employee Employee,hr.model_hr_employee,hiworth_project_management.group_employee,1,1,0,0
+demo_keywords_tags_employee, Model Keywords Tags Employee,hiworth_project_management.model_keywords_tags,hiworth_project_management.group_employee,1,1,0,0
+demo_branch_project_employee, Model Branch Project Employee,hiworth_hr_attendance.model_branch_project,hiworth_project_management.group_employee,1,0,0,0
+demo_employee_work_report, Model Employee Work Report,hiworth_project_management.model_work_report,hiworth_project_management.group_employee,1,1,1,1
+demo_manager_project_wizard, Model manager Wizard11,hiworth_project_management.model_task_mes,hiworth_project_management.group_employee,1,1,1,0
+project_job_summary_wizard_employee, Model Job Summary Wizard Employee,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_employee,1,1,1,0
+access_task_rate_line_employee,Task rate Line Employee,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_employee,1,1,1,0
+project_product11, Model Project Product55,hiworth_construction.model_project_product,hiworth_project_management.group_employee,1,1,1,0
+project_project_453567, Model Project Project Employee,hiworth_construction.model_project_project,hiworth_project_management.group_employee,1,1,1,0
+project_job_assignment_522, Model Job Assignment333,hiworth_project_management.model_job_assignment,hiworth_project_management.group_employee,1,0,0,0
+project_stock_picking_453567, Model Stock Picking Employee,hiworth_construction.model_stock_picking,hiworth_project_management.group_employee,1,1,1,0
+demo_project_task66090,Model project Task0210,hiworth_construction.model_project_task,hiworth_project_management.group_employee,1,1,0,0
+demo_project_task60,Model Employeee55,hiworth_construction.model_project_task_estimation,hiworth_project_management.group_employee,1,1,1,0
+demo_project_task_work60,Model Employeee Work55,project.model_project_task_work,hiworth_project_management.group_employee,1,1,1,0
+demo_project_task_type60,Model Employeee Type55,project.model_project_task_type,hiworth_project_management.group_employee,1,1,1,0
+demo_equ_qualify_emp, Model Equ Qualify Emp,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_employee,1,0,0,0
+demo_hr_pyslip_employee, Model Hr Payslip Employee,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_employee,1,0,0,0
+demo_project_task2ww6011,Model Manager14 Type55,model_task_message,hiworth_project_management.group_employee,1,1,1,0
+access_popup_notifications_employee, Model Popup Notifications Employee,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_employee,1,1,1,1
+access_revision_remarks_employee, Model Revision Remarks employee,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_employee,1,0,0,0
+access_account_analytic_account_employee, Model Account Analytic Account employee,hiworth_project_management.model_account_analytic_account,hiworth_project_management.group_employee,1,1,1,0
+access_project_modification_employee, Model Project Modification employee Right,hiworth_construction.model_project_modification,hiworth_project_management.group_employee,1,1,1,0
+access_category_items_estimation_employee, Model Category Items Estimation employeer Right,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_employee,1,1,1,0
+access_work_schedule_employee, Model Work Schedule employee Right,hiworth_construction.model_work_schedule,hiworth_project_management.group_employee,1,1,1,0
+demo_project_labour_report_employee,Model Project Labour Report employee,hiworth_construction.model_project_labour_report,hiworth_project_management.group_employee,1,1,1,0
+demo_project_directory_employee,Model Project Directory employee,hiworth_construction.model_project_directory,hiworth_project_management.group_employee,1,1,1,0
+demo_project_schedule_employee,Model Project Schedule employee,hiworth_construction.model_project_schedule,hiworth_project_management.group_employee,1,1,1,0
+demo_project_stages_employee,Model Project Stages employee,hiworth_construction.model_project_stages,hiworth_project_management.group_employee,1,1,1,0
+demo_account_move_line_employee,Model Account Move Line employee,hiworth_construction.model_account_move_line,hiworth_project_management.group_employee,1,1,1,0
+access_popup_notifications_employee, Model Popup Notifications employee,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_employee,1,1,1,1
+access_facing_direction_employee,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_employee,1,1,1,1
+access_day_abstract_wizard_employee,Modelday_abstract_wizardemployee,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_employee,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+demo_keywords_tags_customer, Model Keywords Tags Customer,hiworth_project_management.model_keywords_tags,hiworth_project_management.group_user,1,1,0,0
+demo_facing_direction_customer, Model Facing Direction Customer,hiworth_project_management.model_facing_direction,hiworth_project_management.group_user,1,1,0,0
+demo_feedback_prime, Model FeedBack Prime,hiworth_project_management.model_feedback_prime,hiworth_project_management.group_user,1,1,1,0
+demo_customer_work_report, Model customer Work Report,hiworth_project_management.model_work_report,hiworth_project_management.group_user,1,0,0,0
+demo_res_users, Model Res Users,hiworth_project_management.model_res_users,hiworth_project_management.group_user,1,1,0,0
+demo_res_partner, Model Res Partner,hiworth_project_management.model_res_partner,hiworth_project_management.group_user,1,1,0,0
+project_task_onlyread_cust, Model Project Task onlyread customer,hiworth_project_management.model_event_event,hiworth_project_management.group_user,1,0,0,0
+demo_user_messaging2, Model Messaging2,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_user,1,1,1,0
+demo_assigned_mmbr, Model Assig Mem,hiworth_project_management.model_assigned_member,hiworth_project_management.group_user,1,1,1,0
+demo_user_project_work_schedule, Model User work schedule,hiworth_construction.model_work_schedule,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_labour_report, Model User Project Labour Report,hiworth_construction.model_project_labour_report,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_directory, Model User Project Directory,hiworth_construction.model_project_directory,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_product, Model User Project Product,hiworth_construction.model_project_product,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_schedulee, Model User Project Schedule22,hiworth_construction.model_project_schedule,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_stages, Model User Project Stages,hiworth_construction.model_project_stages,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_account_move_line, Model User Account Move Line,hiworth_construction.model_account_move_line,hiworth_project_management.group_user,1,0,0,0
+demo_user_project, Model User Project schedule,hiworth_construction.model_project_project,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_modification, Model User Project modification,hiworth_construction.model_project_modification,hiworth_project_management.group_user,1,0,0,0
+demo_user_project_category, Model User Project category,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_user,1,0,0,0
+demo_branch_project_customer, Model Branch Project Customer,hiworth_hr_attendance.model_branch_project,hiworth_project_management.group_user,1,0,0,0
+demo_children_details, Model Children Details,hiworth_project_management.model_children_details,hiworth_project_management.group_user,1,1,1,0
+access_popup_notifications_employee, Model Popup Notifications Employee,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_user,1,1,1,1
+access_facing_direction_employee,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_user,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+project_work_order_contractor_user_522, Model WorkOrder COntr,hiworth_construction.model_work_order,hiworth_project_management.group_contractor,1,0,0,0
+project_work_order_contractor_user_52, Model WorkOrder COntra,hiworth_construction.model_work_order_line,hiworth_project_management.group_contractor,1,0,0,0
+project_work_order_contractor_hiworth, Model WorkOrder COntrac,hiworth_construction.model_hiworth_invoice,hiworth_project_management.group_contractor,1,1,0,0
+access_popup_notifications_contractor, Model Popup Notifications Contractor,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_contractor,1,1,1,1
+access_facing_direction_employee,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_contractor,1,1,1,1
+,,,,,,,
+,,,,,,,
+access_facing_direction_employee,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.work_description_group,1,1,1,1
+project_rivision_remark_employee, Model Rivision Remark Employee,hiworth_project_management.model_rivision_remark,hiworth_project_management.work_description_group,1,1,1,0
+project_job_assignment_employee_group, Model Job AssignmentEmployee Group,hiworth_project_management.model_job_assignment,hiworth_project_management.work_description_group,1,1,1,0
+demo_manager_charge_employee_group, Model Manager Charge Employee Group,hiworth_project_management.model_manager_charge,hiworth_project_management.work_description_create_project_group,1,1,1,0
+demo_manager_account_analytic_employee_group, Model Account Analytic Employee Group,hiworth_project_management.model_account_analytic_account,hiworth_project_management.work_description_create_project_group,1,1,1,0
+demo_manager_project_project_employee_group, Model Project Project Employee Group,hiworth_project_management.model_project_project,hiworth_project_management.work_description_create_project_group,1,1,1,0
+access_facing_direction_employee,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.work_description_create_project_group,1,1,1,1
+demo_activity_creation_employee_group, Model Activity Creation Employee Group,hiworth_project_management.model_task_entry,hiworth_project_management.activity_create_group,1,1,1,0
+demo_site_visit_creation_employee_group, Model Site Visit Creation Employee Group,hiworth_project_management.model_site_visit_schedule,hiworth_project_management.site_visit_create_group,1,1,1,0
+demo_schedule_task_menu_employee_group, Model Schedule Task Employee Group,hiworth_project_management.model_event_event,hiworth_project_management.schedule_task_menu_group,1,1,1,0
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_im_chat_message_req_admin2, Model Messaging Admin2 Right,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_admin2,1,1,1,1
+access_account_analytic_account_admin2, Model Account Analytic Account Admin2,project.model_account_analytic_account,hiworth_project_management.group_admin2,1,1,1,0
+access_res_users_admin2, Model Res Users Admin2 Right,hiworth_project_management.model_res_users,hiworth_project_management.group_admin2,1,1,1,1
+access_assigned_member_admin2, Model Assigned Member Admin2 Right,hiworth_project_management.model_assigned_member,hiworth_project_management.group_admin2,1,1,1,1
+access_work_description_admin2, Model Work description Admin2 Right,hiworth_project_management.model_job_assignment,hiworth_project_management.group_admin2,1,1,1,1
+access_res_partner_admin2, Model res partner Admin2 Right,hiworth_project_management.model_res_partner,hiworth_project_management.group_admin2,1,1,1,1
+access_children_details_admin2, Model Children Details Admin2 Right,hiworth_project_management.model_children_details,hiworth_project_management.group_admin2,1,1,1,1
+access_rivision_remark_admin2, Model Rivision Remark Admin2 Right,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_admin2,1,1,1,1
+access_task_entry_admin2, Model Task Entry Admin2 Right,hiworth_project_management.model_task_entry,hiworth_project_management.group_admin2,1,1,1,1
+access_site_visit_schedule_admin2, Model Site Visit Schedule Admin2 Right,hiworth_project_management.model_site_visit_schedule,hiworth_project_management.group_admin2,1,1,1,1
+access_manager_charge_admin2, Model Manager Charge Admin2 Right,hiworth_project_management.model_manager_charge,hiworth_project_management.group_admin2,1,1,1,1
+access_customer_file_details_admin2, Model Customer File Details Admin2 Right,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_admin2,1,1,1,1
+access_transfer_document_admin2, Model Transfer Document Admin2 Right,hiworth_project_management.model_transfer_document,hiworth_project_management.group_admin2,1,1,1,1
+access_stock_location_admin2, Model Stock Location Admin2 Right,hiworth_project_management.model_stock_location,hiworth_project_management.group_admin2,1,1,1,1
+access_feedback_prime_admin2, Model Feedback Prime Admin2 Right,hiworth_project_management.model_feedback_prime,hiworth_project_management.group_admin2,1,1,1,1
+access_res_groups_admin2, Model Res Groups Admin2 Right,hiworth_project_management.model_res_groups,hiworth_project_management.group_admin2,1,1,0,0
+access_work_reports_admin2, Model Work Reports Admin2 Right,hiworth_project_management.model_work_report,hiworth_project_management.group_admin2,1,1,1,1
+access_project_project_admin2, Model project project Admin2 Right,hiworth_project_management.model_project_project,hiworth_project_management.group_admin2,1,1,1,1
+access_account_move_line_admin2, Model Account Move Line Admin2 Right,hiworth_construction.model_account_move_line,hiworth_project_management.group_admin2,1,1,1,0
+access_task_wizard_admin2, Model Task Wizard Admin2 Right,hiworth_project_management.model_task_wizard,hiworth_project_management.group_admin2,1,1,1,0
+access_job_summary_wizard_admin2, Model Job Summary Wizard Admin2 Right,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_admin2,1,1,1,0
+access_event_event_admin2, Model Event Event Admin2 Right,hiworth_project_management.model_event_event,hiworth_project_management.group_admin2,1,1,1,1
+access_event_type_admin2, Model Event Type Admin2 Right,event.model_event_type,hiworth_project_management.group_admin2,1,1,1,0
+access_project_task_admin2, Model Project Task Admin2 Right,hiworth_construction.model_project_task,hiworth_project_management.group_admin2,1,1,1,0
+access_project_task_type_admin2, Model Project Task Type Admin2 Right,project.model_project_task_type,hiworth_project_management.group_admin2,1,1,1,0
+access_project_modification_admin2, Model Project Modification Admin2 Right,hiworth_construction.model_project_modification,hiworth_project_management.group_admin2,1,1,1,0
+access_category_items_estimation_admin2, Model Category Items Estimation Admin2 Right,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_admin2,1,1,1,0
+access_work_schedule_admin2, Model Work Schedule Admin2 Right,hiworth_construction.model_work_schedule,hiworth_project_management.group_admin2,1,1,1,0
+access_project_labour_report_admin2, Model Project Labour Report Admin2 Right,hiworth_construction.model_project_labour_report,hiworth_project_management.group_admin2,1,1,1,0
+access_project_directory_admin2, Model Project Directory Admin2 Right,hiworth_construction.model_project_directory,hiworth_project_management.group_admin2,1,1,1,0
+access_project_product_admin2, Model Project Product Admin2 Right,hiworth_construction.model_project_product,hiworth_project_management.group_admin2,1,1,1,0
+access_project_schedule_admin2, Model Project Schedule Admin2 Right,hiworth_construction.model_project_schedule,hiworth_project_management.group_admin2,1,1,1,0
+access_project_stages_admin2, Model Project Stages Admin2 Right,hiworth_construction.model_project_stages,hiworth_project_management.group_admin2,1,1,1,0
+access_popup_notifications_admin2, Model Popup Notifications Admin2,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_admin2,1,1,1,1
+access_task_rate_lines_admin2, Model Task rate Line Admin2,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_admin2,1,1,1,1
+access_edu_qualify_admin2, Model Edu Qualify Admin2,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_admin2,1,1,1,1
+access_hr_password_reset_admin2, Model Hr Passwor Reset Admin2,hiworth_hr_attendance.model_hr_password_reset,hiworth_project_management.group_admin2,1,1,1,1
+access_facing_direction_admin2,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_admin2,1,1,1,1
+access_day_abstract_wizard_admin2,Modelday_abstract_wizarde_admin2,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_admin2,1,1,1,1
+access_hr_employee_resignation_admin2,Model hr employee resignation,hiworth_hr_attendance.model_hr_employee_resignation,hiworth_project_management.group_admin2,1,0,0,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_im_chat_message_req_general_manager, Model Messaging general_manager Right,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_general_manager,1,1,1,1
+access_hiworth_hr_attendance_general_manager_office, Model Hiworth Hr Attendance General Manager Office,hiworth_hr_attendance.model_hiworth_hr_attendance,hiworth_project_management.group_general_manager,1,1,1,0
+access_hiworth_hr_signin_wizard_attendance_general_manager_office, Model Hiworth HrSign in wizard Attendance General Manager Office,hiworth_hr_attendance.model_hiworth_hr_signin_wizard,hiworth_project_management.group_general_manager,1,1,1,0
+access_hiworth_hr_signout_wizard_attendance_general_manager_office, Model Hiworth HrSign Out wizard Attendance General Manager Office,hiworth_hr_attendance.model_hiworth_hr_signout_wizard,hiworth_project_management.group_general_manager,1,1,1,0
+access_keywords_tags_general_manager, Model Keywords Tags general_manager Right,hiworth_project_management.model_keywords_tags,hiworth_project_management.group_general_manager,1,1,1,1
+access_account_analytic_account_general_manager, Model Account Analytic Account general_manager Right,project.model_account_analytic_account,hiworth_project_management.group_general_manager,1,1,1,1
+access_project_modification_general_manager, Model Project Modification general_manager Right,hiworth_construction.model_project_modification,hiworth_project_management.group_general_manager,1,1,1,1
+access_res_users_general_manager, Model Res Users general_manager Right,hiworth_project_management.model_res_users,hiworth_project_management.group_general_manager,1,1,1,1
+access_assigned_member_req_general_manager, Model Messaging Assigned Member Right,hiworth_project_management.model_assigned_member,hiworth_project_management.group_general_manager,1,1,1,1
+access_work_description_general_manager, Model Work description general_manager Right,hiworth_project_management.model_job_assignment,hiworth_project_management.group_general_manager,1,1,1,1
+access_res_partner_general_manager, Model res partner general_manager Right,hiworth_project_management.model_res_partner,hiworth_project_management.group_general_manager,1,1,1,1
+access_children_details_general_manager, Model Children Details general_manager Right,hiworth_project_management.model_children_details,hiworth_project_management.group_general_manager,1,1,1,1
+access_rivision_remark_general_manager, Model Rivision Remark general_manager Right,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_general_manager,1,1,1,1
+access_task_entry_general_manager, Model Task Entry general_manager Right,hiworth_project_management.model_task_entry,hiworth_project_management.group_general_manager,1,1,1,1
+access_site_visit_schedule_general_manager, Model Site Visit Schedule general_manager Right,hiworth_project_management.model_site_visit_schedule,hiworth_project_management.group_general_manager,1,1,1,1
+access_manager_charge_general_manager, Model Manager Charge general_manager Right,hiworth_project_management.model_manager_charge,hiworth_project_management.group_general_manager,1,1,1,1
+access_customer_file_details_general_manager, Model Customer File Details general_manager Right,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_general_manager,1,1,1,1
+access_transfer_document_general_manager, Model Transfer Document general_manager Right,hiworth_project_management.model_transfer_document,hiworth_project_management.group_general_manager,1,1,1,1
+access_stock_location_general_manager, Model Stock Location general_manager Right,hiworth_project_management.model_stock_location,hiworth_project_management.group_general_manager,1,1,1,1
+access_feedback_prime_general_manager, Model Feedback Prime general_manager Right,hiworth_project_management.model_feedback_prime,hiworth_project_management.group_general_manager,1,1,1,1
+access_res_groups_general_manager, Model Res Groups general_manager Right,hiworth_project_management.model_res_groups,hiworth_project_management.group_general_manager,1,1,0,0
+access_work_reports_general_manager, Model Work Reports general_manager Right,hiworth_project_management.model_work_report,hiworth_project_management.group_general_manager,1,1,1,1
+access_project_project_general_manager, Model project project general_manager Right,hiworth_project_management.model_project_project,hiworth_project_management.group_general_manager,1,1,1,1
+access_account_move_line_general_manager, Model Account Move Line general_manager Right,hiworth_construction.model_account_move_line,hiworth_project_management.group_general_manager,1,1,1,0
+access_task_wizard_general_manager, Model Task Wizard general_manager Right,hiworth_project_management.model_task_wizard,hiworth_project_management.group_general_manager,1,1,1,0
+access_job_summary_wizard_general_manager, Model Job Summary Wizard general_manager Right,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_general_manager,1,1,1,0
+access_event_event_general_manager, Model Event Event general_manager Right,hiworth_project_management.model_event_event,hiworth_project_management.group_general_manager,1,1,1,1
+access_event_type_general_manager, Model Event Type general_manager Right,event.model_event_type,hiworth_project_management.group_general_manager,1,1,1,0
+access_event_type_dgm, Model Event Type dgm,event.model_event_type,hiworth_project_management.group_dgm,1,1,1,0
+access_project_task_general_manager, Model Project Task general_manager Right,hiworth_construction.model_project_task,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_task_type_general_manager, Model Project Task Type general_manager Right,project.model_project_task_type,hiworth_project_management.group_general_manager,1,1,1,0
+access_category_items_estimation_general_manager, Model Category Items Estimation general_manager Right,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_general_manager,1,1,1,0
+access_work_schedule general_manager, Model Work Schedule general_manager Right,hiworth_construction.model_work_schedule,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_labour_report general_manager, Model Project Labour Report general_manager Right,hiworth_construction.model_project_labour_report,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_directory general_manager, Model Project Directory general_manager Right,hiworth_construction.model_project_directory,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_product general_manager, Model Project Product general_manager Right,hiworth_construction.model_project_product,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_schedule general_manager, Model Project Schedule general_manager Right,hiworth_construction.model_project_schedule,hiworth_project_management.group_general_manager,1,1,1,0
+access_project_stages general_manager, Model Project Stages general_manager Right,hiworth_construction.model_project_stages,hiworth_project_management.group_general_manager,1,1,1,0
+access_task_rate_line_general_manager, Model Task Rate Line general_manager Right,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_general_manager,1,1,1,0
+access_edu_qualify_general_manager, Model Edu Qualify general_manager Right,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_general_manager,1,1,1,0
+access_hr_payslip_general_manager, Model Task Hr Payslip general_manager Right,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_general_manager,1,1,1,0
+access_hr_employee_general_manager,Model Task Hr Employee general_manager Right,hiworth_hr_attendance.model_hr_employee,hiworth_project_management.group_general_manager,1,1,1,0
+access_popup_notifications_general_manager, Model Popup Notifications General Manager,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_general_manager,1,1,1,1
+access_hr_password_reset_general_manager, Model Hr Passwor Reset general_manager,hiworth_hr_attendance.model_hr_password_reset,hiworth_project_management.group_general_manager,1,1,1,1
+access_facing_direction_general_manager,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_general_manager,1,1,1,1
+access_day_abstract_wizard_general_manager,Modelday_abstract_wizarde_general_manager,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_general_manager,1,1,1,1
+access_hr_employee_resignation_genareal_manager,Model hr employee resignation,hiworth_hr_attendance.model_hr_employee_resignation,hiworth_project_management.group_general_manager,1,0,0,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_children_details_manager_acnts, Model Children Details Manager Accounts Right,hiworth_project_management.model_children_details,hiworth_project_management.group_manager_accounts,1,1,1,0
+access_popup_notifications_manager_accounts, Model Popup Notifications Manager Accounts,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_manager_accounts,1,1,1,1
+access_facing_direction_manager_accounts,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_manager_accounts,1,1,1,1
+access_day_abstract_wizard_manager_accounts,Modelday_abstract_wizarde_manager_accounts,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_manager_accounts,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+demo_leave_approved_architect, Model Approved Persons Architect,hiworth_hr_attendance.model_approved_persons,hiworth_project_management.group_architect,1,1,0,0
+demo_task_rate_line_architect, Model Task Rate Line Architect,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_architect,1,1,1,0
+demo_model_task_ebtry_architect, Model Task Entry Architect,hiworth_project_management.model_task_entry,hiworth_project_management.group_architect,1,1,0,0
+demo_emp_site_architect, Model emp access Site Architect,model_site_visit,hiworth_project_management.group_architect,1,1,1,0
+demo_emp_site_schedule_architect, Model emp access Site schedule Architect,model_site_visit_schedule,hiworth_project_management.group_architect,1,1,0,0
+demo_empp_messaging_architect, Model Messaging Architect,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_architect,1,1,1,1
+demo_assigned_mmbr_architect, Model Assig Mem Architect,hiworth_project_management.model_assigned_member,hiworth_project_management.group_architect,1,1,1,0
+project_task_architect, Model Project Task Create architect,hiworth_project_management.model_event_event,hiworth_project_management.group_architect,1,1,1,0
+demo_facing_direction_architect, Model Facing Direction Architect,hiworth_project_management.model_facing_direction,hiworth_project_management.group_architect,1,1,0,0
+demo_architect_file_details, Model File Details Architect,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_architect,1,1,1,0
+demo_architect_file_transfer_details, Model File Transfer Details Architect,hiworth_project_management.model_transfer_document,hiworth_project_management.group_architect,1,1,1,0
+demo_hr_architect, Model Hr Employee Architect,hr.model_hr_employee,hiworth_project_management.group_architect,1,1,0,0
+demo_keywords_tags_architect, Model Keywords Tags Architect,hiworth_project_management.model_keywords_tags,hiworth_project_management.group_architect,1,1,0,0
+demo_branch_project_architect, Model Branch Project Architect,hiworth_hr_attendance.model_branch_project,hiworth_project_management.group_architect,1,0,0,0
+demo_architect_work_report, Model Architect Work Report,hiworth_project_management.model_work_report,hiworth_project_management.group_architect,1,1,1,1
+demo_architect_project_wizard, Model Architect Wizard,hiworth_project_management.model_task_mes,hiworth_project_management.group_architect,1,1,1,0
+project_job_summary_wizard_architect, Model Job Summary Wizard Architect,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_architect,1,1,1,0
+access_task_rate_line_architect,Task rate Line Architect,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_architect,1,1,1,0
+project_produc_architect, Model Project Product Architect,hiworth_construction.model_project_product,hiworth_project_management.group_architect,1,1,1,0
+project_project_architect, Model Project Project Architect,hiworth_construction.model_project_project,hiworth_project_management.group_architect,1,0,0,0
+project_job_assignment_architect, Model Job Assignment Architect,hiworth_project_management.model_job_assignment,hiworth_project_management.group_architect,1,0,0,0
+project_stock_picking_architect, Model Stock Picking Architect,hiworth_construction.model_stock_picking,hiworth_project_management.group_architect,1,1,1,0
+demo_project_task_architect,Model project Task Architect,hiworth_construction.model_project_task,hiworth_project_management.group_architect,1,1,0,0
+demo_project_task_architect,Model architect access,hiworth_construction.model_project_task_estimation,hiworth_project_management.group_architect,1,1,1,0
+demo_project_task_work_architect,Model Architect Work,project.model_project_task_work,hiworth_project_management.group_architect,1,1,1,0
+demo_project_task_type_architect,Model Architect Type,project.model_project_task_type,hiworth_project_management.group_architect,1,1,1,0
+demo_equ_qualify_architect, Model Equ Qualify Architect,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_architect,1,0,0,0
+demo_hr_pyslip_architect, Model Hr Payslip Architect,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_architect,1,0,0,0
+demo_project_task_message_architect,Model Task Message architect,hiworth_project_management.model_task_message,hiworth_project_management.group_architect,1,1,1,0
+demo_project_modification_architect,Model Project Modification architect,hiworth_construction.model_project_modification,hiworth_project_management.group_architect,1,1,1,0
+demo_category_itemss_estimation_architect,Model Category Items Estimation architect,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_architect,1,1,1,0
+demo_work_schedule_architect,Model Work Schedule architect,hiworth_construction.model_work_schedule,hiworth_project_management.group_architect,1,1,1,0
+demo_project_labour_report_architect,Model Project Labour Report architect,hiworth_construction.model_project_labour_report,hiworth_project_management.group_architect,1,1,1,0
+demo_project_directory_architect,Model Project Directory architect,hiworth_construction.model_project_directory,hiworth_project_management.group_architect,1,1,1,0
+demo_project_schedule_architect,Model Project Schedule architect,hiworth_construction.model_project_schedule,hiworth_project_management.group_architect,1,1,1,0
+demo_project_stages_architect,Model Project Stages architect,hiworth_construction.model_project_stages,hiworth_project_management.group_architect,1,1,1,0
+demo_account_move_line_architect,Model Account Move Line architect,hiworth_construction.model_account_move_line,hiworth_project_management.group_architect,1,1,1,0
+access_popup_notifications_architect, Model Popup Notifications Architect,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_architect,1,1,1,1
+access_project_modification_architect, Model Project Modification architect Right,hiworth_construction.model_project_modification,hiworth_project_management.group_architect,1,1,1,0
+access_facing_direction__architect,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_architect,1,1,1,1
+access_day_abstract_wizard_architect,Modelday_abstract_wizarde_architect,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_architect,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_messaging_am_office, Model Messaging AM Office,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_am_office,1,1,1,0
+access_assigned_member_am_office, Model Assigned Member AM Office,hiworth_project_management.model_assigned_member,hiworth_project_management.group_am_office,1,1,1,0
+access_project_project_am_office, Model Project Project AM Office,hiworth_project_management.model_project_project,hiworth_project_management.group_am_office,1,0,0,0
+access_work_report_am_office, Model Work Report AM Office,hiworth_project_management.model_work_report,hiworth_project_management.group_am_office,1,0,0,0
+access_job_assignment_am_office, Model Job Assignment AM Office,hiworth_project_management.model_job_assignment,hiworth_project_management.group_am_office,1,0,0,0
+access_revision_remarks_am_office, Model Revision Remarks AM Office,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_am_office,1,1,0,0
+access_task_entry_am_office, Model Task Entry AM Office,hiworth_project_management.model_task_entry,hiworth_project_management.group_am_office,1,1,1,0
+access_site_visit_schedule_am_office, Model Site Visit Schedule AM Office,hiworth_project_management.model_site_visit_schedule,hiworth_project_management.group_am_office,1,1,1,0
+access_customer_file_details_am_office, Model Customer File Details AM Office,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_am_office,1,1,1,0
+access_res_partner_am_office, Model Res Partner AM Office,hiworth_project_management.model_res_partner,hiworth_project_management.group_am_office,1,1,1,0
+access_popup_notifications_am_office, Model Popup Notifications AM Office,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_am_office,1,1,1,1
+access_project_modification_am_office, Model Project Modification AM Office,hiworth_construction.model_project_modification,hiworth_project_management.group_am_office,1,1,1,0
+access_category_items_estimation_am_office, Model Category Items Estimation AM Office,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_am_office,1,1,1,0
+access_work_schedule_am_office, Model work schedule AM Office,hiworth_construction.model_work_schedule,hiworth_project_management.group_am_office,1,1,1,0
+access_project_labour_report_am_office, Model Project Labour Report AM Office,hiworth_construction.model_project_labour_report,hiworth_project_management.group_am_office,1,1,1,0
+access_project_direcory_am_office, Model Project Directory AM Office,hiworth_construction.model_project_directory,hiworth_project_management.group_am_office,1,1,1,0
+access_project_product_am_office, Model Project Product AM Office,hiworth_construction.model_project_product,hiworth_project_management.group_am_office,1,1,1,0
+access_project_schedule_am_office, Model Project Schedule AM Office,hiworth_construction.model_project_schedule,hiworth_project_management.group_am_office,1,1,1,0
+access_project_stages_am_office, Model Res Partner AM Office,hiworth_construction.model_project_stages,hiworth_project_management.group_am_office,1,1,1,0
+access_Account_move_line_am_office, Model Account Move Line AM Office,hiworth_construction.model_account_move_line,hiworth_project_management.group_am_office,1,1,1,0
+access_task_rate_line_am_office, Model Task Rate Line AM Office,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_am_office,1,1,1,0
+access_edu_qualify_am_office, Model Edu Qualify AM Office,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_am_office,1,1,1,0
+access_hr_payslip_am_office, Model Hr Payslip AM Office,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_am_office,1,1,1,0
+access_event_event_am_office, Model Event Event am office,hiworth_project_management.model_event_event,hiworth_project_management.group_am_office,1,1,1,1
+access_facing_direction_am_office,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_am_office,1,1,1,1
+access_day_abstract_wizard_am_office,Modelday_abstract_wizarde_am_office,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_am_office,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_messaging_dgm, Model Messaging DGM,hiworth_project_management.model_im_chat_message_req,hiworth_project_management.group_dgm,1,1,1,0
+access_evaluate_rating_dgm, Model Evaluate Rating DGM,hiworth_project_management.model_evaluate_rating,hiworth_project_management.group_dgm,1,1,1,0
+access_evaluate_rating_line_dgm, Model Evaluate Rating Line DGM,hiworth_project_management.model_evaluate_rating_line,hiworth_project_management.group_dgm,1,1,1,0
+access_account_analytic_account_dgm, Model Account Analytic Account DGM,project.model_account_analytic_account,hiworth_project_management.group_dgm,1,1,1,0
+access_project_task_type_dgm, Model Project Task type DGM,project.model_project_task_type,hiworth_project_management.group_dgm,1,1,1,0
+access_children_details_dgm, Model Children Details DGM,hiworth_project_management.model_children_details,hiworth_project_management.group_dgm,1,1,1,0
+access_assigned_member_dgm, Model Assigned Member DGM,hiworth_project_management.model_assigned_member,hiworth_project_management.group_dgm,1,1,1,0
+access_job_assignment_dgm, Model Job Assignment DGM,hiworth_project_management.model_job_assignment,hiworth_project_management.group_dgm,1,1,1,0
+access_stock_location_dgm, Model Stock Location DGM,hiworth_project_management.model_stock_location,hiworth_project_management.group_dgm,1,1,1,0
+access_rivision_remark_dgm, Model Rivision Remark DGM,hiworth_project_management.model_rivision_remark,hiworth_project_management.group_dgm,1,1,1,0
+access_task_entry_dgm, Model Task Entry DGM,hiworth_project_management.model_task_entry,hiworth_project_management.group_dgm,1,1,1,0
+access_site_visit_schedule_dgm, Model Site Visit Schedule DGM,hiworth_project_management.model_site_visit_schedule,hiworth_project_management.group_dgm,1,1,1,0
+access_project_project_dgm, Model Project Project DGM,hiworth_project_management.model_project_project,hiworth_project_management.group_dgm,1,1,1,1
+access_account_move_line_dgm, Model Account Move Line DGM,hiworth_construction.model_account_move_line,hiworth_project_management.group_dgm,1,1,1,0
+access_event_event_dgm, Model Event Event DGM,hiworth_project_management.model_event_event,hiworth_project_management.group_dgm,1,1,1,1
+access_task_wizard_dgm, Model Task Wizard DGM,hiworth_project_management.model_task_wizard,hiworth_project_management.group_dgm,1,1,1,0
+access_job_summary_wizard_dgm, Model Job Summary Wizard DGM,hiworth_project_management.model_job_summary_wizard,hiworth_project_management.group_dgm,1,1,1,0
+access_work_report_dgm, Model Work Report DGM,hiworth_project_management.model_work_report,hiworth_project_management.group_dgm,1,1,1,1
+access_manager_charge_dgm, Model Manager Charge DGM,hiworth_project_management.model_manager_charge,hiworth_project_management.group_dgm,1,1,1,0
+access_customer_file_details_dgm, Model Customer File Details DGM,hiworth_project_management.model_customer_file_details,hiworth_project_management.group_dgm,1,1,1,0
+access_project_modification_dgm, Model Project Modification dgm Right,hiworth_construction.model_project_modification,hiworth_project_management.group_dgm,1,1,1,0
+access_category_items_estimation_dgm, Model Category Items Estimation dgm Right,hiworth_construction.model_category_items_estimation,hiworth_project_management.group_dgm,1,1,1,0
+access_work_schedule_dgm, Model Work Schedule dgm Right,hiworth_construction.model_work_schedule,hiworth_project_management.group_dgm,1,1,1,0
+access_project_labour_report_dgm, Model Project Labour Report dgm Right,hiworth_construction.model_project_labour_report,hiworth_project_management.group_dgm,1,1,1,0
+access_project_directory_dgm, Model Project Directory dgm Right,hiworth_construction.model_project_directory,hiworth_project_management.group_dgm,1,1,1,0
+access_project_product_dgm, Model Project Product dgm Right,hiworth_construction.model_project_product,hiworth_project_management.group_dgm,1,1,1,0
+access_project_schedule_dgm, Model Project Schedule dgm Right,hiworth_construction.model_project_schedule,hiworth_project_management.group_dgm,1,1,1,0
+access_project_stages_dgm, Model Project Stages dgm Right,hiworth_construction.model_project_stages,hiworth_project_management.group_dgm,1,1,1,0
+access_task_rate_line_dgm, Model Task Rate Line dgm Right,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_dgm,1,1,1,0
+access_edu_qualify_dgm, Model Edu Qualify dgm Right,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_dgm,1,1,1,0
+access_hr_payslip_dgm, Model Hr Payslip dgm Right,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_dgm,1,1,1,0
+access_hr_employee_dgm, Model Hr Employee dgm Right,hiworth_hr_attendance.model_hr_employee,hiworth_project_management.group_dgm,1,1,1,0
+access_popup_notifications_dgm, Model Popup Notifications DGM,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_dgm,1,1,1,1
+access_hiworth_hr_signin_wizard_dgm, Model Hr Attendance Sign in DGM,hiworth_hr_attendance.model_hiworth_hr_signin_wizard,hiworth_project_management.group_dgm,1,1,1,1
+access_hr_password_reset_dgm, Model Hr Passwor Reset dgm,hiworth_hr_attendance.model_hr_password_reset,hiworth_project_management.group_dgm,1,1,1,1
+access_facing_direction_dgm,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_dgm,1,1,1,1
+access_day_abstract_wizard_dgm,Modelday_abstract_wizarde_dgm,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_dgm,1,1,1,1
+access_hr_employee_resignation_dgm,Model hr employee resignation,hiworth_hr_attendance.model_hr_employee_resignation,hiworth_project_management.group_dgm,1,0,0,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_task_rate_line_hrmanager, Model task rate line HRManager Right,hiworth_hr_attendance.model_task_rate_line,hiworth_project_management.group_hr_manager,1,1,1,0
+access_edu_qualify_hrmanager, Model Edu Qualify HRManager Right,hiworth_hr_attendance.model_edu_qualify,hiworth_project_management.group_hr_manager,1,1,1,0
+access_hr_payslip_hrmanager, Model Hr payslip HRManager Right,hiworth_hr_attendance.model_hr_payslip,hiworth_project_management.group_hr_manager,1,1,1,0
+access_hr_hrmanager, Model Hr Employee HRManager Right,hiworth_hr_attendance.model_hr_employee,hiworth_project_management.group_hr_manager,1,1,1,0
+access_popup_notifications_hr_manager, Model Popup Notifications Hr Manager,hiworth_project_management.model_popup_notifications,hiworth_project_management.group_hr_manager,1,1,1,1
+access_facing_direction_hr_manager,ModelFacingDirection,hiworth_project_management.model_facing_direction,hiworth_project_management.group_hr_manager,1,1,1,1
+access_day_abstract_wizard_hr_manager,Modelday_abstract_wizarde_hr_manager,hiworth_project_management.model_day_abstract_wizard,hiworth_project_management.group_hr_manager,1,1,1,1
+access_hr_employee_resignation_hr_manager,Model hr employee resignation,hiworth_hr_attendance.model_hr_employee_resignation,hiworth_project_management.group_hr_manager,1,0,0,1
+,,,,,,,
+access_mob_details_global,Model mob details,model_mob_details,,1,1,1,1
+project_rivision_remark_new, Model Rivision Remark,hiworth_project_management.model_rivision_remark,,1,0,0,0
+access_popup_notifications_1,Model popup notifications,model_popup_notifications,base.group_user,1,1,1,1
+access_project_co_applicants,Model project co applicants,model_project_co_applicants,,1,1,1,1
+access_project_category,Model Project Category,model_project_category,,1,1,1,1
+access_comment_reply_global,model comment reply global,model_comment_reply,,1,0,0,0
+access_comment_reply_pm,model comment reply pm,model_comment_reply,hiworth_project_management.group_manager_office,1,1,1,0
+access_comment_reply_manager,model comment reply manager,model_comment_reply,hiworth_project_management.group_general_manager,1,1,1,0
+access_comment_reply_dgm,model comment reply dgm,model_comment_reply,hiworth_project_management.group_dgm,1,1,1,0
+access_comment_reply_admin1,model comment reply admin1,model_comment_reply,hiworth_project_management.group_admin1,1,1,1,1
+access_comment_reply_admin2,model comment reply admin2,model_comment_reply,hiworth_project_management.group_admin2,1,1,1,1
+access_evaluate_line1_user1,access for admin1,model_evaluate_line1,hiworth_project_management.group_admin1,1,1,1,1
+access_evaluate_line1_user2,access for admin2,model_evaluate_line1,hiworth_project_management.group_admin2,1,1,1,1
+access_evaluate_line1_user3,access for gm,model_evaluate_line1,hiworth_project_management.group_general_manager,1,1,1,1
+access_evaluate_line1_user4,access for dgm,model_evaluate_line1,hiworth_project_management.group_dgm,1,1,1,1
+access_evaluate_line1_user5,access for pm,model_evaluate_line1,hiworth_project_management.group_manager_office,1,1,1,1
+access_evaluate_line1_user6,access for others,model_evaluate_line1,,1,0,0,0
+access_evaluate_line2_user1,access for admin1,model_evaluate_line2,hiworth_project_management.group_admin1,1,1,1,1
+access_evaluate_line2_user2,access for admin2,model_evaluate_line2,hiworth_project_management.group_admin2,1,1,1,1
+access_evaluate_line2_user3,access for gm,model_evaluate_line2,hiworth_project_management.group_general_manager,1,1,1,1
+access_evaluate_line2_user4,access for dgm,model_evaluate_line2,hiworth_project_management.group_dgm,1,1,1,1
+access_evaluate_line2_user5,access for pm,model_evaluate_line2,hiworth_project_management.group_manager_office,1,1,1,1
+access_evaluate_line2_user6,access for others,model_evaluate_line2,,1,0,0,0
+dgm_file_transfer_access,Grant File Transfer access,hiworth_project_management.model_transfer_document,hiworth_project_management.group_dgm,1,1,1,0
+
+
+
+
+

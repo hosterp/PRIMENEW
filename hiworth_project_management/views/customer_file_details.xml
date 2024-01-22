@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		 <record model="ir.ui.view" id="customer_search_file_details">
+            <field name="name">Customer File Details</field>
+            <field name="model">customer.file.details</field>
+            <field name="arch" type="xml">
+                <search string="File Details">
+                    <field name="name" string="FileName"/>
+                    <field name="partner_id"/>
+                    <field name="logged_user"/>
+                    <filter name="group_customer_id" string="Customer" icon="terp-partner" context="{'group_by':'partner_id'}"/>
+                    <filter name="group_date_today" string="Date" context="{'group_by':'date_today'}"/>
+                     <filter name="group_logged" string="Responsible Person" context="{'group_by':'logged_user'}"/>
+                     <filter name="branch" string="Branch" context="{'group_by':'branch_id'}"/>                   
+                </search>
+            </field>
+        </record>
+
+		<record id="view_customer_file_details_tree" model="ir.ui.view">
+			<field name="name">customer.file.details.tree</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<tree colors="blue:state == 'draft';red:state == 'waiting';orange:state == 'pending' ">
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="branch_id" />
+					<field name="date_today"/>
+					<field name="logged_user" string="Responsible Person"/>
+					<field name="state" invisible="1"/>
+					<field name="transfer_buddy" invisible="1"/>
+					<field name="status" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_customer_file_details_form" model="ir.ui.view">
+			<field name="name">customer.file.details.form</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="transfer_document" string="Transfer" class="oe_highlight" type="object" states="draft,accept" confirm="Are you sure to transfer this document?"/>
+						<button name="accept_document" string="Accept" class="oe_highlight" type="object" states="pending" confirm="Are you sure to accept this document?"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,waiting,pending,accept"/>
+					</header>
+					
+					<sheet>
+						<h1><field name="name" readonly="1" nolabel="1"/></h1>
+						<group>
+							<field name="partner_id" domain="['|',('customer','=',True),('is_cus', '=', True)]" options="{'no_create': True}" attrs="{'readonly':[('state','in',('waiting','pending'))]}"/>
+							<field name="project_id"/>
+							<field name="branch_id" invisible="1" />
+							<field name="date_today" />
+							<field name="logged_user" readonly="1" string="Responsible Person"/>
+							<field name="file_details" attrs="{'readonly':[('state','in',('waiting','pending'))]}"/>
+							<field name="file_location" attrs="{'readonly':[('state','in',('waiting','pending'))]}"/>
+							<field name="remarks" attrs="{'readonly':[('state','in',('waiting','pending'))]}"/>
+							<field name="transfer" invisible="1"/>
+							<field name="transfer_buddy" invisible="1"/>
+							<field name="status" invisible="1"/>
+							<field name="owner_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_customer_file_details">
+			<field name="name">Customer File Details</field>
+			<field name="res_model">customer.file.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state','in',['draft','accept']),('logged_user','=',uid)]</field>
+			<field name="context">{}</field>
+			<field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new Document.
+              </p>
+            </field>
+		</record>
+
+		<record id="action_customer_file_details_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customer_file_details_tree" />
+			<field name="act_window_id" ref="action_customer_file_details" />
+		</record>
+
+		<record id="action_customer_file_details_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customer_file_details_form" />
+			<field name="act_window_id" ref="action_customer_file_details" />
+		</record>		
+
+		<menuitem name="Customer File Details" id="menu_customer_file_details" parent="menu_office_management" sequence="5" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+		<menuitem name="My Own File Details" id="menu_customer_file_details_sub" parent="menu_customer_file_details" sequence="5" action="action_customer_file_details" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+		<record id="view_customer_file_transfer_details_tree" model="ir.ui.view">
+			<field name="name">customer.filetransfer.details.tree</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<tree colors="green:state=='transfer'" create="false">
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="branch_id" />
+					<field name="date_today"/>
+					<field name="logged_user" string="Responsible Person"/>
+					<field name="state" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_customer_file_transfer_details_form" model="ir.ui.view">
+			<field name="name">customer.filetransfer.details.form</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<form create="false" edit="false">					
+					<sheet>
+						<h1><field name="name" readonly="1" nolabel="1"/></h1>
+					<group>
+						<field name="partner_id" domain="['|',('customer','=',True),('is_cus', '=', True)]" options="{'no_create': True}"/>
+						<field name="project_id"/>
+						<field name="date_today"/>
+						<field name="logged_user" readonly="1" string="Responsible Person"/>
+						<field name="file_details"/>
+						<field name="file_location"/>
+						<field name="remarks"/>
+						<field name="transfer" invisible="1"/>
+						<field name="to_customer" invisible="1"/>
+						<field name="owner_id" invisible="1"/>
+					</group>
+				</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_customer_file_transfer_details">
+			<field name="name">Transferred File Details</field>
+			<field name="res_model">customer.file.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state','=','transfer'),('owner_id','=',uid)]</field>
+		</record>
+
+		<record id="action_customer_file_transfer_details_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customer_file_transfer_details_tree" />
+			<field name="act_window_id" ref="action_customer_file_transfer_details" />
+		</record>
+
+		<record id="action_customer_file_transfer_details_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customer_file_transfer_details_form" />
+			<field name="act_window_id" ref="action_customer_file_transfer_details" />
+		</record>		
+
+		<menuitem name="Transferred File Details" id="menu_customer_file_details_sub_menu" parent="menu_customer_file_details" sequence="10" action="action_customer_file_transfer_details" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager_office,base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_general_manager,hiworth_project_management.group_architect,hiworth_project_management.group_am_office,hiworth_project_management.group_dgm"/>
+
+		<record model="ir.actions.act_window" id="action_customer_my_own_details">
+			<field name="name">My Own File Details</field>
+			<field name="res_model">customer.file.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('logged_user','=',uid)]</field>
+		</record>
+
+		<record id="action_customer_my_own_details_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_customer_file_transfer_details_tree" />
+			<field name="act_window_id" ref="action_customer_my_own_details" />
+		</record>
+
+		<record id="action_customer_my_own_details_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_customer_file_transfer_details_form" />
+			<field name="act_window_id" ref="action_customer_my_own_details" />
+		</record>
+	
+		<!-- <menuitem name="My Own File Details" id="menu_customer_my_own_sub_menu" parent="menu_customer_file_details" sequence="10" action="action_customer_my_own_details" groups="base.group_erp_manager,hiworth_project_management.group_admin2,hiworth_project_management.group_dgm,hiworth_project_management.group_general_manager"/> -->
+
+		<record id="view_project_transfer_document_wizard" model="ir.ui.view">
+			<field name="name">transfer.document.form</field>
+			<field name="model">transfer.document</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="rec" invisible="1"/>
+						<field name="partner_id" options="{'no_create': True}" required="1"/>
+
+					</group>
+					<footer>
+						<button name="transfer_doc" string="Transfer" type="object" class="oe_highlight" />Or
+	                        <button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_customer_file_transfer_details_kanban" model="ir.ui.view">
+            <field name="name">customer.file.details.kanban</field>
+            <field name="model">customer.file.details</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_color_details" create="0">
+                    <field name="partner_id"/>
+                    <field name="date_today"/>
+                    <field name="logged_user"/>
+                    <field name="file_details"/>
+                    <field name="file_location"/>
+                    <field name="remarks"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                        	<div t-attf-class="oe_kanban_card oe_kanban_file_location">
+                            
+                                <div class="oe_kanban_vignette">
+									<img t-att-src="kanban_image('res.partner',
+									'image_medium', record.id.value)"
+									class="oe_kanban_image"/>
+									<div class="oe_kanban_details"><br/>
+									<br/>
+									
+									<h1><field name="partner_id" /></h1><br/>
+									<field name="date_today"/><br/>
+									<field name="logged_user"/><br/>
+									<field name="owner_id" invisible="1"/>
+									<p><i><h3>
+										You have pending file transfer content</h3>
+									</i>
+									</p>
+									
+									</div>
+								</div>
+							</div>                               
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>..
+
+
+        <record model="ir.actions.act_window" id="action_customer_file_transfer_details_kanban">
+			<field name="name">Dashboard</field>
+			<field name="res_model">customer.file.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,form</field>
+			<field name="domain">[('state','=','pending'),('logged_user','=',uid)]</field>
+		</record>
+	
+		<!-- <menuitem name="Dashboard" id="menu_customer_file_details_kanban" parent="menu_customer_file_details" sequence="2" action="action_customer_file_transfer_details_kanban" groups="hiworth_project_management.group_employee,hiworth_project_management.group_manager,base.group_erp_manager"/> -->
+
+
+		<record id="viewpending_customer_file_transfer_details_tree" model="ir.ui.view">
+			<field name="name">customer.filetransfer.details.tree</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<tree create="false" colors="red:state=='pend_cust'">
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="date_today"/>
+					<field name="logged_user" string="Responsible Person"/>
+					<field name="state" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="viewpending_customer_file_transfer_details_form" model="ir.ui.view">
+			<field name="name">customer.filetransfer.details.form</field>
+			<field name="model">customer.file.details</field>
+			<field name="arch" type="xml">
+				<form create="false">
+					<header>
+						<button name="approve_file" string="Approve" class="oe_highlight" type="object" states="pend_cust" confirm="Are you sure to approve this document?" groups="base.group_erp_manager,hiworth_project_management.pending_files_approval_group"/>
+						<button name="accept_document" string="Accept" class="oe_highlight" type="object" states="pending" confirm="Are you sure to accept this document?"/>
+						<field name="state" widget="statusbar" invisible="1"/>
+					</header>				
+					
+					<sheet>
+						<h1><field name="name" readonly="1" nolabel="1"/></h1>
+					<group>
+						<field name="partner_id" domain="['|',('customer','=',True),('is_cus', '=', True)]" options="{'no_create': True}"/>
+						<field name="project_id"/>
+						<field name="date_today"/>
+						<field name="logged_user" readonly="1" string="Responsible Person"/>
+						<field name="file_details"/>
+						<field name="file_location"/>
+						<field name="remarks"/>
+						<field name="transfer" invisible="1"/>
+						<field name="to_customer" invisible="1"/>
+						<field name="admin" invisible="1"/>
+						<field name="status_admin" invisible="1"/>
+						<field name="owner_id" invisible="1"/>
+				</group>
+			</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_customerpending_file_transfer_details">
+			<field name="name">Pending Files To Customer</field>
+			<field name="res_model">customer.file.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state','=',('pending','waiting')),('logged_user','=',uid)]</field>
+		</record>
+
+		<record id="action_customerpending_file_transfer_details_tree" model="ir.actions.act_window.view">
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="viewpending_customer_file_transfer_details_tree" />
+			<field name="act_window_id" ref="action_customerpending_file_transfer_details" />
+		</record>
+
+		<record id="action_customerpending_file_transfer_details_form" model="ir.actions.act_window.view">
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="viewpending_customer_file_transfer_details_form" />
+			<field name="act_window_id" ref="action_customerpending_file_transfer_details" />
+		</record>
+	
+
+		<menuitem name="Pending Files" id="menu_customer_file_detailspending_sub_menu" parent="menu_customer_file_details" sequence="15" action="action_customerpending_file_transfer_details"/>
+		<!--<menuitem name="Pending Files" id="menu_customer_file_detailspending_sub_menu_employeecategory" parent="menu_project_management_employee_file_details" sequence="15" action="action_customerpending_file_transfer_details" />-->
+
+		<record id="view_res_partner_filter_inherit" model="ir.ui.view">
+			<field name="name">res.partner.select.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_res_partner_filter" />
+			<field name="arch" type="xml">
+				<xpath expr="//filter[@string='Customers']" position="replace">
+					<filter string="Branch" name="group_by_branch" context="{'group_by':'company_id'}"/>
+					<!-- <filter string="Customers" name="customer" domain="['|',('is_cus','=',True),('customer','=',True),('supplier','=',False)]" help="Customer Partners"/> -->
+				</xpath>
+			</field>
+		</record>
+		
+		
+	</data>
+</openerp>
