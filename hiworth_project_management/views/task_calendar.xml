@@ -225,12 +225,32 @@
             </field>
         </record>
 
+        <record id="event_search_view" model="ir.ui.view">
+            <field name="name">event.event.search</field>
+            <field name="model">event.event</field>
+            <field name="arch" type="xml">
+                <search string="Task_calender">
+                    <field name="name" string="task_calender"
+                           filter_domain="['|','|','|','|','|',('date_begin','ilike',self),('name','ilike',self),('user_ids','ilike',self),('project_id','ilike',self),('company_id','ilike',self),('type','ilike',self)]"/>
+                    <field name="name"/>
+                    <field name="user_ids"/>
+                    <field name="project_id"/>
+<!--                    <group expand="0" string="Group By">-->
+<!--                    <filter string="company" icon="terp-accessories-archiver" domain="[]"-->
+<!--                            context="{'group_by':'user_ids'}"/>-->
+<!--                    </group>-->
+                </search>
+            </field>
+        </record>
+
+
         <record id="event.view_event_calendar" model="ir.ui.view">
             <field name="name">event.event.calendar</field>
             <field name="model">event.event</field>
             <field eval="2" name="priority"/>
+            <field name="search_view_id" ref="event_search_view"/>
             <field name="arch" type="xml">
-                <calendar color="type" date_start="date_begin" date_stop="date_end" date_delay="duration" string="Task">
+                <calendar color="type" date_start="date_begin" date_stop="date_end" date_delay="duration">
                     <field name="name"/>
                     <field name="user_id"/>
                     <field name="type"/>
