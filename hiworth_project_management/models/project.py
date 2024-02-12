@@ -372,7 +372,7 @@ class EvaluateRating(models.Model):
 
 class EventEvent(models.Model):
 	_inherit = 'event.event'
-	_order = 'date_begin'
+	_order = 'date_end desc'
 
 
 	@api.model
